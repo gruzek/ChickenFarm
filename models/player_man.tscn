@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b85cge3x6l3cg"]
+[gd_scene load_steps=6 format=3 uid="uid://c7a16ujpn8spx"]
 
 [ext_resource type="PackedScene" uid="uid://bx6co6o3u2c44" path="res://blender files/player_man.blend" id="1_ry12r"]
 [ext_resource type="Texture2D" uid="uid://cbr2726c847cm" path="res://blender files/textures/player_body.png" id="2_cwda6"]
