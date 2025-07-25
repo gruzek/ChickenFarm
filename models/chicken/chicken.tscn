@@ -126,7 +126,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49721, 0)
 [node name="Icosphere" parent="chicken_rig/chicken" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_isxhm")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="chicken_animation_player" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_isxhm")
 }
