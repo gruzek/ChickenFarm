@@ -3,6 +3,10 @@ extends CharacterBody3D
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var chicken_animation_player: AnimationPlayer = $chicken_animation_player
 
+# Egg variables
+@export var egg: PackedScene
+@export var egg_chance = 50
+
 # Roaming variables
 @export var roaming_speed = 3.0
 @export var roaming_radius = 15.0
@@ -41,3 +45,13 @@ func pick_random_point():
 	)
 	var new_pos = global_position + rand_offset
 	navigation_agent_3d.target_position = new_pos
+
+func lay_egg():
+	if randf_range(0, 100) <= egg_chance:
+		print("EGG!")
+		var new_egg = egg.instantiate()
+		get_tree().current_scene.add_child(new_egg)
+		new_egg.global_position = position
+
+func _on_egg_timer_timeout() -> void:
+	lay_egg()
