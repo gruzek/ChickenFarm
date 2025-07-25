@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @onready var player_rig: Node3D = $player_rig
 @onready var camera_3d: Camera3D = $Camera3D
+#@onready var pickup_area: Area3D = $PickupArea
 
 @export var chicken_scene: PackedScene
 
@@ -79,7 +80,7 @@ func rotate_player_to_direction(target_rotation: float, delta: float) -> void:
 	var new_rotation = current_rotation + angle_diff * ROTATION_SPEED * delta
 	player_rig.rotation.y = new_rotation
 
-# 
+# For building
 func get_mouse_ground_position():
 	var mouse_pos = get_viewport().get_mouse_position()
 	var from = camera_3d.project_ray_origin(mouse_pos)
@@ -96,3 +97,10 @@ func get_mouse_ground_position():
 	else:
 		return null
 	
+
+#func _ready():
+	#pickup_area.body_entered.connect(_on_body_entered)
+
+## For picking up/interacting with things
+#func _on_body_entered(body):
+	#print(body)

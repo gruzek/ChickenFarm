@@ -5,6 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://dt40nqqclxdgf" path="res://models/chicken/chicken.tscn" id="2_gwnis"]
 [ext_resource type="Texture2D" uid="uid://u76c1ooqbsi7" path="res://blender files/textures/player_face.png" id="3_yw30f"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
+radius = 1.79346
+height = 5.95
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdcjb"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lj5jj"]
@@ -160,12 +164,13 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
-height = 3.23926
-
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_oul6g")
 chicken_scene = ExtResource("2_gwnis")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40753, 0)
+shape = SubResource("CapsuleShape3D_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 0, 10.3179, 2.45632)
@@ -351,7 +356,3 @@ skin = SubResource("Skin_rgyib")
 material_override = SubResource("StandardMaterial3D_hg6s5")
 mesh = SubResource("ArrayMesh_8t03j")
 skin = SubResource("Skin_rgyib")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40753, 0)
-shape = SubResource("CapsuleShape3D_0wfyh")
