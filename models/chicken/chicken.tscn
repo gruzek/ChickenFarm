@@ -7,23 +7,6 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isxhm"]
 albedo_texture = ExtResource("3_xw6bm")
 
-[sub_resource type="Animation" id="Animation_gq4v0"]
-resource_name = "waddle"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("chicken_rig:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.174533), Vector3(0, 0, 0), Vector3(0, 0, -0.174533)]
-}
-
 [sub_resource type="Animation" id="Animation_xw6bm"]
 length = 0.001
 tracks/0/type = "value"
@@ -37,6 +20,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cwd5f"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chicken_rig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.5, 0.6, 0.733333, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.63886, -0.410152), Vector3(0, 3.3458, -0.342085), Vector3(0, 4.71239, 0.342085), Vector3(0, 6.28319, -0.410152), Vector3(0, 6.28319, 0.410152), Vector3(0.755728, 6.28319, -0.204204), Vector3(0.685914, 6.28319, -0.274017), Vector3(-0.549779, 6.28319, -0.95644)]
 }
 
 [sub_resource type="Animation" id="Animation_47cc7"]
@@ -90,8 +88,10 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0.205949, 0, 0.204204), Vector3(0, 0, 0), Vector3(0.205949, 0, -0.204204)]
 }
 
-[sub_resource type="Animation" id="Animation_cwd5f"]
-resource_name = "death"
+[sub_resource type="Animation" id="Animation_gq4v0"]
+resource_name = "waddle"
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -99,10 +99,10 @@ tracks/0/path = NodePath("chicken_rig:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.5, 0.6, 0.733333, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.63886, -0.410152), Vector3(0, 3.3458, -0.342085), Vector3(0, 4.71239, 0.342085), Vector3(0, 6.28319, -0.410152), Vector3(0, 6.28319, 0.410152), Vector3(0.755728, 6.28319, -0.204204), Vector3(0.685914, 6.28319, -0.274017), Vector3(-0.549779, 6.28319, -0.95644)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.174533), Vector3(0, 0, 0), Vector3(0, 0, -0.174533)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_isxhm"]
@@ -115,7 +115,9 @@ _data = {
 &"waddle": SubResource("Animation_gq4v0")
 }
 
-[node name="Chicken" type="Node3D"]
+[node name="Chicken" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_clxel")
 
 [node name="chicken_rig" type="Node3D" parent="."]
@@ -124,11 +126,18 @@ script = ExtResource("2_clxel")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49721, 0)
 
 [node name="Icosphere" parent="chicken_rig/chicken" index="0"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_isxhm")
+
+[node name="StaticBody3D" parent="chicken_rig/chicken/Icosphere" index="0"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="chicken_animation_player" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_isxhm")
 }
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [editable path="chicken_rig/chicken"]

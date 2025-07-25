@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=11 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" path="res://models/fence-section.tscn" id="3_sugp2"]
-[ext_resource type="PackedScene" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://i65n6x867qjf" path="res://Player/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://di8tthuu34bms" path="res://models/fence-section.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://c41heprc7sys3" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://630u3h61ot7d" path="res://models/chicken_coop.tscn" id="5_tbgi4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
@@ -17,6 +17,10 @@ sky_material = SubResource("ProceduralSkyMaterial_sgp6g")
 background_mode = 2
 sky = SubResource("Sky_o5qli")
 tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_tbgi4"]
+vertices = PackedVector3Array(54.2724, 10.3269, -63.7692, 61.7724, 10.3269, -64.2692, 54.5224, 10.3269, -64.2692, -63.9776, 10.3269, -64.2692, -79.9776, 10.3269, -64.2692, -63.7276, 10.3269, -63.7692, -63.4776, 10.3269, -63.7692, -63.2276, 10.3269, -64.2692, -63.7276, 10.3269, -65.2692, 54.0224, 10.3269, -65.2692, 53.7724, 10.3269, -64.2692, 54.0224, 10.3269, -63.7692, 61.7724, 10.3269, 76.7308, 54.2724, 10.3269, 76.2308, 54.0224, 10.3269, 76.2308, -63.4776, 10.3269, 76.2308, -63.7276, 10.3269, 76.2308, -79.9776, 10.3269, 76.7308, -62.2276, 0.326929, -30.2692, -35.9776, 0.326929, -30.2692, -35.9776, 0.326929, -63.0192, -62.2276, 0.326929, -63.0192, -35.7276, 0.326929, -30.2692, -35.4776, 0.326929, -30.7692, 35.5224, 0.326929, -30.7692, 35.7724, 0.326929, -29.5192, 53.0224, 0.326929, -29.2692, 53.0224, 0.326929, -63.0192, 55.2724, 0.326929, -63.0192, 55.2724, 0.326929, 75.4808, 56.0224, 0.326929, 75.4808, 56.0224, 0.326929, -63.0192, -35.7276, 0.326929, 40.2308, -62.2276, 0.326929, 40.2308, 53.0224, 0.326929, 39.2308, 35.7724, 0.326929, 39.7308, 25.2724, 0.326929, -21.0192, 24.5224, 0.326929, -21.5192, 24.2724, 0.326929, -21.0192, 34.2724, 0.326929, 39.2308, 21.5224, 0.326929, -24.7692, 22.0224, 0.326929, -25.0192, 22.0224, 0.326929, -29.0192, -34.2276, 0.326929, -29.2692, 34.2724, 0.326929, -21.5192, 27.7724, 0.326929, -21.5192, 27.5224, 0.326929, -21.0192, 21.7724, 0.326929, -21.0192, -34.2276, 0.326929, 39.2308, 27.5224, 0.326929, -25.0192, 34.2724, 0.326929, -29.2692, 22.7724, 2.32693, -23.7692, 22.7724, 2.32693, -22.2692, 26.5224, 2.32693, -22.2692, 26.5224, 2.32693, -23.7692, 24.0224, 2.82693, -23.7692, 24.0224, 2.82693, -22.2692, 23.2724, 0.576929, -23.5192, 23.2724, 0.576929, -22.7692, 26.2724, 0.576929, -22.7692, 26.2724, 0.576929, -23.5192, 35.2724, 0.326929, 40.9808, 53.0224, 0.326929, 75.4808, -33.9776, 0.326929, 40.7308, -34.2276, 0.326929, 75.4808, -35.4776, 0.326929, 40.7308, -62.2276, 0.326929, 75.4808)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(7, 3, 8), PackedInt32Array(11, 10, 0), PackedInt32Array(0, 10, 2), PackedInt32Array(2, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(14, 11, 13), PackedInt32Array(13, 11, 0), PackedInt32Array(16, 5, 15), PackedInt32Array(15, 5, 6), PackedInt32Array(10, 11, 7), PackedInt32Array(7, 11, 6), PackedInt32Array(12, 15, 14), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 12), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(22, 19, 23), PackedInt32Array(23, 19, 20), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(23, 20, 24), PackedInt32Array(24, 20, 27), PackedInt32Array(31, 30, 28), PackedInt32Array(28, 30, 29), PackedInt32Array(19, 22, 32), PackedInt32Array(18, 19, 33), PackedInt32Array(33, 19, 32), PackedInt32Array(26, 34, 25), PackedInt32Array(25, 34, 35), PackedInt32Array(37, 36, 38), PackedInt32Array(38, 36, 39), PackedInt32Array(41, 40, 42), PackedInt32Array(42, 40, 43), PackedInt32Array(45, 44, 46), PackedInt32Array(46, 44, 39), PackedInt32Array(47, 38, 39), PackedInt32Array(43, 40, 47), PackedInt32Array(43, 47, 48), PackedInt32Array(48, 47, 39), PackedInt32Array(36, 46, 39), PackedInt32Array(49, 41, 42), PackedInt32Array(44, 45, 49), PackedInt32Array(44, 49, 50), PackedInt32Array(50, 49, 42), PackedInt32Array(51, 55, 52), PackedInt32Array(52, 55, 56), PackedInt32Array(56, 55, 54), PackedInt32Array(56, 54, 53), PackedInt32Array(60, 59, 57), PackedInt32Array(57, 59, 58), PackedInt32Array(35, 34, 61), PackedInt32Array(61, 34, 62), PackedInt32Array(63, 61, 64), PackedInt32Array(64, 61, 62), PackedInt32Array(32, 65, 33), PackedInt32Array(33, 65, 66), PackedInt32Array(66, 65, 64), PackedInt32Array(65, 63, 64)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
 albedo_color = Color(0.353347, 0.401959, 0.197968, 1)
@@ -32,87 +36,90 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, -0.173101, 0.728728, 0.6
 light_color = Color(0.976471, 0.917647, 0.815686, 1)
 shadow_enabled = true
 
-[node name="Ground" type="CSGBox3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_tbgi4")
+
+[node name="Ground" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, -3.11527, -0.05, 5.89781)
 use_collision = true
 size = Vector3(0.59601, 1, 0.71917)
 material = SubResource("StandardMaterial3D_o5qli")
 
-[node name="Player" parent="." instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
-
-[node name="fence-west" type="Node3D" parent="."]
+[node name="fence-west" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.12996, 0, 4.94592)
 
-[node name="fence-section-01" parent="fence-west" instance=ExtResource("3_sugp2")]
+[node name="fence-section-01" parent="NavigationRegion3D/fence-west" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 
-[node name="fence-section-02" parent="fence-west" instance=ExtResource("3_sugp2")]
+[node name="fence-section-02" parent="NavigationRegion3D/fence-west" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
 
-[node name="fence-section-03" parent="fence-west" instance=ExtResource("3_sugp2")]
+[node name="fence-section-03" parent="NavigationRegion3D/fence-west" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
 
-[node name="fence-section-04" parent="fence-west" instance=ExtResource("3_sugp2")]
+[node name="fence-section-04" parent="NavigationRegion3D/fence-west" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
 
-[node name="fence-south" type="Node3D" parent="."]
+[node name="fence-south" type="Node3D" parent="NavigationRegion3D"]
 
-[node name="fence-section-05" parent="fence-south" instance=ExtResource("3_sugp2")]
+[node name="fence-section-05" parent="NavigationRegion3D/fence-south" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 
-[node name="fence-section-06" parent="fence-south" instance=ExtResource("3_sugp2")]
+[node name="fence-section-06" parent="NavigationRegion3D/fence-south" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
 
-[node name="fence-section-07" parent="fence-south" instance=ExtResource("3_sugp2")]
+[node name="fence-section-07" parent="NavigationRegion3D/fence-south" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
 
-[node name="fence-section-08" parent="fence-south" instance=ExtResource("3_sugp2")]
+[node name="fence-section-08" parent="NavigationRegion3D/fence-south" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
 
-[node name="fence-east" type="Node3D" parent="."]
+[node name="fence-east" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.08483, 0, 4.94592)
 
-[node name="fence-section-01" parent="fence-east" instance=ExtResource("3_sugp2")]
+[node name="fence-section-01" parent="NavigationRegion3D/fence-east" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 
-[node name="fence-section-02" parent="fence-east" instance=ExtResource("3_sugp2")]
+[node name="fence-section-02" parent="NavigationRegion3D/fence-east" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
 
-[node name="fence-section-03" parent="fence-east" instance=ExtResource("3_sugp2")]
+[node name="fence-section-03" parent="NavigationRegion3D/fence-east" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
 
-[node name="fence-section-04" parent="fence-east" instance=ExtResource("3_sugp2")]
+[node name="fence-section-04" parent="NavigationRegion3D/fence-east" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
 
-[node name="fence-north" type="Node3D" parent="."]
+[node name="fence-north" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 10.1442)
 
-[node name="fence-section-05" parent="fence-north" instance=ExtResource("3_sugp2")]
+[node name="fence-section-05" parent="NavigationRegion3D/fence-north" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 
-[node name="fence-section-06" parent="fence-north" instance=ExtResource("3_sugp2")]
+[node name="fence-section-06" parent="NavigationRegion3D/fence-north" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
 
-[node name="fence-section-07" parent="fence-north" instance=ExtResource("3_sugp2")]
+[node name="fence-section-07" parent="NavigationRegion3D/fence-north" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
 
-[node name="fence-section-08" parent="fence-north" instance=ExtResource("3_sugp2")]
+[node name="fence-section-08" parent="NavigationRegion3D/fence-north" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
 
-[node name="boundaries" type="Node3D" parent="."]
+[node name="boundaries" type="Node3D" parent="NavigationRegion3D"]
 
-[node name="InvisibleBoundary" parent="boundaries" instance=ExtResource("4_jyhfs")]
+[node name="InvisibleBoundary" parent="NavigationRegion3D/boundaries" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.951165, -63.7213, 0, 5.61127)
 
-[node name="InvisibleBoundary2" parent="boundaries" instance=ExtResource("4_jyhfs")]
+[node name="InvisibleBoundary2" parent="NavigationRegion3D/boundaries" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.951165, 54.1017, 0, 5.61127)
 
-[node name="InvisibleBoundary3" parent="boundaries" instance=ExtResource("4_jyhfs")]
+[node name="InvisibleBoundary3" parent="NavigationRegion3D/boundaries" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08, -9.14026, 0, 76.5759)
 
-[node name="InvisibleBoundary4" parent="boundaries" instance=ExtResource("4_jyhfs")]
+[node name="InvisibleBoundary4" parent="NavigationRegion3D/boundaries" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08, -9.14026, 0, -64.2564)
 
-[node name="chicken_coop" parent="." instance=ExtResource("5_tbgi4")]
+[node name="chicken_coop" parent="NavigationRegion3D" instance=ExtResource("5_tbgi4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24.6959, 0.251615, -23.0376)

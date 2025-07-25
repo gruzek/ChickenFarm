@@ -1,10 +1,38 @@
 extends CharacterBody3D
 
 @onready var player_rig: Node3D = $player_rig
+@onready var camera_3d: Camera3D = $Camera3D
+
+@export var chicken_scene: PackedScene
 
 const SPEED = 12.0
 const JUMP_VELOCITY = 4.5
 const ROTATION_SPEED = 10.0  # Speed at which the player rotates to face movement direction
+
+var in_build_mode = false
+var preview_instance: Node3D = null
+
+func _process(delta: float) -> void:
+	# Start build mode
+	if !in_build_mode and Input.is_action_just_pressed("build_thing"):
+		in_build_mode = true
+		preview_instance = chicken_scene.instantiate()
+		get_tree().current_scene.add_child(preview_instance)
+
+	if in_build_mode:
+		var mouse_ground_position = get_mouse_ground_position()
+		if mouse_ground_position:
+			preview_instance.global_position = mouse_ground_position
+		#print(mouse_ground_position)
+		
+		# Cancle build
+		if Input.is_action_just_pressed("ui_cancel"):
+			preview_instance.queue_free()
+			in_build_mode = false
+		
+		# Finalize build
+		if Input.is_action_just_pressed("ui_accept"):
+			in_build_mode = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -50,3 +78,21 @@ func rotate_player_to_direction(target_rotation: float, delta: float) -> void:
 	# Smoothly interpolate to the target rotation
 	var new_rotation = current_rotation + angle_diff * ROTATION_SPEED * delta
 	player_rig.rotation.y = new_rotation
+
+# 
+func get_mouse_ground_position():
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = camera_3d.project_ray_origin(mouse_pos)
+	var to = from + camera_3d.project_ray_normal(mouse_pos) * 1000
+	
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.collision_mask = 1  # only look at layer 1 (ground)
+	query.collide_with_bodies = true
+	
+	var result = space_state.intersect_ray(query)
+	if result:
+		return result.position
+	else:
+		return null
+	
