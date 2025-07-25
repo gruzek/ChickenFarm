@@ -1,0 +1,118 @@
+[gd_scene load_steps=11 format=3 uid="uid://dt40nqqclxdgf"]
+
+[ext_resource type="PackedScene" uid="uid://bcvgmftkdh54c" path="res://blender files/chicken.blend" id="1_03fs5"]
+[ext_resource type="Script" uid="uid://tciuwa3ixpm7" path="res://models/chicken/chicken.gd" id="2_clxel"]
+[ext_resource type="Texture2D" uid="uid://dm3abensqw0aw" path="res://blender files/textures/chicken_texture.png" id="3_xw6bm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isxhm"]
+albedo_texture = ExtResource("3_xw6bm")
+
+[sub_resource type="Animation" id="Animation_gq4v0"]
+resource_name = "waddle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chicken_rig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.174533), Vector3(0, 0, 0), Vector3(0, 0, -0.174533)]
+}
+
+[sub_resource type="Animation" id="Animation_xw6bm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chicken_rig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_47cc7"]
+resource_name = "idle"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chicken_rig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.933333, 1, 2.60678, 2.7, 3.56667, 3.6317, 3.63333, 4.76667, 4.83333, 5.73333, 5.8, 5.86667, 5.93333, 6, 6.06667, 6.13333, 6.2, 6.26667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0.682424, 0), Vector3(0, 0.682424, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -0.750492, 0), Vector3(0, -0.750492, 0), Vector3(0, -0.750492, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.136136), Vector3(0, 0, 0), Vector3(0, 0, 0.122173), Vector3(0, 0, 0), Vector3(0, 0, 0.136136), Vector3(0, 0, 0), Vector3(0, 0, 0.122173), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_isxhm"]
+resource_name = "idle_pecking"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chicken_rig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.251961, 0.318627, 0.385294, 0.833333, 0.9, 0.966667, 1.13333, 1.2, 1.26667, 1.7, 1.73333, 1.76667, 2.04021, 2.10687, 2.17354, 2.59631, 2.66298, 2.72964),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.893609, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.893609, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.893609, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.893609, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.893609, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.893609, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_txhhx"]
+resource_name = "running"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chicken_rig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.205949, 0, 0.204204), Vector3(0, 0, 0), Vector3(0.205949, 0, -0.204204)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_isxhm"]
+_data = {
+&"RESET": SubResource("Animation_xw6bm"),
+&"idle": SubResource("Animation_47cc7"),
+&"pecking": SubResource("Animation_isxhm"),
+&"running": SubResource("Animation_txhhx"),
+&"waddle": SubResource("Animation_gq4v0")
+}
+
+[node name="Chicken" type="Node3D"]
+script = ExtResource("2_clxel")
+
+[node name="chicken_rig" type="Node3D" parent="."]
+
+[node name="chicken" parent="chicken_rig" instance=ExtResource("1_03fs5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49721, 0)
+
+[node name="Icosphere" parent="chicken_rig/chicken" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_isxhm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_isxhm")
+}
+
+[editable path="chicken_rig/chicken"]
