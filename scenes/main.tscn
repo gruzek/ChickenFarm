@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=9 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://player/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://di8tthuu34bms" path="res://models/fence-section.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://c41heprc7sys3" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -30,9 +32,83 @@ light_color = Color(0.976471, 0.917647, 0.815686, 1)
 shadow_enabled = true
 
 [node name="Ground" type="CSGBox3D" parent="."]
-transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, 0, -0.05, 0)
+transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, -3.11527, -0.05, 5.89781)
 use_collision = true
+size = Vector3(0.59601, 1, 0.71917)
 material = SubResource("StandardMaterial3D_o5qli")
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59284, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
+
+[node name="fence-west" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.12996, 0, 4.94592)
+
+[node name="fence-section-01" parent="fence-west" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-02" parent="fence-west" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-03" parent="fence-west" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-04" parent="fence-west" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="fence-south" type="Node3D" parent="."]
+
+[node name="fence-section-05" parent="fence-south" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-06" parent="fence-south" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-07" parent="fence-south" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-08" parent="fence-south" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="fence-east" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.08483, 0, 4.94592)
+
+[node name="fence-section-01" parent="fence-east" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-02" parent="fence-east" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-03" parent="fence-east" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-04" parent="fence-east" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="fence-north" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 10.1442)
+
+[node name="fence-section-05" parent="fence-north" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-06" parent="fence-north" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-07" parent="fence-north" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-08" parent="fence-north" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="boundaries" type="Node3D" parent="."]
+
+[node name="InvisibleBoundary" parent="boundaries" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.951165, -63.7213, 0, 5.61127)
+
+[node name="InvisibleBoundary2" parent="boundaries" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.951165, 54.1017, 0, 5.61127)
+
+[node name="InvisibleBoundary3" parent="boundaries" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08, -9.14026, 0, 76.5759)
+
+[node name="InvisibleBoundary4" parent="boundaries" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08, -9.14026, 0, -64.2564)

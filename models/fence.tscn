@@ -1,5 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnvnoklvoipwf"]
+[gd_scene load_steps=3 format=3 uid="uid://cnvnoklvoipwf"]
 
 [ext_resource type="PackedScene" uid="uid://bei2uq6fk0x7p" path="res://blender files/fence.blend" id="1_61cgq"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjfah"]
+albedo_color = Color(0.626128, 0.417492, 0.310306, 1)
+
 [node name="fence" instance=ExtResource("1_61cgq")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_yjfah")
