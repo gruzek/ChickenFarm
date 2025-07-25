@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://b38r8siyfyu8y"]
 
-[ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://Player/player.gd" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://cbr2726c847cm" path="res://blender files/textures/player_body.png" id="2_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://u76c1ooqbsi7" path="res://blender files/textures/player_face.png" id="3_yw30f"]
 
@@ -162,22 +162,22 @@ blend_shape_mode = 0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
 height = 3.23926
 
-[node name="Player" type="CharacterBody3D"]
+[node name="player" type="CharacterBody3D"]
 script = ExtResource("1_oul6g")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 0, 10.3179, 2.45632)
 
-[node name="metarig" type="Node3D" parent="."]
+[node name="player_rig" type="Node3D" parent="."]
 transform = Transform3D(-1.53786, 0, -1.34444e-07, 0, 1.53786, 0, 1.34444e-07, 0, -1.53786, 0, 0, 0)
 
-[node name="Cylinder" type="MeshInstance3D" parent="metarig"]
+[node name="Cylinder" type="MeshInstance3D" parent="player_rig"]
 transform = Transform3D(0.351553, 2.65735e-09, 0.0853848, -0.0192977, 0.352412, 0.0794539, -0.0831755, -0.0817638, 0.342456, 0, 1.91494, -1.58853)
 visible = false
 mesh = SubResource("ArrayMesh_qjkh3")
 skeleton = NodePath("")
 
-[node name="Skeleton3D" type="Skeleton3D" parent="metarig"]
+[node name="Skeleton3D" type="Skeleton3D" parent="player_rig"]
 bones/0/name = "spine"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 2.38419e-07, 5.95187e-08, 0.968339, -0.24964, -2.3087e-07, 0.24964, 0.968339, 0, 0.968947, -0.0552)
@@ -340,12 +340,12 @@ bones/22/position = Vector3(-7.45058e-09, 0.454215, 1.86258e-09)
 bones/22/rotation = Quaternion(-0.527363, 7.87022e-17, 2.52711e-16, 0.84964)
 bones/22/scale = Vector3(1, 1, 1)
 
-[node name="Cube" type="MeshInstance3D" parent="metarig/Skeleton3D"]
+[node name="Cube" type="MeshInstance3D" parent="player_rig/Skeleton3D"]
 material_override = SubResource("StandardMaterial3D_g6k8r")
 mesh = SubResource("ArrayMesh_boad6")
 skin = SubResource("Skin_rgyib")
 
-[node name="Cube_001" type="MeshInstance3D" parent="metarig/Skeleton3D"]
+[node name="Cube_001" type="MeshInstance3D" parent="player_rig/Skeleton3D"]
 material_override = SubResource("StandardMaterial3D_hg6s5")
 mesh = SubResource("ArrayMesh_8t03j")
 skin = SubResource("Skin_rgyib")
