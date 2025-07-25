@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dt40nqqclxdgf"]
+[gd_scene load_steps=12 format=3 uid="uid://dt40nqqclxdgf"]
 
 [ext_resource type="PackedScene" uid="uid://bcvgmftkdh54c" path="res://blender files/chicken.blend" id="1_03fs5"]
 [ext_resource type="Script" uid="uid://tciuwa3ixpm7" path="res://models/chicken/chicken.gd" id="2_clxel"]
@@ -90,9 +90,25 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0.205949, 0, 0.204204), Vector3(0, 0, 0), Vector3(0.205949, 0, -0.204204)]
 }
 
+[sub_resource type="Animation" id="Animation_cwd5f"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("chicken_rig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.5, 0.6, 0.733333, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.63886, -0.410152), Vector3(0, 3.3458, -0.342085), Vector3(0, 4.71239, 0.342085), Vector3(0, 6.28319, -0.410152), Vector3(0, 6.28319, 0.410152), Vector3(0.755728, 6.28319, -0.204204), Vector3(0.685914, 6.28319, -0.274017), Vector3(-0.549779, 6.28319, -0.95644)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_isxhm"]
 _data = {
 &"RESET": SubResource("Animation_xw6bm"),
+&"death": SubResource("Animation_cwd5f"),
 &"idle": SubResource("Animation_47cc7"),
 &"pecking": SubResource("Animation_isxhm"),
 &"running": SubResource("Animation_txhhx"),
