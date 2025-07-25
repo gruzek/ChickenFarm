@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://b85cge3x6l3cg"]
+
+[ext_resource type="PackedScene" uid="uid://dclhub0pcn0jb" path="res://blender files/player_man.glb" id="1_ry12r"]
+[ext_resource type="Texture2D" uid="uid://cbr2726c847cm" path="res://blender files/textures/player_body.png" id="2_cwda6"]
+[ext_resource type="Texture2D" uid="uid://u76c1ooqbsi7" path="res://blender files/textures/player_face.png" id="3_xkssb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xx1aj"]
+albedo_texture = ExtResource("2_cwda6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agdxs"]
+albedo_texture = ExtResource("3_xkssb")
+
+[node name="player_man" instance=ExtResource("1_ry12r")]
+
+[node name="Cube" parent="metarig/Skeleton3D" index="0"]
+material_override = SubResource("StandardMaterial3D_xx1aj")
+
+[node name="Cube_001" parent="metarig/Skeleton3D" index="1"]
+material_override = SubResource("StandardMaterial3D_agdxs")
