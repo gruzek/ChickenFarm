@@ -1,13 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b38r8siyfyu8y"]
+[gd_scene load_steps=16 format=4 uid="uid://i65n6x867qjf"]
 
 [ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://Player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://cbr2726c847cm" path="res://blender files/textures/player_body.png" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://dt40nqqclxdgf" path="res://models/chicken/chicken.tscn" id="2_gwnis"]
-[ext_resource type="PackedScene" uid="uid://bx6co6o3u2c44" path="res://blender files/player_man.blend" id="3_k53q1"]
 [ext_resource type="Texture2D" uid="uid://u76c1ooqbsi7" path="res://blender files/textures/player_face.png" id="3_yw30f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
-<<<<<<< Updated upstream
 radius = 1.79346
 height = 5.95
 
@@ -166,16 +164,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-=======
-height = 3.23926
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhl08"]
-albedo_texture = ExtResource("2_g1dw6")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtle1"]
-albedo_texture = ExtResource("3_yw30f")
-
->>>>>>> Stashed changes
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_oul6g")
 chicken_scene = ExtResource("2_gwnis")
@@ -187,7 +175,6 @@ shape = SubResource("CapsuleShape3D_0wfyh")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 0, 10.3179, 2.45632)
 
-<<<<<<< Updated upstream
 [node name="player_rig" type="Node3D" parent="."]
 transform = Transform3D(-1.53786, 0, -1.34444e-07, 0, 1.53786, 0, 1.34444e-07, 0, -1.53786, 0, 0, 0)
 
@@ -369,37 +356,3 @@ skin = SubResource("Skin_rgyib")
 material_override = SubResource("StandardMaterial3D_hg6s5")
 mesh = SubResource("ArrayMesh_8t03j")
 skin = SubResource("Skin_rgyib")
-=======
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40753, 0)
-shape = SubResource("CapsuleShape3D_0wfyh")
-
-[node name="player_man" parent="." instance=ExtResource("3_k53q1")]
-
-[node name="Cylinder" parent="player_man/metarig" index="0"]
-visible = false
-
-[node name="Skeleton3D" parent="player_man/metarig" index="1"]
-bones/0/position = Vector3(5.31581e-11, 0.999321, -0.0552)
-bones/1/rotation = Quaternion(-0.0637113, -0.150895, 0.028674, 0.986078)
-bones/4/rotation = Quaternion(0.201738, 1.18158e-07, 2.40745e-08, 0.97944)
-bones/6/rotation = Quaternion(-0.093712, -1.18709e-07, -1.14276e-08, 0.995599)
-bones/8/rotation = Quaternion(-0.00429441, 0.13945, -0.843046, 0.519431)
-bones/9/rotation = Quaternion(0.473562, -0.167354, -0.104916, 0.858327)
-bones/12/rotation = Quaternion(-0.373427, -0.905988, 0.189527, 0.0617864)
-bones/13/rotation = Quaternion(0.262081, 0.168345, -0.00919213, 0.950205)
-bones/17/rotation = Quaternion(0.981292, 2.45414e-08, 1.17295e-07, -0.192524)
-bones/18/rotation = Quaternion(0.358267, 5.8027e-10, 1.51288e-09, 0.933619)
-bones/19/rotation = Quaternion(-0.156091, -1.65941e-13, 2.99607e-14, 0.987743)
-bones/20/rotation = Quaternion(0.771273, -7.46269e-08, 9.09148e-08, 0.636505)
-bones/21/rotation = Quaternion(0.389992, 6.3173e-10, 1.49221e-09, 0.920818)
-bones/22/rotation = Quaternion(-0.405341, -3.06951e-13, 1.29137e-13, 0.914166)
-
-[node name="Cube" parent="player_man/metarig/Skeleton3D" index="0"]
-material_override = SubResource("StandardMaterial3D_fhl08")
-
-[node name="Cube_001" parent="player_man/metarig/Skeleton3D" index="1"]
-material_override = SubResource("StandardMaterial3D_vtle1")
-
-[editable path="player_man"]
->>>>>>> Stashed changes
