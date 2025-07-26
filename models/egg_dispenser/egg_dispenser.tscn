@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=4 uid="uid://dr2x5he8a5xn0"]
+[gd_scene load_steps=14 format=4 uid="uid://dr2x5he8a5xn0"]
 
+[ext_resource type="Script" uid="uid://bkdp0psem2ow4" path="res://models/egg_dispenser/egg_dispenser.gd" id="1_mnxib"]
 [ext_resource type="Texture2D" uid="uid://cijqltn05c5x3" path="res://blender files/textures/egg_dispenser_texture.png" id="2_bpq6g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p6sc"]
@@ -129,6 +130,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e1rco")
 
 [node name="egg_dispenser" type="Node3D"]
+script = ExtResource("1_mnxib")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_0p6sc")

@@ -10,7 +10,7 @@ const JUMP_VELOCITY = 4.5
 #@onready var pickup_area: Area3D = $PickupArea
 @onready var player_rig: Node3D = $player_rig
 
-@export var chicken_scene: PackedScene
+@export var egg_dispenser_scene: PackedScene
 
 # Variables for animation
 @export var anim_blend_speed = 15
@@ -20,9 +20,6 @@ var currentAnim = IDLE
 
 signal egg_amount_changed(value)
 
-
-
-
 var in_build_mode = false
 var preview_instance: Node3D = null
 
@@ -30,7 +27,7 @@ func _process(delta: float) -> void:
 	# Start build mode
 	if !in_build_mode and Input.is_action_just_pressed("build_thing"):
 		in_build_mode = true
-		preview_instance = chicken_scene.instantiate()
+		preview_instance = egg_dispenser_scene.instantiate()
 		get_tree().current_scene.add_child(preview_instance)
 		# Make preview semi-transparent
 		preview_instance.set_preview_mode(true)

@@ -1,6 +1,6 @@
 # buildable_object.gd
 # Base class for all objects that can be placed in build mode
-extends CharacterBody3D
+extends Node3D
 class_name BuildableObject
 
 func set_preview_mode(is_preview: bool):
