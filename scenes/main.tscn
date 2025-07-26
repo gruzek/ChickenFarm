@@ -46,9 +46,9 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0767951, 2.34178e-11, -1.79466e-08, 0.997047)
-bones/4/rotation = Quaternion(0.152853, 1.17956e-07, 1.75061e-08, 0.988249)
-bones/6/rotation = Quaternion(-0.0325258, -1.19146e-07, -3.87738e-09, 0.999471)
+bones/1/rotation = Quaternion(-0.0761076, -2.87412e-11, -1.859e-08, 0.9971)
+bones/4/rotation = Quaternion(0.156855, 1.18076e-07, 1.70372e-08, 0.987622)
+bones/6/rotation = Quaternion(-0.0375224, -1.19125e-07, -4.47302e-09, 0.999296)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -145,6 +145,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("6_tefeu")
+starting_eggs = 10000
 
 [node name="EggLabel" type="Label" parent="UI"]
 layout_mode = 2

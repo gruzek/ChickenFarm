@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://dr2x5he8a5xn0"]
+[gd_scene load_steps=17 format=4 uid="uid://dr2x5he8a5xn0"]
 
 [ext_resource type="Script" uid="uid://bkdp0psem2ow4" path="res://models/egg_dispenser/egg_dispenser.gd" id="1_mnxib"]
 [ext_resource type="Texture2D" uid="uid://cijqltn05c5x3" path="res://blender files/textures/egg_dispenser_texture.png" id="2_bpq6g"]
+[ext_resource type="PackedScene" uid="uid://dvbau1p0yhd07" path="res://Egg/throwing_egg.tscn" id="2_s01e3"]
+[ext_resource type="PackedScene" uid="uid://b88t56vgbd5j5" path="res://Egg/egg_break.tscn" id="3_a736m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p6sc"]
 albedo_texture = ExtResource("2_bpq6g")
@@ -133,7 +135,11 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e1rco")
 
 [node name="egg_dispenser" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_mnxib")
+spin_speed = 15
+throwing_egg_scene = ExtResource("2_s01e3")
+egg_break_partical = ExtResource("3_a736m")
 
 [node name="egg_dispenser_static_body" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.234562, 0)
@@ -159,3 +165,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jiqfg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.85719, 0)
 mesh = SubResource("ArrayMesh_a0n04")
 skeleton = NodePath("")
+
+[node name="Egg Spawn Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Egg Spawn Timer" to="." method="_on_egg_spawn_timer_timeout"]
