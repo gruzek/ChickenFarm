@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b38r8siyfyu8y"]
+[gd_scene load_steps=11 format=3 uid="uid://b38r8siyfyu8y"]
 
 [ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://Player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dvbau1p0yhd07" path="res://Egg/throwing_egg.tscn" id="2_fhl08"]
-[ext_resource type="PackedScene" uid="uid://dr2x5he8a5xn0" path="res://models/egg_dispenser/egg_dispenser.tscn" id="2_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://b85cge3x6l3cg" path="res://models/player_man.tscn" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://c7a16ujpn8spx" path="res://models/player_man.tscn" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://bn346es4bjr8e" path="res://Player/build_node.gd" id="3_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://b88t56vgbd5j5" path="res://Egg/egg_break.tscn" id="3_vtle1"]
 
@@ -70,6 +69,5 @@ parameters/Run/blend_amount = 0.0
 
 [node name="build_node" type="Node3D" parent="."]
 script = ExtResource("3_g1dw6")
-egg_dispenser_scene = ExtResource("2_g1dw6")
 
 [editable path="player_rig"]

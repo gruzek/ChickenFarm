@@ -56,6 +56,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("finalize_build"):
 			print("Build_node: Finalizing build mode")
 			# Make preview fully opaque
+			preview_instance.set_buildable(true)
 			preview_instance.set_preview_mode(false)
 			in_build_mode = false
 			build_mode_exited.emit()
