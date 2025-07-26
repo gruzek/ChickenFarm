@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=14 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://630u3h61ot7d" path="res://models/chicken_coop.tscn" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://cjc8l5wlnr4fb" path="res://Egg/egg_label.gd" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://djqbvefiyd54s" path="res://Egg/egg.tscn" id="7_o6xl0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -150,3 +151,24 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "Eggs: 0"
 label_settings = SubResource("LabelSettings_tbgi4")
+
+[node name="egg" parent="." instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 11.2249, 0.052903, -10.0542)
+
+[node name="egg2" parent="." instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 23.1999, 0.0529061, -11.1705)
+
+[node name="egg3" parent="." instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 19.6695, 0.052903, -17.7864)
+
+[node name="egg4" parent="." instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 18.1209, 0.0529045, -10.9104)
+
+[node name="egg5" parent="." instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 30.3518, 0.0529045, -8.43066)
+
+[node name="egg6" parent="." instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.9128, 0.0529045, -23.8142)
+
+[node name="egg7" parent="." instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.17478)

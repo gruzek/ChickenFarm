@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://c7a16ujpn8spx" path="res://models/player_man.tscn" id="3_btcbx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
-radius = 1.79346
-height = 5.95
+radius = 0.416004
+height = 2.74457
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_btcbx"]
 animation = &"metarigAction_001"
@@ -28,6 +28,7 @@ node_connections = [&"Run", 0, &"Anim Idle", &"Run", 1, &"Anim Run", &"output", 
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_oul6g")
+pickup_range = 5
 chicken_scene = ExtResource("2_gwnis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -41,19 +42,19 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
 bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
-bones/1/rotation = Quaternion(-0.0731074, 1.32977e-10, -1.53718e-08, 0.997324)
-bones/4/rotation = Quaternion(0.168542, 1.15879e-07, 2.79788e-08, 0.985695)
-bones/6/rotation = Quaternion(-0.0521242, -1.19047e-07, -6.21369e-09, 0.998641)
+bones/1/rotation = Quaternion(-0.0773486, 1.33193e-10, -1.63796e-08, 0.997004)
+bones/4/rotation = Quaternion(0.149924, 1.17867e-07, 1.78489e-08, 0.988698)
+bones/6/rotation = Quaternion(-0.0288706, -1.1916e-07, -3.44165e-09, 0.999583)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
 bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
 bones/17/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
-bones/18/rotation = Quaternion(0.0906871, 4.61454e-10, -1.53344e-09, 0.995879)
+bones/18/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
 bones/19/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
-bones/20/rotation = Quaternion(0.985454, -0.0329283, 0.00279711, 0.166695)
-bones/21/rotation = Quaternion(0.0906871, 5.15683e-10, 1.13994e-09, 0.995879)
-bones/22/rotation = Quaternion(-0.526346, 0.0273806, -0.0557254, 0.848001)
+bones/20/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
+bones/21/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
+bones/22/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="AnimationTree" type="AnimationTree" parent="player_rig/AnimationPlayer" index="0"]
 root_node = NodePath("../..")

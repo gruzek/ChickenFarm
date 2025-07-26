@@ -1,5 +1,11 @@
 extends CharacterBody3D
 
+# Player Statistics
+@export var SPEED = 12.0
+const JUMP_VELOCITY = 4.5
+@export var ROTATION_SPEED = 10.0  # Speed at which the player rotates to face movement direction
+@export var pickup_range = 25
+
 @onready var camera_3d: Camera3D = $Camera3D
 #@onready var pickup_area: Area3D = $PickupArea
 @onready var player_rig: Node3D = $player_rig
@@ -15,9 +21,7 @@ var currentAnim = IDLE
 
 
 
-const SPEED = 12.0
-const JUMP_VELOCITY = 4.5
-const ROTATION_SPEED = 10.0  # Speed at which the player rotates to face movement direction
+
 
 var in_build_mode = false
 var preview_instance: Node3D = null
@@ -43,6 +47,9 @@ func _process(delta: float) -> void:
 		# Finalize build
 		if Input.is_action_just_pressed("ui_accept"):
 			in_build_mode = false
+			
+	# Pickup logic
+	check_for_egg()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -123,6 +130,13 @@ func handle_animations(delta):
 			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 0, anim_blend_speed * delta)
 		RUN:
 			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 1, anim_blend_speed * delta)
+
+# Checks if an egg is in pickup range then picks it up
+func check_for_egg():
+	for egg in get_tree().get_nodes_in_group("egg"):
+		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
+			egg.queue_free()
+			# Add egg to egg counter
 
 #func _ready():
 	#pickup_area.body_entered.connect(_on_body_entered)
