@@ -1,8 +1,6 @@
 extends MarginContainer
 
 @export var starting_eggs = 0
-var current_eggs = 0
-@onready var egg_label: Label = $EggLabel
 
 var eggs: int:
 	set(eggs_in):
@@ -18,8 +16,3 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func _on_egg_amount_changed(value: Variant) -> void:
-	current_eggs += value
-	egg_label.text = ("Eggs: " + str(current_eggs))
