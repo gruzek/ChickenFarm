@@ -19,6 +19,10 @@ func set_preview_mode(is_preview: bool):
 	in_preview_mode = is_preview
 	var alpha = 1.0 if not is_preview else 0.5
 	set_transparency_recursive(self, alpha)
+	
+	# Setup collision area for preview mode
+	if is_preview:
+		_setup_collision_area()
 
 func set_buildable(buildable: bool):
 	is_buildable = buildable
@@ -90,10 +94,37 @@ func find_collision_shape_recursive(node: Node) -> Shape3D:
 	return null
 
 # Create a collision area for build validation
-# This function is no longer used - collision detection is handled by build_node.gd
 func _setup_collision_area():
-	# We're keeping this function as a stub in case we need to revert
-	print("BuildableObject: _setup_collision_area is deprecated")
+	# Remove existing area if any
+	if collision_area:
+		collision_area.queue_free()
+	
+	# Create new area
+	collision_area = Area3D.new()
+	collision_area.name = "BuildValidationArea"
+	add_child(collision_area)
+	
+	# Find and duplicate all collision shapes from the static body
+	var shapes = _find_all_collision_shapes(self)
+	
+	for shape_data in shapes:
+		var original_shape = shape_data["shape"]
+		var original_transform = shape_data["transform"]
+		
+		# Create new collision shape for the area
+		var new_shape = CollisionShape3D.new()
+		new_shape.shape = original_shape.shape.duplicate()
+		new_shape.transform = original_transform
+		collision_area.add_child(new_shape)
+	
+	# Set collision properties
+	collision_area.collision_layer = 0  # Don't collide with anything
+	collision_area.collision_mask = 2   # Only detect layer 2 (other buildings)
+	
+	# Connect signals
+	collision_area.body_entered.connect(_on_body_entered)
+	collision_area.body_exited.connect(_on_body_exited)
+	
 
 # Find all collision shapes in the node tree
 func _find_all_collision_shapes(node: Node) -> Array:
@@ -110,10 +141,12 @@ func _find_all_collision_shapes(node: Node) -> Array:
 	
 	return shapes
 
-# Signal handlers are no longer used - collision detection is handled by build_node.gd
+# Signal handlers for collision detection
 func _on_body_entered(body: Node3D):
-	print("BuildableObject: _on_body_entered is deprecated")
+	set_buildable(false)
 
-# Signal handlers are no longer used - collision detection is handled by build_node.gd
+# Signal handlers for collision detection
 func _on_body_exited(body: Node3D):
-	print("BuildableObject: _on_body_exited is deprecated")
+	# Only set buildable to true if there are no more collisions
+	if collision_area and collision_area.get_overlapping_bodies().size() == 0:
+		set_buildable(true)

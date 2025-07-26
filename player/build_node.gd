@@ -22,7 +22,6 @@ func _process(delta: float) -> void:
 	# Start build mode
 	if !in_build_mode and Input.is_action_just_pressed("build_thing"):
 		if buildable_scenes.size() > 0:
-			print("Build_node: Entering build mode")
 			in_build_mode = true
 			build_mode_entered.emit()
 			instantiate_preview()
@@ -70,7 +69,6 @@ func switch_to_previous_item():
 
 func update_preview_item():
 	if preview_instance:
-		print("Build_node: Updating preview to item ", current_item_index)
 		# Store current position
 		var current_position = preview_instance.global_position
 		# Remove old preview
@@ -84,7 +82,6 @@ func update_preview_item():
 
 # Create the initial preview instance
 func instantiate_preview():
-	print("Build_node: Instantiating preview item ", current_item_index)
 	preview_instance = buildable_scenes[current_item_index].instantiate()
 	get_tree().current_scene.add_child(preview_instance)
 	
@@ -140,7 +137,6 @@ func check_build_collision():
 	# This is a backup method to ensure we detect collisions with other buildings
 	var is_overlapping_buildings = false
 	var buildings = get_tree().get_nodes_in_group("buildable_objects")
-	print("DEBUG: Found ", buildings.size(), " buildable objects in the scene")
 	
 	for building in buildings:
 		# Skip the preview instance itself
@@ -149,10 +145,8 @@ func check_build_collision():
 		
 		# Check if the preview's position is close to this building's position
 		var distance = preview_instance.global_position.distance_to(building.global_position)
-		print("DEBUG: Distance to ", building.name, ": ", distance)
 		
 		if distance < 2.0:
-			print("DEBUG: Close to another building: ", building.name)
 			is_overlapping_buildings = true
 			break
 	
@@ -160,14 +154,12 @@ func check_build_collision():
 	is_colliding = result.size() > 0 or is_overlapping_buildings
 	
 	if result.size() > 0:
-		print("DEBUG: Collision detected with ", result.size(), " objects:")
 		for i in range(min(3, result.size())):
 			var collider = result[i].collider
-			print("  - ", collider.name, " on layer ", collider.collision_layer)
-	elif is_overlapping_buildings:
-		print("DEBUG: Overlapping with existing buildings")
-	else:
-		print("DEBUG: No collisions detected")
+	#elif is_overlapping_buildings:
+		#print("DEBUG: Overlapping with existing buildings")
+	#else:
+		#print("DEBUG: No collisions detected")
 	
 	# Update buildable state
 	preview_instance.set_buildable(not is_colliding)
