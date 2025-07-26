@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://du62gw5kd77xa"]
+
+[ext_resource type="PackedScene" uid="uid://dvyq3nahtl45e" path="res://blender files/sentry_gun.blend" id="1_s07uy"]
+[ext_resource type="Texture2D" uid="uid://yln78cetq4p5" path="res://blender files/textures/rifle_texture.png" id="2_h6bsr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kf253"]
+albedo_color = Color(0.201527, 0.201527, 0.201527, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btrpy"]
+albedo_texture = ExtResource("2_h6bsr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wp8xu"]
+albedo_color = Color(0.169245, 0.169245, 0.169245, 1)
+
+[node name="sentry_gun" instance=ExtResource("1_s07uy")]
+
+[node name="Base" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_kf253")
+
+[node name="Gun" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_btrpy")
+
+[node name="Second Gear" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wp8xu")

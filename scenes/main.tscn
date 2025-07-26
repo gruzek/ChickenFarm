@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=13 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://cjc8l5wlnr4fb" path="res://Egg/egg_label.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://djqbvefiyd54s" path="res://Egg/egg.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://dqf7kdk6rmsp0" path="res://Egg Pickupper/egg_pickerupper.tscn" id="8_tipki"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -47,9 +46,9 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0776073, 1.84505e-10, -1.56471e-08, 0.996984)
-bones/4/rotation = Quaternion(0.150543, 1.16111e-07, 2.6391e-08, 0.988604)
-bones/6/rotation = Quaternion(-0.0296433, -1.19157e-07, -3.53375e-09, 0.999561)
+bones/1/rotation = Quaternion(-0.0767951, 2.34178e-11, -1.79466e-08, 0.997047)
+bones/4/rotation = Quaternion(0.152853, 1.17956e-07, 1.75061e-08, 0.988249)
+bones/6/rotation = Quaternion(-0.0325258, -1.19146e-07, -3.87738e-09, 0.999471)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -174,9 +173,6 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.9128, 0.0529045, -23.
 
 [node name="egg7" parent="." instance=ExtResource("7_o6xl0")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.17478)
-
-[node name="egg_pickerupper2" parent="." instance=ExtResource("8_tipki")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.63004, 0.3008, 3.20943)
 
 [editable path="Player"]
 [editable path="Player/player_rig"]
