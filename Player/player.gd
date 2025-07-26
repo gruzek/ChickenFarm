@@ -32,6 +32,8 @@ func _process(delta: float) -> void:
 		in_build_mode = true
 		preview_instance = chicken_scene.instantiate()
 		get_tree().current_scene.add_child(preview_instance)
+		# Make preview semi-transparent
+		preview_instance.set_preview_mode(true)
 
 	if in_build_mode:
 		var mouse_ground_position = get_mouse_ground_position()
@@ -46,6 +48,8 @@ func _process(delta: float) -> void:
 		
 		# Finalize build
 		if Input.is_action_just_pressed("ui_accept"):
+			# Make preview fully opaque
+			preview_instance.set_preview_mode(false)
 			in_build_mode = false
 			
 	# Pickup logic

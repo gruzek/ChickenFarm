@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends BuildableObject
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var chicken_animation_player: AnimationPlayer = $chicken_animation_player
