@@ -117,6 +117,7 @@ _data = {
 }
 
 [node name="Chicken" type="CharacterBody3D" groups=["chicken"]]
+transform = Transform3D(0.255, 0, 0, 0, 0.255, 0, 0, 0, 0.255, 0, 0, 0)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_clxel")

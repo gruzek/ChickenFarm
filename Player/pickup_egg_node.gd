@@ -16,4 +16,3 @@ func check_for_egg():
 		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
 			egg.queue_free()
 			egg_bank.eggs += 1
-			print(get_parent_node_3d())

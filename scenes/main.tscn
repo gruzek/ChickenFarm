@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://di8tthuu34bms" path="res://models/fence-section.tscn" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://c41heprc7sys3" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://daahb02bxyth6" path="res://models/fence-section.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://cjc8l5wlnr4fb" path="res://Egg/egg_label.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://djqbvefiyd54s" path="res://Egg/egg.tscn" id="7_o6xl0"]
 
@@ -44,21 +44,12 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
+collision_mask = 1
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0716018, -9.81923e-11, -1.85907e-08, 0.997433)
-bones/4/rotation = Quaternion(0.17441, 1.18581e-07, 1.49737e-08, 0.984673)
-bones/6/rotation = Quaternion(-0.0594758, -1.18998e-07, -7.09006e-09, 0.99823)
-bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
-bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
-bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
-bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
-bones/17/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
-bones/18/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
-bones/19/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
-bones/20/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
-bones/21/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
-bones/22/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
+bones/1/rotation = Quaternion(-0.0653222, -1.74716e-10, -1.82778e-08, 0.997864)
+bones/4/rotation = Quaternion(0.198722, 1.19219e-07, 1.20972e-08, 0.980056)
+bones/6/rotation = Quaternion(-0.0899293, -1.18726e-07, -1.07204e-08, 0.995948)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")

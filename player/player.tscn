@@ -29,7 +29,6 @@ nodes/Run/position = Vector2(-140, 0)
 node_connections = [&"Run", 0, &"Anim Idle", &"Run", 1, &"Anim Run", &"output", 0, &"Run"]
 
 [node name="player" type="CharacterBody3D"]
-collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_oul6g")
 pickup_range = 5
@@ -46,9 +45,9 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
 bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
-bones/1/rotation = Quaternion(-0.0647094, -4.81471e-11, -1.61729e-08, 0.997904)
-bones/4/rotation = Quaternion(0.201232, 1.18007e-07, 1.79861e-08, 0.979544)
-bones/6/rotation = Quaternion(-0.0930773, -1.18692e-07, -1.10956e-08, 0.995659)
+bones/1/rotation = Quaternion(-0.0767623, 1.69118e-11, -1.80395e-08, 0.99705)
+bones/4/rotation = Quaternion(0.153151, 1.17965e-07, 1.74712e-08, 0.988203)
+bones/6/rotation = Quaternion(-0.0328975, -1.19144e-07, -3.92168e-09, 0.999459)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
