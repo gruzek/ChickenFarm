@@ -1,11 +1,21 @@
 extends Node3D
 
+@export var egg_break_partical: PackedScene
+@export var chicken_scene: PackedScene
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@export var chicken_chance = 50
 
+func explode():
+	var egg_break = egg_break_partical.instantiate()
+	get_tree().current_scene.add_child(egg_break)
+	egg_break.global_position = position
+	spawn_chicken()
+	queue_free()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func spawn_chicken():
+	var num = randf_range(0, 100)
+	print(num)
+	if num < chicken_chance:
+		var chicken = chicken_scene.instantiate()
+		get_tree().current_scene.add_child(chicken)
+		chicken.global_position = position
