@@ -16,8 +16,6 @@ enum {IDLE, RUN}
 var currentAnim = IDLE
 @onready var animation_tree: AnimationTree = $player_rig/AnimationPlayer/AnimationTree
 
-signal egg_amount_changed(value)
-
 var in_build_mode = false
 
 func _process(delta: float) -> void:
@@ -33,9 +31,6 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_accept"):
 			# Make preview fully opaque
 			in_build_mode = false
-			
-	# Pickup logic
-	check_for_egg()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -102,12 +97,7 @@ func handle_animations(delta):
 		RUN:
 			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 1, anim_blend_speed * delta)
 
-# Checks if an egg is in pickup range then picks it up
-func check_for_egg():
-	for egg in get_tree().get_nodes_in_group("egg"):
-		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
-			egg.queue_free()
-			egg_amount_changed.emit(1)
+
 
 #func _ready():
 	#pickup_area.body_entered.connect(_on_body_entered)

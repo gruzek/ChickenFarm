@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b38r8siyfyu8y"]
+[gd_scene load_steps=11 format=3 uid="uid://b38r8siyfyu8y"]
 
-[ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://Player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dr2x5he8a5xn0" path="res://models/egg_dispenser/egg_dispenser.tscn" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://c7a16ujpn8spx" path="res://models/player_man.tscn" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://bn346es4bjr8e" path="res://player/build_node.gd" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://dusq08hrnu2kl" path="res://Player/pickup_egg_node.gd" id="5_k53q1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
 radius = 0.416004
@@ -42,9 +43,9 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
 bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
-bones/1/rotation = Quaternion(-0.0768439, 3.3101e-11, -1.78084e-08, 0.997043)
-bones/4/rotation = Quaternion(0.15241, 1.17943e-07, 1.75579e-08, 0.988317)
-bones/6/rotation = Quaternion(-0.0319725, -1.19148e-07, -3.81143e-09, 0.999489)
+bones/1/rotation = Quaternion(-0.0775718, 1.77466e-10, -1.57476e-08, 0.996987)
+bones/4/rotation = Quaternion(0.150431, 1.16385e-07, 2.50591e-08, 0.988621)
+bones/6/rotation = Quaternion(-0.0295033, -1.19158e-07, -3.51707e-09, 0.999565)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -65,5 +66,8 @@ parameters/Run/blend_amount = 0.0
 [node name="build_node" type="Node3D" parent="."]
 script = ExtResource("3_g1dw6")
 egg_dispenser_scene = ExtResource("2_g1dw6")
+
+[node name="pickup_egg_node" type="Node3D" parent="."]
+script = ExtResource("5_k53q1")
 
 [editable path="player_rig"]
