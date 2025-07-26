@@ -1,12 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://630u3h61ot7d"]
+[gd_scene load_steps=5 format=3 uid="uid://630u3h61ot7d"]
 
 [ext_resource type="PackedScene" uid="uid://5ece8avo0n6v" path="res://blender files/chicken_coop.blend" id="1_uqn5c"]
 [ext_resource type="Texture2D" uid="uid://bk0fkn04xwkqv" path="res://blender files/textures/chicken_coop_texture.png" id="2_kuhdk"]
+[ext_resource type="Script" uid="uid://1snib30fohu1" path="res://models/chicken_coop/chicken_coop.gd" id="2_tf1kw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbtgc"]
 albedo_texture = ExtResource("2_kuhdk")
 
 [node name="chicken_coop" instance=ExtResource("1_uqn5c")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("2_tf1kw")
 
 [node name="Cube" parent="." index="0"]
 material_override = SubResource("StandardMaterial3D_vbtgc")
+
+[node name="StaticBody3D" parent="Cube" index="0"]
+collision_layer = 2
+collision_mask = 2
