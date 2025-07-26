@@ -102,6 +102,7 @@ func throw_egg():
 	var forward = -global_transform.basis.z.normalized()
 	var distance = egg_throw_range
 	var end_pos = start_pos + forward * distance
+	end_pos.y = 0
 	
 	spawn_and_tween_egg(start_pos, end_pos)
 
