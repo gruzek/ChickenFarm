@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://dr2x5he8a5xn0"]
 
-[ext_resource type="Script" uid="uid://bkdp0psem2ow4" path="res://models/egg_dispenser/egg_dispenser.gd" id="1_mnxib"]
+[ext_resource type="Script" uid="uid://bkdp0psem2ow4" path="res://egg_dispenser/egg_dispenser.gd" id="1_mnxib"]
 [ext_resource type="Texture2D" uid="uid://cijqltn05c5x3" path="res://blender files/textures/egg_dispenser_texture.png" id="2_bpq6g"]
 [ext_resource type="PackedScene" uid="uid://dvbau1p0yhd07" path="res://Egg/throwing_egg.tscn" id="2_s01e3"]
 [ext_resource type="PackedScene" uid="uid://b88t56vgbd5j5" path="res://Egg/egg_break.tscn" id="3_a736m"]

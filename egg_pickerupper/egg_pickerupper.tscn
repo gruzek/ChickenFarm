@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=4 uid="uid://dqf7kdk6rmsp0"]
 
-[ext_resource type="Script" uid="uid://boo0obe6brx3q" path="res://models/egg_pickerupper/egg_pickupper.gd" id="1_hhf6g"]
-[ext_resource type="Script" uid="uid://dqvx1pannd6be" path="res://models/egg_pickerupper/egg_pickerupper_buildable.gd" id="1_wulr0"]
-[ext_resource type="Texture2D" uid="uid://sv8l48xevlxq" path="res://models/egg_pickerupper/egg_pickupper_texture.png" id="2_jpe1t"]
+[ext_resource type="Script" uid="uid://boo0obe6brx3q" path="res://egg_pickerupper/egg_pickupper.gd" id="1_hhf6g"]
+[ext_resource type="Script" uid="uid://dqvx1pannd6be" path="res://egg_pickerupper/egg_pickerupper_buildable.gd" id="1_wulr0"]
+[ext_resource type="Texture2D" uid="uid://sv8l48xevlxq" path="res://egg_pickerupper/egg_pickupper_texture.png" id="2_jpe1t"]
 [ext_resource type="PackedScene" uid="uid://bkxu5166q7vr4" path="res://Egg/pickup_egg_node.tscn" id="3_hegp5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hegp5"]

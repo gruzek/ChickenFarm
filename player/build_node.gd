@@ -18,9 +18,9 @@ var cost_label: Label3D = null
 func _ready():
 	# Load buildable scenes programmatically
 	buildable_scenes = [
-		load("res://models/chicken_coop/chicken_coop.tscn"),
-		load("res://models/egg_dispenser/egg_dispenser.tscn"),
-		load("res://models/egg_pickerupper/egg_pickerupper.tscn")
+		load("res://chicken_coop/chicken_coop.tscn"),
+		load("res://egg_dispenser/egg_dispenser.tscn"),
+		load("res://egg_pickerupper/egg_pickerupper.tscn")
 	]
 
 	buildable_costs = [
