@@ -9,7 +9,9 @@ var in_build_mode = false
 var current_item_index = 0
 var buildable_scenes: Array[PackedScene]
 var buildable_costs: Array[int]
-
+var building_names: Array[String]
+var cost_label: Label3D = null
+	
 @onready var camera_3d: Camera3D = $"../Camera3D"
 @onready var egg_bank = get_tree().get_first_node_in_group("egg bank")
 
@@ -20,11 +22,17 @@ func _ready():
 		load("res://models/egg_dispenser/egg_dispenser.tscn"),
 		load("res://models/egg_pickerupper/egg_pickerupper.tscn")
 	]
-	
+
 	buildable_costs = [
-		25,
+		5,
 		200,
 		500
+	]
+		
+	building_names = [
+		"Chicken Coop",
+		"Egg Dispenser",
+		"Egg PickerUpperinator 5000"
 	]
 
 func _process(delta: float) -> void:
@@ -70,6 +78,7 @@ func _process(delta: float) -> void:
 				set_active(true)
 				in_build_mode = false
 				egg_bank.eggs = egg_bank.eggs - buildable_costs[current_item_index]
+				remove_cost_label_from_preview()
 				build_mode_exited.emit()
 
 # Item switching functions
@@ -97,6 +106,11 @@ func update_preview_item():
 		preview_instance.global_position = current_position
 		# Disable activity for preview objects
 		set_active(false)
+		# Add cost label above the preview
+		var can_afford = false
+		if (egg_bank.eggs - buildable_costs[current_item_index] >=0):
+			can_afford=true
+		add_cost_label_to_preview(can_afford)
 
 # Create the initial preview instance
 func instantiate_preview():
@@ -108,6 +122,12 @@ func instantiate_preview():
 	
 	# Disable activity for preview objects
 	set_active(false)
+	
+	# Add cost label above the preview
+	var can_afford = false
+	if (egg_bank.eggs - buildable_costs[current_item_index] >=0):
+		can_afford=true
+	add_cost_label_to_preview(can_afford)
 
 # For building
 func get_mouse_ground_position():
@@ -200,3 +220,76 @@ func set_active(value: bool):
 		if child.has_method("set_is_active"):
 			child.set_is_active(value)
 			return
+
+func remove_cost_label_from_preview():
+	# Remove any existing cost label
+	if cost_label != null:
+		cost_label.queue_free()
+		cost_label=null
+
+# Add a label showing the cost above the preview instance
+func add_cost_label_to_preview(can_afford):
+	if not preview_instance:
+		return
+		
+	# Remove any existing cost label
+	#var existing_label = preview_instance.find_child("CostLabel")
+	#if existing_label:
+		#existing_label.queue_free()
+	
+	# Create a new Label3D node
+	cost_label = Label3D.new()
+	cost_label.name = "CostLabel"
+	
+	# Set label properties
+	cost_label.text = str(buildable_costs[current_item_index]) + " eggs"
+	cost_label.font_size = 32  # Larger font size
+	if (can_afford):
+		cost_label.modulate = Color(1, 1, 1)  # White color for better visibility
+	else:
+		cost_label.modulate = Color(1, 0, 0)  # White color for better visibility
+	cost_label.outline_size = 2  # Add outline
+	cost_label.outline_modulate = Color(0, 0, 0)  # Black outline
+	
+	# Make the label visible from all angles
+	cost_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	cost_label.no_depth_test = true  # Ensure it renders on top
+	cost_label.fixed_size = true  # Keep consistent size regardless of distance
+	
+	# Position the label above the object based on object size
+	var height_offset = 3.0  # Default height offset
+	
+	# Try to get a better height based on the object's collision shape
+	var collision_shape = find_collision_shape_recursive(preview_instance)
+	if collision_shape and collision_shape is BoxShape3D:
+		# For box shapes, use the box height + some padding
+		height_offset = 0
+	
+	# Position the label above the object
+	cost_label.position = Vector3(0, height_offset, 0)
+	
+	# Add the label as a child of the preview instance
+	preview_instance.add_child(cost_label)
+	
+	# Add the building name to the label
+	cost_label.text = building_names[current_item_index] + "\nCost: " + str(buildable_costs[current_item_index]) + " eggs"
+
+# Helper function to find collision shapes recursively in a node and its children
+func find_collision_shape_recursive(node):
+	# Check if this node has a shape property (like CollisionShape3D)
+	if node is CollisionShape3D and node.shape:
+		return node.shape
+	
+	# Check if this node is a StaticBody3D with collision shapes
+	if node is StaticBody3D:
+		for child in node.get_children():
+			if child is CollisionShape3D and child.shape:
+				return child.shape
+	
+	# Recursively check children
+	for child in node.get_children():
+		var result = find_collision_shape_recursive(child)
+		if result:
+			return result
+	
+	return null
