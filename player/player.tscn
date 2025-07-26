@@ -42,9 +42,9 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
 bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
-bones/1/rotation = Quaternion(-0.0773486, 1.33193e-10, -1.63796e-08, 0.997004)
-bones/4/rotation = Quaternion(0.149924, 1.17867e-07, 1.78489e-08, 0.988698)
-bones/6/rotation = Quaternion(-0.0288706, -1.1916e-07, -3.44165e-09, 0.999583)
+bones/1/rotation = Quaternion(-0.0681462, 5.65198e-11, -1.53723e-08, 0.997675)
+bones/4/rotation = Quaternion(0.187832, 1.16406e-07, 2.57019e-08, 0.982201)
+bones/6/rotation = Quaternion(-0.0762771, -1.18862e-07, -9.09295e-09, 0.997087)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)

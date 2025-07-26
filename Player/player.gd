@@ -18,7 +18,7 @@ enum {IDLE, RUN}
 var currentAnim = IDLE
 @onready var animation_tree: AnimationTree = $player_rig/AnimationPlayer/AnimationTree
 
-
+signal egg_amount_changed(value)
 
 
 
@@ -136,7 +136,7 @@ func check_for_egg():
 	for egg in get_tree().get_nodes_in_group("egg"):
 		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
 			egg.queue_free()
-			# Add egg to egg counter
+			egg_amount_changed.emit(1)
 
 #func _ready():
 	#pickup_area.body_entered.connect(_on_body_entered)
