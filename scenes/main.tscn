@@ -47,9 +47,9 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0645608, -1.74433e-11, -1.56622e-08, 0.997914)
-bones/4/rotation = Quaternion(0.201555, 1.1721e-07, 2.18538e-08, 0.979477)
-bones/6/rotation = Quaternion(-0.0934822, -1.18688e-07, -1.11439e-08, 0.995621)
+bones/1/rotation = Quaternion(-0.0776073, 1.84505e-10, -1.56471e-08, 0.996984)
+bones/4/rotation = Quaternion(0.150543, 1.16111e-07, 2.6391e-08, 0.988604)
+bones/6/rotation = Quaternion(-0.0296433, -1.19157e-07, -3.53375e-09, 0.999561)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -175,9 +175,8 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.9128, 0.0529045, -23.
 [node name="egg7" parent="." instance=ExtResource("7_o6xl0")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.17478)
 
-[node name="egg_pickerupper" parent="." instance=ExtResource("8_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.258, 0.602, 3.222)
+[node name="egg_pickerupper2" parent="." instance=ExtResource("8_tipki")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.63004, 0.3008, 3.20943)
 
 [editable path="Player"]
 [editable path="Player/player_rig"]
-[editable path="egg_pickerupper"]

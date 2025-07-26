@@ -22,7 +22,7 @@ func _on_move_timer_timeout() -> void:
 		return
 		
 	navigation_agent_3d.target_position = eggs[chosen_egg].global_transform.origin
-		
+	getting_egg = true
 
 func _physics_process(delta: float) -> void:
 	if !navigation_agent_3d.is_navigation_finished():
@@ -36,3 +36,5 @@ func _physics_process(delta: float) -> void:
 		look_at(look_target)
 		
 		move_and_slide()
+	else:
+		getting_egg = false
