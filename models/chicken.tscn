@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6y85dbl1v8ve"]
+
+[ext_resource type="PackedScene" uid="uid://bcvgmftkdh54c" path="res://blender files/chicken.blend" id="1_03fs5"]
+[ext_resource type="Texture2D" uid="uid://dm3abensqw0aw" path="res://blender files/textures/chicken_texture.png" id="2_dkdfg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clxel"]
+albedo_texture = ExtResource("2_dkdfg")
+
+[node name="chicken" instance=ExtResource("1_03fs5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42108, 0)
+
+[node name="Icosphere" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_clxel")

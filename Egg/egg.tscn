@@ -2,15 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://b5dy3f583ljc3" path="res://blender files/egg.blend" id="1_sll2o"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jfr3l"]
-radius = 1.6
-height = 10.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_sll2o"]
 
 [node name="egg" instance=ExtResource("1_sll2o")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="." index="1"]
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="1"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" groups=["egg"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4386, 0)
-shape = SubResource("CapsuleShape3D_jfr3l")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" groups=["egg"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.62395, 0)
+shape = SubResource("SphereShape3D_sll2o")

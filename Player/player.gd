@@ -1,10 +1,19 @@
 extends CharacterBody3D
 
-@onready var player_rig: Node3D = $player_rig
 @onready var camera_3d: Camera3D = $Camera3D
 #@onready var pickup_area: Area3D = $PickupArea
+@onready var player_rig: Node3D = $player_rig
 
 @export var chicken_scene: PackedScene
+
+# Variables for animation
+@export var anim_blend_speed = 15
+enum {IDLE, RUN}
+var currentAnim = IDLE
+@onready var animation_tree: AnimationTree = $player_rig/AnimationPlayer/AnimationTree
+
+
+
 
 const SPEED = 12.0
 const JUMP_VELOCITY = 4.5
@@ -39,6 +48,9 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	# Animation update
+	handle_animations(delta)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -57,9 +69,15 @@ func _physics_process(delta: float) -> void:
 		# Rotate player_rig to face movement direction
 		var target_rotation = atan2(direction.x, direction.z)
 		rotate_player_to_direction(target_rotation, delta)
+		
+		# Play run animation
+		currentAnim = RUN
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+		# Play idle animation
+		currentAnim = IDLE
 
 	move_and_slide()
 
@@ -96,7 +114,15 @@ func get_mouse_ground_position():
 		return result.position
 	else:
 		return null
-	
+
+# Controls Animations
+func handle_animations(delta):
+	match currentAnim:
+		IDLE:
+			# Changes the blend amount in the animation tree depending on the players state
+			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 0, anim_blend_speed * delta)
+		RUN:
+			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 1, anim_blend_speed * delta)
 
 #func _ready():
 	#pickup_area.body_entered.connect(_on_body_entered)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bffn8vtqgko05"]
+[gd_scene load_steps=4 format=3 uid="uid://djlcsysw082gi"]
 
 [ext_resource type="PackedScene" uid="uid://dhflkc82fchmr" path="res://blender files/rifle.blend" id="1_g0c6h"]
 [ext_resource type="Texture2D" uid="uid://yln78cetq4p5" path="res://blender files/textures/rifle_texture.png" id="2_04irc"]
