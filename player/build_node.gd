@@ -1,5 +1,9 @@
 extends Node3D
 
+# Signals for build mode state changes
+signal build_mode_entered
+signal build_mode_exited
+
 var preview_instance: Node3D = null
 var in_build_mode = false
 @export var egg_dispenser_scene: PackedScene
@@ -10,6 +14,7 @@ func _process(delta: float) -> void:
 	# Start build mode
 	if !in_build_mode and Input.is_action_just_pressed("build_thing"):
 		in_build_mode = true
+		build_mode_entered.emit()
 		preview_instance = egg_dispenser_scene.instantiate()
 		get_tree().current_scene.add_child(preview_instance)
 		# Make preview semi-transparent
@@ -22,15 +27,17 @@ func _process(delta: float) -> void:
 		#print(mouse_ground_position)
 		
 		# Cancle build
-		if Input.is_action_just_pressed("ui_cancel"):
+		if Input.is_action_just_pressed("cancel_build"):
 			preview_instance.queue_free()
 			in_build_mode = false
+			build_mode_exited.emit()
 		
 		# Finalize build
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("finalize_build"):
 			# Make preview fully opaque
 			preview_instance.set_preview_mode(false)
 			in_build_mode = false
+			build_mode_exited.emit()
 
 # For building
 func get_mouse_ground_position():
