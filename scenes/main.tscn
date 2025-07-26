@@ -18,6 +18,8 @@ sky_material = SubResource("ProceduralSkyMaterial_sgp6g")
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 2
 sky = SubResource("Sky_o5qli")
+ambient_light_source = 2
+reflected_light_source = 1
 tonemap_mode = 3
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tbgi4"]
@@ -38,19 +40,31 @@ outline_color = Color(0, 0, 0, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0wfyh")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="sun_light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, -0.173101, 0.728728, 0.662565, -0.469084, 0.530521, -0.706051, 0, 7.1053, 0)
 light_color = Color(0.976471, 0.917647, 0.815686, 1)
 shadow_enabled = true
+
+[node name="moon_light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.858522, 0.512777, 0, -0.512777, 0.858522, 0, 0, 0)
+
+[node name="DayNightCycle" type="Node3D" parent="."]
+script = ExtResource("7_tipki")
+sunrise_color = Color(1, 0.651466, 0.100866, 1)
+daytime_color = Color(1, 0.972228, 0.956357, 1)
+sunset_color = Color(0.817042, 0.162845, 0.219807, 1)
+night_color = Color(0.0687983, 0.0687983, 0.0687983, 1)
+moonlight_color = Color(0.383703, 0.663499, 1, 1)
+night_time_seconds = 90
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0649911, 7.9109e-12, -1.53724e-08, 0.997886)
-bones/4/rotation = Quaternion(0.20085, 1.16736e-07, 2.41548e-08, 0.979622)
-bones/6/rotation = Quaternion(-0.092599, -1.18697e-07, -1.10386e-08, 0.995704)
+bones/1/rotation = Quaternion(-0.0652982, 1.26422e-11, -1.53724e-08, 0.997866)
+bones/4/rotation = Quaternion(0.199868, 1.16712e-07, 2.42719e-08, 0.979823)
+bones/6/rotation = Quaternion(-0.0913664, -1.18711e-07, -1.08917e-08, 0.995817)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -186,9 +200,6 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.9128, 0.0529045, -23.
 
 [node name="egg7" parent="." instance=ExtResource("7_o6xl0")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.17478)
-
-[node name="DayNightCycle" type="Node3D" parent="."]
-script = ExtResource("7_tipki")
 
 [editable path="Player"]
 [editable path="Player/player_rig"]
