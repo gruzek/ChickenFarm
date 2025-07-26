@@ -173,10 +173,25 @@ func check_build_collision():
 		exclude_rids.append(preview_instance.get_rid())
 	query.exclude = exclude_rids
 	
-	var hits = space_state.intersect_shape(query)
-		
 	var result = space_state.intersect_shape(query)
-	var is_colliding = result.size() > 0
+	
+	# Filter out collisions with objects named "Ground"
+	var filtered_collisions = []
+	for collision in result:
+		var collider = collision.collider
+		# Check if the collider or any of its parents is named "Ground"
+		var should_ignore = false
+		var current_node = collider
+		while current_node != null:
+			if current_node.name == "Ground":
+				should_ignore = true
+				break
+			current_node = current_node.get_parent()
+		
+		if not should_ignore:
+			filtered_collisions.append(collision)
+	
+	var is_colliding = filtered_collisions.size() > 0
 	
 	# Method 2: Direct overlap check with existing buildings
 	# This is a backup method to ensure we detect collisions with other buildings
@@ -196,11 +211,11 @@ func check_build_collision():
 			break
 	
 	# Combine results from both methods
-	is_colliding = result.size() > 0 or is_overlapping_buildings
+	is_colliding = filtered_collisions.size() > 0 or is_overlapping_buildings
 	
-	if result.size() > 0:
-		for i in range(min(3, result.size())):
-			var collider = result[i].collider
+	if filtered_collisions.size() > 0:
+		for i in range(min(3, filtered_collisions.size())):
+			var collider = filtered_collisions[i].collider
 	#elif is_overlapping_buildings:
 		#print("DEBUG: Overlapping with existing buildings")
 	#else:
@@ -249,9 +264,9 @@ func add_cost_label_to_preview(can_afford):
 	cost_label.text = str(buildable_costs[current_item_index]) + " eggs"
 	cost_label.font_size = 32  # Larger font size
 	if (can_afford):
-		cost_label.modulate = Color(1, 1, 1)  # White color for better visibility
+		cost_label.modulate = Color(0.8, 1, .8)  # green color for affordable
 	else:
-		cost_label.modulate = Color(1, 0, 0)  # White color for better visibility
+		cost_label.modulate = Color(1, 0, 0)  # red color for unaffordable
 	cost_label.outline_size = 2  # Add outline
 	cost_label.outline_modulate = Color(0, 0, 0)  # Black outline
 	
