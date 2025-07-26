@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtgop0puj1s61"]
+[gd_scene load_steps=6 format=3 uid="uid://kpc4sx4cc3wt"]
 
 [ext_resource type="PackedScene" uid="uid://5ece8avo0n6v" path="res://blender files/chicken_coop.blend" id="1_gds0f"]
 [ext_resource type="Script" uid="uid://1snib30fohu1" path="res://models/chicken_coop/chicken_coop.gd" id="2_yjk7j"]
