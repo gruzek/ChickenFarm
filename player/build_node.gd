@@ -130,6 +130,8 @@ func check_build_collision():
 		exclude_rids.append(preview_instance.get_rid())
 	query.exclude = exclude_rids
 	
+	var hits = space_state.intersect_shape(query)
+		
 	var result = space_state.intersect_shape(query)
 	var is_colliding = result.size() > 0
 	
