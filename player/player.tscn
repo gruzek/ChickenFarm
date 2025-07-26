@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b38r8siyfyu8y"]
+[gd_scene load_steps=10 format=3 uid="uid://b38r8siyfyu8y"]
 
 [ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dr2x5he8a5xn0" path="res://models/egg_dispenser/egg_dispenser.tscn" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://c7a16ujpn8spx" path="res://models/player_man.tscn" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://bn346es4bjr8e" path="res://player/build_node.gd" id="3_g1dw6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
 radius = 0.416004
@@ -29,7 +30,6 @@ node_connections = [&"Run", 0, &"Anim Idle", &"Run", 1, &"Anim Run", &"output", 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_oul6g")
 pickup_range = 5
-egg_dispenser_scene = ExtResource("2_g1dw6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40753, 0)
@@ -42,9 +42,9 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
 bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
-bones/1/rotation = Quaternion(-0.0652475, 1.18616e-11, -1.53724e-08, 0.997869)
-bones/4/rotation = Quaternion(0.200082, 1.16717e-07, 2.42464e-08, 0.979779)
-bones/6/rotation = Quaternion(-0.0916353, -1.18708e-07, -1.09237e-08, 0.995793)
+bones/1/rotation = Quaternion(-0.0768439, 3.3101e-11, -1.78084e-08, 0.997043)
+bones/4/rotation = Quaternion(0.15241, 1.17943e-07, 1.75579e-08, 0.988317)
+bones/6/rotation = Quaternion(-0.0319725, -1.19148e-07, -3.81143e-09, 0.999489)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -61,5 +61,9 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeBlendTree_fhl08")
 anim_player = NodePath("..")
 parameters/Run/blend_amount = 0.0
+
+[node name="build_node" type="Node3D" parent="."]
+script = ExtResource("3_g1dw6")
+egg_dispenser_scene = ExtResource("2_g1dw6")
 
 [editable path="player_rig"]
