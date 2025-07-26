@@ -18,7 +18,7 @@ func _ready():
 func set_preview_mode(is_preview: bool):
 	in_preview_mode = is_preview
 	var alpha = 1.0 if not is_preview else 0.5
-	set_transparency_recursive(self, alpha)
+	#set_transparency_recursive(self, alpha)
 	
 	# Setup collision area for preview mode
 	if is_preview:
@@ -28,7 +28,7 @@ func set_buildable(buildable: bool):
 	is_buildable = buildable
 	# Update appearance when buildable state changes
 	var alpha = 0.5  # Assume we're in preview mode
-	set_transparency_recursive(self, alpha)
+	#set_transparency_recursive(self, alpha)
 
 func set_transparency_recursive(node: Node, alpha: float):
 	if node is MeshInstance3D:
