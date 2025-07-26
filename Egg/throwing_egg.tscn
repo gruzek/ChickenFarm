@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvbau1p0yhd07"]
+
+[ext_resource type="PackedScene" uid="uid://b5dy3f583ljc3" path="res://blender files/egg.blend" id="1_xlxem"]
+
+[node name="throwing_egg" instance=ExtResource("1_xlxem")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

@@ -2,11 +2,14 @@ extends CharacterBody3D
 
 # Player Statistics
 @export var SPEED = 12.0
-const JUMP_VELOCITY = 4.5
 @export var ROTATION_SPEED = 10.0  # Speed at which the player rotates to face movement direction
 @export var pickup_range = 25
+@export var egg_throw_range = 5.0
 
-#@onready var pickup_area: Area3D = $PickupArea
+# egg throwing
+@export var throwing_egg_scene: PackedScene
+@export var egg_break_partical: PackedScene
+
 @onready var player_rig: Node3D = $player_rig
 @onready var build_node: Node3D = $build_node
 
@@ -37,10 +40,10 @@ func _physics_process(delta: float) -> void:
 		
 	# Animation update
 	handle_animations(delta)
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	
+	# Throw Egg
+	if Input.is_action_just_pressed("throw_egg"):
+		throw_egg()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -84,8 +87,6 @@ func rotate_player_to_direction(target_rotation: float, delta: float) -> void:
 	var new_rotation = current_rotation + angle_diff * ROTATION_SPEED * delta
 	player_rig.rotation.y = new_rotation
 
-
-
 # Controls Animations
 func handle_animations(delta):
 	match currentAnim:
@@ -101,6 +102,45 @@ func check_for_egg():
 		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
 			egg.queue_free()
 			egg_amount_changed.emit(1)
+
+# Throwing eggs
+func throw_egg():
+	var start_pos = global_position + Vector3.UP * 1.5 # to make it eye or hand hieght
+	var forward = -global_transform.basis.z.normalized()
+	var distance = egg_throw_range
+	var end_pos = start_pos + forward * distance
+	
+	spawn_and_tween_egg(start_pos, end_pos)
+
+
+func spawn_and_tween_egg(start_pos: Vector3, end_pos: Vector3):
+	# Spawn egg
+	var throwing_egg = throwing_egg_scene.instantiate()
+	get_tree().current_scene.add_child(throwing_egg)
+	throwing_egg.global_position = start_pos
+	
+	# Tween egg
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	var duration = 0.5
+	var peak_height = 2.5
+	
+	tween.tween_method(func(t):
+		var flat_lerp = start_pos.lerp(end_pos, t)
+		var vertical_arc = sin(t * PI) * peak_height
+		throwing_egg.global_position = flat_lerp + Vector3.UP * vertical_arc
+	, 0.0, 1.0, duration)
+	
+	tween.tween_callback(func():
+		#await get_tree().create_timer(duration).timeout
+		throwing_egg.queue_free()
+		var egg_break = egg_break_partical.instantiate()
+		add_child(egg_break)
+		egg_break.global_position = end_pos
+		
+		)
+	
 
 # Signal handlers for build mode
 func _on_build_mode_entered():
