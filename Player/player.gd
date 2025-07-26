@@ -8,6 +8,7 @@ const JUMP_VELOCITY = 4.5
 
 #@onready var pickup_area: Area3D = $PickupArea
 @onready var player_rig: Node3D = $player_rig
+@onready var build_node: Node3D = $build_node
 
 
 # Variables for animation
@@ -20,20 +21,12 @@ signal egg_amount_changed(value)
 
 var in_build_mode = false
 
+func _ready():
+	# Connect to build_node signals
+	build_node.build_mode_entered.connect(_on_build_mode_entered)
+	build_node.build_mode_exited.connect(_on_build_mode_exited)
+
 func _process(delta: float) -> void:
-	# Start build mode
-	if !in_build_mode and Input.is_action_just_pressed("build_thing"):
-		in_build_mode = true
-		
-		# Cancle build
-		if Input.is_action_just_pressed("ui_cancel"):
-			in_build_mode = false
-		
-		# Finalize build
-		if Input.is_action_just_pressed("ui_accept"):
-			# Make preview fully opaque
-			in_build_mode = false
-			
 	# Pickup logic
 	check_for_egg()
 
@@ -108,6 +101,15 @@ func check_for_egg():
 		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
 			egg.queue_free()
 			egg_amount_changed.emit(1)
+
+# Signal handlers for build mode
+func _on_build_mode_entered():
+	in_build_mode = true
+	print("Player: Build mode entered")
+
+func _on_build_mode_exited():
+	in_build_mode = false
+	print("Player: Build mode exited")
 
 #func _ready():
 	#pickup_area.body_entered.connect(_on_body_entered)
