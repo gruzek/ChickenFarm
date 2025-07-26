@@ -8,7 +8,10 @@ var preview_instance: Node3D = null
 var in_build_mode = false
 var current_item_index = 0
 var buildable_scenes: Array[PackedScene]
+var buildable_costs: Array[int]
+
 @onready var camera_3d: Camera3D = $"../Camera3D"
+@onready var egg_bank = get_tree().get_first_node_in_group("egg bank")
 
 func _ready():
 	# Load buildable scenes programmatically
@@ -16,6 +19,12 @@ func _ready():
 		load("res://models/chicken_coop/chicken_coop.tscn"),
 		load("res://models/egg_dispenser/egg_dispenser.tscn"),
 		load("res://models/egg_pickerupper/egg_pickerupper.tscn")
+	]
+	
+	buildable_costs = [
+		25,
+		200,
+		500
 	]
 
 func _process(delta: float) -> void:
@@ -32,8 +41,11 @@ func _process(delta: float) -> void:
 		var mouse_ground_position = get_mouse_ground_position()
 		if mouse_ground_position:
 			preview_instance.global_position = mouse_ground_position
-			# Check for collisions and update buildable state
-			check_build_collision()
+			if buildable_costs[current_item_index] > egg_bank.eggs:
+				preview_instance.set_buildable(false)
+			else:
+				# Check for collisions and update buildable state
+				check_build_collision()
 		#print(mouse_ground_position)
 		
 		# Item selection
@@ -57,6 +69,7 @@ func _process(delta: float) -> void:
 				# Activate the object when placed
 				set_active(true)
 				in_build_mode = false
+				egg_bank.eggs = egg_bank.eggs - buildable_costs[current_item_index]
 				build_mode_exited.emit()
 
 # Item switching functions
@@ -95,8 +108,6 @@ func instantiate_preview():
 	
 	# Disable activity for preview objects
 	set_active(false)
-
-
 
 # For building
 func get_mouse_ground_position():
