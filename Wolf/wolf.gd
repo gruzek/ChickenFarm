@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var target_timer: Timer = $"Target Timer"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@export var attack_range = 1.5
+@export var attack_range = 0.7
 @export var attack_damage = 2
 
 @export var move_speed = 5
