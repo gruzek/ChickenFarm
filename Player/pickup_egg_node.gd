@@ -1,15 +1,19 @@
 extends Node3D
 
-signal pickup_egg
-
 @export var pickup_range = 3
+
+@onready var egg_bank = get_tree().get_first_node_in_group("egg bank")
 
 func _process(delta: float) -> void:
 	check_for_egg()
+
+func _ready() -> void:
+	print(self, ": ", egg_bank)
 
 # Checks if an egg is in pickup range then picks it up
 func check_for_egg():
 	for egg in get_tree().get_nodes_in_group("egg"):
 		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
 			egg.queue_free()
-			pickup_egg.emit()
+			egg_bank.eggs += 1
+			print(get_parent_node_3d())

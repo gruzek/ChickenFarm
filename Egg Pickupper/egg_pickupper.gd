@@ -5,11 +5,8 @@ extends CharacterBody3D
 
 @export var move_speed = 5
 @export var reaction_time = 1
-@export var pickup_range = 5
 
 var getting_egg = false
-
-signal egg_amount_changed(value)
 
 func _ready() -> void:
 	move_timer.wait_time = reaction_time
@@ -39,9 +36,3 @@ func _physics_process(delta: float) -> void:
 		look_at(look_target)
 		
 		move_and_slide()
-
-func collect_egg():
-	for egg in get_tree().get_nodes_in_group("egg"):
-		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
-			egg.queue_free() 
-			egg_amount_changed.emit(1)

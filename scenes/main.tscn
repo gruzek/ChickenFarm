@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=14 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" path="res://models/fence-section.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://630u3h61ot7d" path="res://models/chicken_coop.tscn" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://cjc8l5wlnr4fb" path="res://Egg/egg_label.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://djqbvefiyd54s" path="res://Egg/egg.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dqf7kdk6rmsp0" path="res://Egg Pickupper/egg_pickerupper.tscn" id="8_tipki"]
@@ -48,9 +47,9 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0763023, -2.57409e-11, -1.859e-08, 0.997085)
-bones/4/rotation = Quaternion(0.156174, 1.18056e-07, 1.71171e-08, 0.98773)
-bones/6/rotation = Quaternion(-0.0366714, -1.19129e-07, -4.37158e-09, 0.999327)
+bones/1/rotation = Quaternion(-0.0645608, -1.74433e-11, -1.56622e-08, 0.997914)
+bones/4/rotation = Quaternion(0.201555, 1.1721e-07, 2.18538e-08, 0.979477)
+bones/6/rotation = Quaternion(-0.0934822, -1.18688e-07, -1.11439e-08, 0.995621)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -134,10 +133,7 @@ transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08,
 [node name="InvisibleBoundary4" parent="NavigationRegion3D/boundaries" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08, -9.14026, 0, -64.2564)
 
-[node name="chicken_coop" parent="NavigationRegion3D" instance=ExtResource("5_tbgi4")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24.6959, 0.251615, -23.0376)
-
-[node name="UI" type="MarginContainer" parent="."]
+[node name="UI" type="MarginContainer" parent="." groups=["egg bank"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -180,9 +176,8 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.9128, 0.0529045, -23.
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.17478)
 
 [node name="egg_pickerupper" parent="." instance=ExtResource("8_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.81817, 0.6016, 3.22205)
-
-[connection signal="pickup_egg" from="Player/pickup_egg_node" to="UI" method="_on_pickup_egg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.258, 0.602, 3.222)
 
 [editable path="Player"]
 [editable path="Player/player_rig"]
+[editable path="egg_pickerupper"]

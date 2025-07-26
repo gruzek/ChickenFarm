@@ -30,8 +30,7 @@ func _ready():
 	build_node.build_mode_exited.connect(_on_build_mode_exited)
 
 func _process(delta: float) -> void:
-	# Pickup logic
-	check_for_egg()
+	pass
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -96,13 +95,6 @@ func handle_animations(delta):
 		RUN:
 			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 1, anim_blend_speed * delta)
 
-# Checks if an egg is in pickup range then picks it up
-func check_for_egg():
-	for egg in get_tree().get_nodes_in_group("egg"):
-		if global_transform.origin.distance_to(egg.global_transform.origin) < pickup_range:
-			egg.queue_free()
-			egg_amount_changed.emit(1)
-
 # Throwing eggs
 func throw_egg():
 	var start_pos = global_position + Vector3.UP * 1.5 # to make it eye or hand hieght
@@ -150,6 +142,7 @@ func _on_build_mode_entered():
 func _on_build_mode_exited():
 	in_build_mode = false
 	print("Player: Build mode exited")
+
 
 #func _ready():
 	#pickup_area.body_entered.connect(_on_body_entered)
