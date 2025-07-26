@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkxu5166q7vr4"]
+
+[ext_resource type="Script" uid="uid://dusq08hrnu2kl" path="res://Player/pickup_egg_node.gd" id="1_0gav2"]
+
+[node name="pickup_egg_node" type="Node3D"]
+script = ExtResource("1_0gav2")

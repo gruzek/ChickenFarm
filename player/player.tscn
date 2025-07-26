@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b38r8siyfyu8y"]
+[gd_scene load_steps=12 format=3 uid="uid://b38r8siyfyu8y"]
 
 [ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://Player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dvbau1p0yhd07" path="res://Egg/throwing_egg.tscn" id="2_fhl08"]
 [ext_resource type="PackedScene" uid="uid://c7a16ujpn8spx" path="res://models/player_man.tscn" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://bn346es4bjr8e" path="res://Player/build_node.gd" id="3_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://b88t56vgbd5j5" path="res://Egg/egg_break.tscn" id="3_vtle1"]
+[ext_resource type="PackedScene" uid="uid://bkxu5166q7vr4" path="res://Egg/pickup_egg_node.tscn" id="6_fhl08"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
 radius = 0.416004
@@ -47,9 +48,9 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
 bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
-bones/1/rotation = Quaternion(-0.0649269, -9.3072e-11, -1.692e-08, 0.99789)
-bones/4/rotation = Quaternion(0.200759, 1.19173e-07, 1.23269e-08, 0.979641)
-bones/6/rotation = Quaternion(-0.0924849, -1.18698e-07, -1.1025e-08, 0.995714)
+bones/1/rotation = Quaternion(-0.0653803, -1.86729e-10, -1.84776e-08, 0.99786)
+bones/4/rotation = Quaternion(0.198359, 1.1921e-07, 1.21403e-08, 0.980129)
+bones/6/rotation = Quaternion(-0.089474, -1.18731e-07, -1.06661e-08, 0.995989)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -69,5 +70,7 @@ parameters/Run/blend_amount = 0.0
 
 [node name="build_node" type="Node3D" parent="."]
 script = ExtResource("3_g1dw6")
+
+[node name="pickup_egg_node" parent="." instance=ExtResource("6_fhl08")]
 
 [editable path="player_rig"]

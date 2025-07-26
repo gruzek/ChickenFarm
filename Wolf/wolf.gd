@@ -1,28 +1,29 @@
 extends CharacterBody3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
-@onready var move_timer: Timer = $move_timer
+@onready var target_timer: Timer = $"Target Timer"
 
 @export var move_speed = 5
 @export var reaction_time = 1
 
-var getting_egg = false
+var attacking = false
 
 func _ready() -> void:
-	move_timer.wait_time = reaction_time
-	
+	target_timer.wait_time = reaction_time
 
-func _on_move_timer_timeout() -> void:
-	var eggs = get_tree().get_nodes_in_group("egg")
-	if eggs.is_empty() || getting_egg:
+
+func _on_target_timer_timeout() -> void:
+	var chickens = get_tree().get_nodes_in_group("chicken")
+	if chickens.is_empty() || attacking:
+		print("EMPTY - RETUREND")
 		return
 		
-	var chosen_egg = randi_range(0, eggs.size() - 1)
-	if eggs[chosen_egg] == null:
+	var chosen_target = randi_range(0, chickens.size() - 1)
+	if chickens[chosen_target] == null:
+		print("NULL - RETUREND")
 		return
 		
-	navigation_agent_3d.target_position = eggs[chosen_egg].global_transform.origin
-	getting_egg = true
+	navigation_agent_3d.target_position = chickens[chosen_target].global_transform.origin
 
 func _physics_process(delta: float) -> void:
 	if !navigation_agent_3d.is_navigation_finished():
@@ -36,5 +37,3 @@ func _physics_process(delta: float) -> void:
 		look_at(look_target)
 		
 		move_and_slide()
-	else:
-		getting_egg = false

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://boo0obe6brx3q" path="res://Egg Pickupper/egg_pickupper.gd" id="1_hhf6g"]
 [ext_resource type="Texture2D" uid="uid://sv8l48xevlxq" path="res://Egg Pickupper/egg_pickupper_texture.png" id="2_jpe1t"]
-[ext_resource type="Script" uid="uid://dusq08hrnu2kl" path="res://Player/pickup_egg_node.gd" id="3_hegp5"]
+[ext_resource type="PackedScene" uid="uid://bkxu5166q7vr4" path="res://Egg/pickup_egg_node.tscn" id="3_hegp5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hegp5"]
 albedo_texture = ExtResource("2_jpe1t")
@@ -88,9 +88,12 @@ albedo_color = Color(0.154876, 0.154876, 0.154876, 1)
 size = Vector3(2.16818, 1, 2.46228)
 
 [node name="egg_pickerupper" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Egg Pickupper" type="CharacterBody3D" parent="."]
 script = ExtResource("1_hhf6g")
+move_speed = 4
+reaction_time = 2
 
 [node name="Cube" type="MeshInstance3D" parent="Egg Pickupper"]
 material_override = SubResource("StandardMaterial3D_hegp5")
@@ -112,7 +115,6 @@ shape = SubResource("BoxShape3D_bx3cw")
 [node name="move_timer" type="Timer" parent="Egg Pickupper"]
 autostart = true
 
-[node name="pickup_egg_node" type="Node3D" parent="Egg Pickupper"]
-script = ExtResource("3_hegp5")
+[node name="pickup_egg_node" parent="Egg Pickupper" instance=ExtResource("3_hegp5")]
 
 [connection signal="timeout" from="Egg Pickupper/move_timer" to="Egg Pickupper" method="_on_move_timer_timeout"]

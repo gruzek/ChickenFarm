@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjst7xfrt2nqq"]
+
+[ext_resource type="Script" uid="uid://bbodi52e5h54o" path="res://Wolf/wolf.gd" id="1_dlc5l"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gkgrw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dlc5l"]
+
+[node name="Wolf" type="CharacterBody3D"]
+script = ExtResource("1_dlc5l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_gkgrw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_dlc5l")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Target Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Target Timer" to="." method="_on_target_timer_timeout"]
