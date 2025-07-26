@@ -8,7 +8,7 @@ extends CharacterBody3D
 
 # egg throwing
 @export var throwing_egg_scene: PackedScene
-@export var egg_break_partical: PackedScene
+@onready var egg_bank = get_tree().get_first_node_in_group("egg bank")
 
 @onready var player_rig: Node3D = $player_rig
 @onready var build_node: Node3D = $build_node
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	handle_animations(delta)
 	
 	# Throw Egg
-	if Input.is_action_just_pressed("throw_egg"):
+	if Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
 		throw_egg()
 
 	# Get the input direction and handle the movement/deceleration.
@@ -97,6 +97,7 @@ func handle_animations(delta):
 
 # Throwing eggs
 func throw_egg():
+	egg_bank.eggs -= 1
 	var start_pos = global_position + Vector3.UP * 1.5 # to make it eye or hand hieght
 	var forward = -global_transform.basis.z.normalized()
 	var distance = egg_throw_range
@@ -126,13 +127,8 @@ func spawn_and_tween_egg(start_pos: Vector3, end_pos: Vector3):
 	
 	tween.tween_callback(func():
 		#await get_tree().create_timer(duration).timeout
-		throwing_egg.queue_free()
-		var egg_break = egg_break_partical.instantiate()
-		add_child(egg_break)
-		egg_break.global_position = end_pos
-		
+		throwing_egg.explode()
 		)
-	
 
 # Signal handlers for build mode
 func _on_build_mode_entered():

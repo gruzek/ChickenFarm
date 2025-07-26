@@ -8,9 +8,9 @@ extends CharacterBody3D
 @export var egg_chance = 50
 
 # Roaming variables
-@export var roaming_speed = 3.0
+@export var roaming_speed = 5.0
 @export var roaming_radius = 15.0
-@export var roam_interval = 6.0
+@export var roam_interval = 3.0
 var roam_timer = 0.0
 
 func _process(delta: float) -> void:
