@@ -116,7 +116,7 @@ _data = {
 &"waddle": SubResource("Animation_gq4v0")
 }
 
-[node name="Chicken" type="CharacterBody3D"]
+[node name="Chicken" type="CharacterBody3D" groups=["chicken"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_clxel")
