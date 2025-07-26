@@ -14,7 +14,8 @@ func _ready():
 	# Load buildable scenes programmatically
 	buildable_scenes = [
 		load("res://models/chicken_coop/chicken_coop.tscn"),
-		load("res://models/egg_dispenser/egg_dispenser.tscn")
+		load("res://models/egg_dispenser/egg_dispenser.tscn"),
+		load("res://models/egg_pickerupper/egg_pickerupper.tscn")
 	]
 
 func _process(delta: float) -> void:
@@ -53,6 +54,8 @@ func _process(delta: float) -> void:
 				# Make preview fully opaque
 				preview_instance.set_buildable(true)
 				preview_instance.set_preview_mode(false)
+				# Activate the object when placed
+				set_active(true)
 				in_build_mode = false
 				build_mode_exited.emit()
 
@@ -79,6 +82,8 @@ func update_preview_item():
 		# Set preview mode and restore position
 		preview_instance.set_preview_mode(true)  # This will trigger collision area setup
 		preview_instance.global_position = current_position
+		# Disable activity for preview objects
+		set_active(false)
 
 # Create the initial preview instance
 func instantiate_preview():
@@ -87,6 +92,9 @@ func instantiate_preview():
 	
 	# Set preview mode first - this will trigger collision area setup
 	preview_instance.set_preview_mode(true)
+	
+	# Disable activity for preview objects
+	set_active(false)
 
 
 
@@ -165,3 +173,19 @@ func check_build_collision():
 	
 	# Update buildable state
 	preview_instance.set_buildable(not is_colliding)
+
+# Helper function to set active state on preview instance or its children
+func set_active(value: bool):
+	if not preview_instance:
+		return
+		
+	# First check if the preview instance itself has the method
+	if preview_instance.has_method("set_is_active"):
+		preview_instance.set_is_active(value)
+		return
+		
+	# If not, check immediate children
+	for child in preview_instance.get_children():
+		if child.has_method("set_is_active"):
+			child.set_is_active(value)
+			return

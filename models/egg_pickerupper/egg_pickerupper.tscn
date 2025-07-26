@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=4 uid="uid://dqf7kdk6rmsp0"]
+[gd_scene load_steps=14 format=4 uid="uid://dqf7kdk6rmsp0"]
 
-[ext_resource type="Script" uid="uid://boo0obe6brx3q" path="res://Egg Pickupper/egg_pickupper.gd" id="1_hhf6g"]
-[ext_resource type="Texture2D" uid="uid://sv8l48xevlxq" path="res://Egg Pickupper/egg_pickupper_texture.png" id="2_jpe1t"]
+[ext_resource type="Script" uid="uid://boo0obe6brx3q" path="res://models/egg_pickerupper/egg_pickupper.gd" id="1_hhf6g"]
+[ext_resource type="Script" uid="uid://dqvx1pannd6be" path="res://models/egg_pickerupper/egg_pickerupper_buildable.gd" id="1_wulr0"]
+[ext_resource type="Texture2D" uid="uid://sv8l48xevlxq" path="res://models/egg_pickerupper/egg_pickupper_texture.png" id="2_jpe1t"]
 [ext_resource type="PackedScene" uid="uid://bkxu5166q7vr4" path="res://Egg/pickup_egg_node.tscn" id="3_hegp5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hegp5"]
@@ -85,17 +86,21 @@ shadow_mesh = SubResource("ArrayMesh_ok0oa")
 albedo_color = Color(0.154876, 0.154876, 0.154876, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bx3cw"]
-size = Vector3(2.16818, 1, 2.46228)
+size = Vector3(2.16818, 1.15088, 2.61313)
 
 [node name="egg_pickerupper" type="Node3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_wulr0")
 
 [node name="Egg Pickupper" type="CharacterBody3D" parent="."]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_hhf6g")
 move_speed = 4
 reaction_time = 2
 
 [node name="Cube" type="MeshInstance3D" parent="Egg Pickupper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.787992, 0)
 material_override = SubResource("StandardMaterial3D_hegp5")
 mesh = SubResource("ArrayMesh_vgtj7")
 skeleton = NodePath("")
@@ -109,7 +114,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wggci")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Egg Pickupper"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Egg Pickupper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0153046, 0, 0.434265)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0153046, 1.21874, 0.421493)
 shape = SubResource("BoxShape3D_bx3cw")
 
 [node name="move_timer" type="Timer" parent="Egg Pickupper"]
