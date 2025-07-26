@@ -44,7 +44,11 @@ func _process(delta: float) -> void:
 			build_mode_entered.emit()
 			instantiate_preview()
 			# Preview mode is already set in instantiate_preview
-
+	elif in_build_mode and Input.is_action_just_pressed("build_thing"):
+		preview_instance.queue_free()
+		in_build_mode = false
+		build_mode_exited.emit()
+	
 	if in_build_mode:
 		var mouse_ground_position = get_mouse_ground_position()
 		if mouse_ground_position:
