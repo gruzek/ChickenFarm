@@ -19,8 +19,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
-
-func _on_egg_amount_changed(value: Variant) -> void:
-	current_eggs += value
-	egg_label.text = ("Eggs " + str(current_eggs))
+func _on_pickup_egg() -> void:
+	current_eggs += 1
+	egg_label.text = ("Eggs: " + str(current_eggs))
