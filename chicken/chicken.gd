@@ -13,6 +13,17 @@ extends CharacterBody3D
 @export var roam_interval = 3.0
 var roam_timer = 0.0
 
+# Health
+@export var starting_health = 10
+var health: int:
+	set(health_in):
+		health = health_in
+		if health <= 0:
+			queue_free()
+
+func _ready() -> void:
+	health = starting_health
+
 func _process(delta: float) -> void:
 	roam_timer += delta
 

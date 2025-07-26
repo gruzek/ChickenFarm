@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b5dy3f583ljc3" path="res://blender files/egg.blend" id="1_xlxem"]
 [ext_resource type="Script" uid="uid://cn35hr7uycokw" path="res://Egg/throwing_egg.gd" id="2_ubs50"]
 [ext_resource type="PackedScene" uid="uid://b88t56vgbd5j5" path="res://Egg/egg_break.tscn" id="3_jp718"]
-[ext_resource type="PackedScene" uid="uid://dt40nqqclxdgf" path="res://models/chicken/chicken.tscn" id="4_hjlav"]
+[ext_resource type="PackedScene" uid="uid://dt40nqqclxdgf" path="res://chicken/chicken.tscn" id="4_hjlav"]
 
 [node name="throwing_egg" instance=ExtResource("1_xlxem")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

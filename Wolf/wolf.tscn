@@ -1,10 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjst7xfrt2nqq"]
+[gd_scene load_steps=8 format=3 uid="uid://cjst7xfrt2nqq"]
 
 [ext_resource type="Script" uid="uid://bbodi52e5h54o" path="res://Wolf/wolf.gd" id="1_dlc5l"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlc5l"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gkgrw"]
+material = SubResource("StandardMaterial3D_dlc5l")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dlc5l"]
+
+[sub_resource type="Animation" id="Animation_38o6x"]
+resource_name = "attack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.0119792, 0.214508, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_se4sg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o1ixa"]
+_data = {
+&"RESET": SubResource("Animation_se4sg"),
+&"attack": SubResource("Animation_38o6x")
+}
 
 [node name="Wolf" type="CharacterBody3D"]
 script = ExtResource("1_dlc5l")
@@ -21,5 +75,10 @@ shape = SubResource("CapsuleShape3D_dlc5l")
 
 [node name="Target Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o1ixa")
+}
 
 [connection signal="timeout" from="Target Timer" to="." method="_on_target_timer_timeout"]
