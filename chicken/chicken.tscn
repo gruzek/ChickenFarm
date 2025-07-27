@@ -133,7 +133,7 @@ layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_isxhm")
 
 [node name="StaticBody3D" parent="chicken_rig/chicken/Icosphere" index="0"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 0
 
 [node name="chicken_animation_player" type="AnimationPlayer" parent="."]

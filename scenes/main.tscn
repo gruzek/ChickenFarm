@@ -69,23 +69,25 @@ daytime_color = Color(1, 0.972228, 0.956357, 1)
 sunset_color = Color(0.817042, 0.162845, 0.219807, 1)
 night_color = Color(0.0687983, 0.0687983, 0.0687983, 1)
 moonlight_color = Color(0.383703, 0.663499, 1, 1)
+day_time_seconds = 180
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
+starting_health = 30
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
 bones/0/rotation = Quaternion(0.12582, 1.18262e-07, 1.49988e-08, 0.992053)
-bones/1/rotation = Quaternion(-0.0772882, 1.21221e-10, -1.65505e-08, 0.997009)
-bones/4/rotation = Quaternion(0.150115, 1.17873e-07, 1.78266e-08, 0.988669)
-bones/6/rotation = Quaternion(-0.0291087, -1.19159e-07, -3.47003e-09, 0.999576)
+bones/1/rotation = Quaternion(-0.0720883, -9.06973e-11, -1.85907e-08, 0.997398)
+bones/4/rotation = Quaternion(0.172548, 1.18529e-07, 1.51931e-08, 0.985001)
+bones/6/rotation = Quaternion(-0.057144, -1.19014e-07, -6.81209e-09, 0.998366)
 bones/10/rotation = Quaternion(-0.0238619, 0.0501728, 0.000387373, 0.998455)
 bones/14/rotation = Quaternion(-0.0510234, -0.0412582, -0.0171822, 0.997697)
 bones/15/scale = Vector3(0.026485, 0.026485, 0.216099)
 bones/17/rotation = Quaternion(-0.152455, 0.793331, 0.285504, 0.515627)
 
 [node name="Cube_002" parent="Player/player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58278e-06, -0.0264832, 0.00254143, 0.000203613, -0.00031142, -0.216078, 0.0264842, 7.97198e-06, 0.00166067, -0.26747, 0.681675, 0.0639337)
+transform = Transform3D(5.58278e-06, -0.0264832, 0.00254143, -7.25992e-05, -0.000311487, -0.216083, 0.0264849, 4.7232e-06, -0.00059286, -0.26747, 0.680852, 0.0593962)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -185,7 +187,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("6_tefeu")
-starting_eggs = 100
+starting_eggs = 5
 
 [node name="EggLabel" type="Label" parent="UI"]
 layout_mode = 2
@@ -288,12 +290,6 @@ parameters/looping = true
 [node name="NighttimeMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_jbj1t")
 parameters/looping = true
-
-[node name="Wolf" parent="." instance=ExtResource("8_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4803, 7.63685e-07, 1.4441)
-
-[node name="Wolf2" parent="." instance=ExtResource("8_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.32306, 1.52737e-06, -6.33494)
 
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight"]
