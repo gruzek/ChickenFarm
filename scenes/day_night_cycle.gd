@@ -17,10 +17,10 @@ signal evening_civil_twilight
 @export var night_color: Color = Color(0.0, 0.0, 0.0, 1.0)     # Complete black
 @export var moonlight_color: Color = Color(0.1, 0.1, 0.2, 1.0)  # Soft blue moonlight
 
-@export var day_time_seconds: int = 240
-@export var night_time_seconds: int = 120
-@export var sunrise_overlap: int = 60
-@export var sunset_overlap: int = 60
+@export var day_time_seconds: int = 120
+@export var night_time_seconds: int = 60
+@export var sunrise_overlap: int = 30
+@export var sunset_overlap: int = 30
 
 # Time tracking variables
 var current_time: float = 0.0  # Time in seconds since sunrise

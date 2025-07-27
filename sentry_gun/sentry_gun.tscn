@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://du62gw5kd77xa"]
+[gd_scene load_steps=7 format=3 uid="uid://du62gw5kd77xa"]
 
 [ext_resource type="PackedScene" uid="uid://dvyq3nahtl45e" path="res://blender files/sentry_gun.blend" id="1_s07uy"]
+[ext_resource type="Script" uid="uid://dl073gp217k1i" path="res://sentry_gun/sentry_gun.gd" id="2_bt7ye"]
 [ext_resource type="Texture2D" uid="uid://yln78cetq4p5" path="res://blender files/textures/rifle_texture.png" id="2_h6bsr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kf253"]
@@ -13,18 +14,19 @@ albedo_texture = ExtResource("2_h6bsr")
 albedo_color = Color(0.169245, 0.169245, 0.169245, 1)
 
 [node name="sentry_gun" instance=ExtResource("1_s07uy")]
+script = ExtResource("2_bt7ye")
 
 [node name="Base" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_kf253")
 
 [node name="Gun" parent="." index="1"]
-transform = Transform3D(-0.608513, 2.6599e-08, 2.6599e-08, -2.6599e-08, 0, -0.608513, -2.6599e-08, -0.608513, 1.16268e-15, 0, 2.19117, 0)
+transform = Transform3D(-2.6599e-08, -0.608513, 2.6599e-08, 0, -2.6599e-08, -0.608513, 0.608513, -2.6599e-08, 1.16268e-15, 0, 2.19117, 0)
 material_override = SubResource("StandardMaterial3D_btrpy")
+
+[node name="Barrel" type="Node3D" parent="Gun" index="0"]
+transform = Transform3D(-1.64335, -2.48139e-07, 1.08465e-14, 0, -7.18331e-08, -1.64335, 2.48139e-07, -1.64335, 7.18331e-08, 4.72631, -7.63498e-07, -1.14032)
 
 [node name="Second Gear" parent="." index="2"]
 transform = Transform3D(0.590867, 0, 0, 0, 0.0514845, 0, 0, 0, 0.590867, 0, 0.487214, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_wp8xu")
-
-[node name="Barrel" type="Node3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87602, 2.88507, 0)
