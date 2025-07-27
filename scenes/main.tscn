@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=19 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cjst7xfrt2nqq" path="res://Wolf/wolf.tscn" id="8_tipki"]
 [ext_resource type="FontFile" uid="uid://effiwb14owmy" path="res://fonts/Wantedo.ttf" id="8_ya4ey"]
 [ext_resource type="Script" uid="uid://b3gmj2roi3tbh" path="res://scenes/fog_generator.gd" id="11_eb6dy"]
+[ext_resource type="Script" uid="uid://p8jw0ekw653h" path="res://scenes/enemy_spawn_points.gd" id="12_eb6dy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -65,21 +66,20 @@ daytime_color = Color(1, 0.972228, 0.956357, 1)
 sunset_color = Color(0.817042, 0.162845, 0.219807, 1)
 night_color = Color(0.0687983, 0.0687983, 0.0687983, 1)
 moonlight_color = Color(0.383703, 0.663499, 1, 1)
-day_time_seconds = 30
-night_time_seconds = 30
-sunrise_overlap = 15
-sunset_overlap = 15
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
 
+[node name="Camera3D" parent="Player" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 0, 50, 20)
+
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0646883, -4.37843e-11, -1.61003e-08, 0.997905)
+bones/1/rotation = Quaternion(-0.0652365, 1.16911e-11, -1.53724e-08, 0.99787)
 bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
-bones/4/rotation = Quaternion(0.201278, 1.17894e-07, 1.85356e-08, 0.979534)
+bones/4/rotation = Quaternion(0.200129, 1.16719e-07, 2.42408e-08, 0.97977)
 bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
-bones/6/rotation = Quaternion(-0.0931349, -1.18691e-07, -1.11025e-08, 0.995654)
+bones/6/rotation = Quaternion(-0.0916941, -1.18707e-07, -1.09307e-08, 0.995787)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -92,7 +92,7 @@ bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
 bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="Cube_002" parent="Player/player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000465479, -0.000311525, -0.216051, 0.026481, 1.02358e-07, -0.00379825, -0.26747, 0.679764, 0.0529275)
+transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000436385, -0.000311524, -0.216055, 0.0264815, 4.45347e-07, -0.00356088, -0.26747, 0.679841, 0.0534071)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -247,6 +247,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10771, 1.55717e-06, 28.428
 
 [node name="FogGenerator" type="Node3D" parent="."]
 script = ExtResource("11_eb6dy")
+
+[node name="EnemySpawnPoints" type="Node3D" parent="."]
+script = ExtResource("12_eb6dy")
+chickens_per_wolf = 10
+enemy_scene = ExtResource("8_tipki")
+
+[node name="TopLeft" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1627, 1.00019, -22.1705)
+
+[node name="TopRight" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7841, 1.00019, -22.1705)
+
+[node name="BottomLeft" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1627, 1.00019, 34.1698)
+
+[node name="BottomRight" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7841, 1.00019, 34.1698)
 
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight"]
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]

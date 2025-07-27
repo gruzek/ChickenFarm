@@ -2,6 +2,7 @@ extends Node3D
 @onready var world_environment: WorldEnvironment = $"../WorldEnvironment"
 @onready var sun_light: DirectionalLight3D = $"../sun_light"
 @onready var moon_light: DirectionalLight3D = $"../moon_light"
+@onready var enemy_spawn_points: Node3D = $"../EnemySpawnPoints"
 
 # Signals for day/night events
 signal morning_civil_twilight
@@ -105,6 +106,7 @@ func check_and_emit_events() -> void:
 		emit_signal("sunset")
 		sunset_emitted = true
 		print("Sunset event at time: ", current_time)
+		enemy_spawn_points.spawn_enemies()
 	
 	# Evening civil twilight (halfway through sunset overlap)
 	if current_time >= evening_civil_twilight_time and not evening_civil_twilight_emitted:
