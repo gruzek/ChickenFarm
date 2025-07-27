@@ -2,7 +2,9 @@ extends CharacterBody3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var target_timer: Timer = $"Target Timer"
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+#@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_tree: AnimationTree = $werewolf/AnimationPlayer/AnimationTree
+
 
 @export var attack_range = 2.0
 @export var attack_damage = 5
@@ -17,9 +19,15 @@ var health: int:
 		if health <=0:
 			queue_free()
 
+# Targeting variables
 var target: Node
 var is_attacking = false
 var attack_timer = 0.0
+
+# Variables for animation
+@export var anim_blend_speed = 15
+enum {RUN, ATTACK}
+var currentAnim = RUN
 
 func _ready() -> void:
 	target_timer.wait_time = reaction_time
@@ -56,6 +64,9 @@ func _on_target_timer_timeout() -> void:
 	navigation_agent_3d.target_position = target.global_transform.origin
 
 func _physics_process(delta: float) -> void:
+	# Animation update
+	handle_animations(delta)
+	
 	if is_attacking:
 		# Check if target died during attack
 		if not target or not is_instance_valid(target) or target.is_dead:
@@ -115,7 +126,9 @@ func start_attack():
 		target.start_being_attacked()
 	
 	# Play attack animation
-	animation_player.play("attack")
+	attack()
+	currentAnim = ATTACK
+	#animation_player.play("attack")
 
 func attack():
 	"""Called by animation player during attack animation"""
@@ -135,6 +148,23 @@ func finish_attack():
 	# Check if target is dead and find new target
 	if not target or not is_instance_valid(target) or target.is_dead:
 		find_new_target_immediately()
+	
+	currentAnim = RUN
+
+# Controls Animations
+func handle_animations(delta):
+	match currentAnim:
+		ATTACK:
+			# Changes the blend amount in the animation tree depending on the players state
+			animation_tree["parameters/Attack/blend_amount"] = lerpf(animation_tree["parameters/Attack/blend_amount"], 1, anim_blend_speed * delta)
+		RUN:
+			animation_tree["parameters/Attack/blend_amount"] = lerpf(animation_tree["parameters/Attack/blend_amount"], 0, anim_blend_speed * delta)
+	# there's a target, run at them
+	if target: 
+		animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 1, anim_blend_speed * delta)
+	else:
+		animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 0, anim_blend_speed * delta)
+
 
 func find_new_target():
 	"""Find a new target after current one dies or becomes invalid"""

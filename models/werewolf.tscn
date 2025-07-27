@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://csu7jridgyg3o"]
+[gd_scene load_steps=12 format=3 uid="uid://cl7su6v8jg3jm"]
 
 [ext_resource type="PackedScene" uid="uid://cc4yglfaeavu7" path="res://blender files/werewolf.blend" id="1_6wo16"]
 [ext_resource type="Texture2D" uid="uid://c5derg34kb47h" path="res://blender files/textures/werewolf_head_texture.png" id="2_m67nf"]
@@ -45,9 +45,9 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="metarig" index="0"]
 bones/0/position = Vector3(0, 0.907035, -0.0552)
-bones/1/rotation = Quaternion(0.141669, 0, 0, 0.989914)
+bones/1/rotation = Quaternion(0.144509, 0, 0, 0.989503)
 bones/2/rotation = Quaternion(-0.0774642, 0, 0, 0.996995)
-bones/6/rotation = Quaternion(-0.276593, 0, 0, 0.960987)
+bones/6/rotation = Quaternion(-0.279479, 0, 0, 0.960152)
 bones/11/rotation = Quaternion(-0.169131, 0.540972, -0.63006, 0.530818)
 bones/12/rotation = Quaternion(0.514568, -0.224016, 0.0584544, 0.825603)
 bones/13/rotation = Quaternion(-0.307821, 0.178225, -0.0574122, 0.932838)
@@ -64,19 +64,19 @@ bones/25/rotation = Quaternion(0.176793, -0.0108909, -3.16813e-06, 0.984188)
 bones/26/rotation = Quaternion(-0.674186, 0.0420047, -0.0586068, 0.735033)
 
 [node name="Head" parent="metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.337936, 0, 0, 0, 0.00892584, -0.326127, 0, 0.337818, 0.00861692, 0, 2.18631, 0.138678)
+transform = Transform3D(0.337936, 0, 0, 0, 0.00901631, -0.326125, 0, 0.337815, 0.00870423, 0, 2.18484, 0.141826)
 
 [node name="Head" parent="metarig/Skeleton3D/Head" index="0"]
 material_override = SubResource("StandardMaterial3D_mqg0w")
 
 [node name="Glowing Eye" parent="metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350388, -0.000383567, 0, -0.000925795, -0.0145169, 0, 1.87424, 0.360395)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350386, -0.000387455, 0, -0.000935176, -0.0145168, 0, 1.87282, 0.363627)
 
 [node name="Glowing Eye_001" parent="metarig/Skeleton3D" index="2"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350388, -0.000383567, 0, -0.000925795, -0.0145169, -0.211952, 1.87424, 0.360395)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350386, -0.000387455, 0, -0.000935176, -0.0145168, -0.211952, 1.87282, 0.363627)
 
 [node name="Weapon" parent="metarig/Skeleton3D" index="3"]
-transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0278674, 0.0179434, -0.0216422, -0.0103292, 0.0354126, 0.0149677, -0.704906, 0.974426, 0.116188)
+transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0279262, 0.0177398, -0.0217278, -0.010169, 0.035515, 0.0148432, -0.704906, 0.973662, 0.115409)
 
 [node name="Body" parent="metarig/Skeleton3D" index="4"]
 material_override = SubResource("StandardMaterial3D_w80kg")
