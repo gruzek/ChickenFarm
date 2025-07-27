@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmrtd4y1gjdco"]
+
+[ext_resource type="Script" uid="uid://je081ysr8354" path="res://scenes/game_over.gd" id="1_wqhvx"]
+[ext_resource type="FontFile" uid="uid://cq64scvcuyu6a" path="res://fonts/WesternBangBang-Regular.ttf" id="2_tbwuq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_racf3"]
+font = ExtResource("2_tbwuq")
+font_size = 128
+font_color = Color(1, 0.269678, 0.30101, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7m3ot"]
+font = ExtResource("2_tbwuq")
+font_size = 64
+font_color = Color(1, 0.269678, 0.30101, 1)
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wqhvx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GameOverLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -398.0
+offset_top = -85.0
+offset_right = 398.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_racf3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -219.0
+offset_right = 401.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Stats"
+label_settings = SubResource("LabelSettings_7m3ot")
+horizontal_alignment = 1
+
+[node name="NewGameButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -89.0
+offset_right = 103.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.523025, 0.313268, 1)
+theme_override_fonts/font = ExtResource("2_tbwuq")
+theme_override_font_sizes/font_size = 32
+text = "New Game"

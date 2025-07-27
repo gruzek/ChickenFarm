@@ -32,8 +32,11 @@ var currentAnim = IDLE
 signal egg_amount_changed(value)
 signal build_mode_entered
 signal build_mode_exited
+signal player_death
 
 var in_build_mode = false
+
+var current_scene
 
 func _ready():
 	health = starting_health
@@ -41,6 +44,9 @@ func _ready():
 	# Connect to build_node signals
 	build_node.build_mode_entered.connect(_on_build_mode_entered)
 	build_node.build_mode_exited.connect(_on_build_mode_exited)
+	
+	# Get current scene
+	current_scene = get_tree().current_scene.name
 
 func _process(delta: float) -> void:
 	pass
@@ -54,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	handle_animations(delta)
 	
 	# Throw Egg
-	if Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
+	if current_scene != "Start Scene" and Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
 		throw_egg()
 
 	# Get the input direction and handle the movement/deceleration.
@@ -156,11 +162,13 @@ func _on_build_mode_exited():
 	build_mode_exited.emit()
 
 func die():
-	"""Handle player death - exit the game for now"""
+	"""Handle player death - load Game Over scene"""
 	is_dead = true
 	print("Player died! Game Over!")
-	# Exit the game (will be replaced with Game Over scene later)
-	get_tree().quit()
+	# Emit death signal before changing scenes
+	player_death.emit()
+	# Load the Game Over scene
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 func start_being_attacked():
 	"""Called when a wolf starts attacking the player"""

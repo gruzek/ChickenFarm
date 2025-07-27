@@ -38,13 +38,11 @@ func _on_target_timer_timeout() -> void:
 			valid_targets.append(player)
 	
 	if valid_targets.is_empty():
-		print("EMPTY - RETUREND")
 		target = null
 		return
 	
 	target = find_best_target(valid_targets)
 	if target == null:
-		print("NULL - RETUREND")
 		return
 
 	navigation_agent_3d.target_position = target.global_transform.origin
@@ -78,9 +76,7 @@ func _physics_process(delta: float) -> void:
 		
 		# Check if we're close enough to attack
 		var distance_to_target = global_position.distance_to(target.global_position)
-		print("Distance to ", target.name, ": ", distance_to_target, " (attack_range: ", attack_range, ")")
 		if distance_to_target <= attack_range:
-			print("Starting attack on ", target.name)
 			start_attack()
 			return
 		
@@ -110,9 +106,6 @@ func start_attack():
 	if target.has_method("start_being_attacked"):
 		target.start_being_attacked()
 	
-	print("wolf attacking")
-	print(target.name)
-	
 	# Play attack animation
 	animation_player.play("attack")
 
@@ -120,10 +113,7 @@ func attack():
 	"""Called by animation player during attack animation"""
 	# Check if target is still valid before dealing damage
 	if target and is_instance_valid(target):
-		print("valid instance")
 		target.health -= attack_damage
-	else:
-		print("wolf attacking invalid instance")
 
 func finish_attack():
 	"""Clean up after attack is finished"""

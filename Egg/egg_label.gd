@@ -36,8 +36,19 @@ func update_chicken_display():
 func _ready() -> void:
 	eggs = starting_eggs
 	# Chickens will manage their own count when they're created
+	
+	# Connect to player death signal to store stats
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.player_death.connect(_on_player_death)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func _on_player_death():
+	"""Store current game stats when player dies"""
+	var game_stats = get_node("/root/GameStats")
+	if game_stats:
+		game_stats.set_death_stats(chickens, eggs)
