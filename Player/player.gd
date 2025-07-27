@@ -36,12 +36,17 @@ signal player_death
 
 var in_build_mode = false
 
+var current_scene
+
 func _ready():
 	health = starting_health
 	add_to_group("player")
 	# Connect to build_node signals
 	build_node.build_mode_entered.connect(_on_build_mode_entered)
 	build_node.build_mode_exited.connect(_on_build_mode_exited)
+	
+	# Get current scene
+	current_scene = get_tree().current_scene.name
 
 func _process(delta: float) -> void:
 	pass
@@ -55,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	handle_animations(delta)
 	
 	# Throw Egg
-	if Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
+	if current_scene != "Start Scene" and Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
 		throw_egg()
 
 	# Get the input direction and handle the movement/deceleration.

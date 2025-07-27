@@ -15,6 +15,8 @@ var cost_label: Label3D = null
 @onready var camera_3d: Camera3D = $"../Camera3D"
 @onready var egg_bank = get_tree().get_first_node_in_group("egg bank")
 
+var current_scene
+
 func _ready():
 	# Load buildable scenes programmatically
 	buildable_scenes = [
@@ -34,8 +36,14 @@ func _ready():
 		"Egg Dispenser",
 		"Egg PickerUpperinator 5000"
 	]
+	
+	# Get current scene
+	current_scene = get_tree().current_scene.name
 
 func _process(delta: float) -> void:
+	# Don't build in the start scene
+	if current_scene == "Start Scene":
+		return
 
 	# Start build mode
 	if !in_build_mode and Input.is_action_just_pressed("build_thing"):
