@@ -11,6 +11,8 @@ extends CharacterBody3D
 var health: int:
 	set(health_in):
 		health = health_in
+		var health_percent: float = float(health)/float(starting_health)
+		emit_signal("health_changed", health_percent)
 		if health <= 0:
 			die()
 var is_dead = false
@@ -37,6 +39,7 @@ signal egg_amount_changed(value)
 signal build_mode_entered
 signal build_mode_exited
 signal player_death
+signal health_changed(percent: float)
 
 var in_build_mode = false
 

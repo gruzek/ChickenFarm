@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=20 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
@@ -10,8 +10,9 @@
 [ext_resource type="Script" uid="uid://bxqhfhxabmfvv" path="res://scenes/day_night_cycle.gd" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://cjst7xfrt2nqq" path="res://Wolf/wolf.tscn" id="8_tipki"]
 [ext_resource type="FontFile" uid="uid://effiwb14owmy" path="res://fonts/Wantedo.ttf" id="8_ya4ey"]
+[ext_resource type="Script" uid="uid://b8hr2jxnrwi8h" path="res://scenes/health_bar_container.gd" id="9_eb6dy"]
 [ext_resource type="Script" uid="uid://b3gmj2roi3tbh" path="res://scenes/fog_generator.gd" id="11_eb6dy"]
-[ext_resource type="Script" uid="uid://p8jw0ekw653h" path="res://scenes/enemy_spawn_points.gd" id="12_eb6dy"]
+[ext_resource type="Script" path="res://scenes/enemy_spawn_points.gd" id="12_eb6dy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -38,7 +39,6 @@ albedo_texture = ExtResource("1_0wfyh")
 
 [sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
 font = ExtResource("8_ya4ey")
-font_size = 31
 font_color = Color(0.938731, 0.694795, 0.393608, 1)
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
@@ -71,15 +71,12 @@ moonlight_color = Color(0.383703, 0.663499, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
 
-[node name="Camera3D" parent="Player" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 0, 50, 20)
-
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0652365, 1.16911e-11, -1.53724e-08, 0.99787)
+bones/1/rotation = Quaternion(-0.0690348, -1.37754e-10, -1.85909e-08, 0.997614)
 bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
-bones/4/rotation = Quaternion(0.200129, 1.16719e-07, 2.42408e-08, 0.97977)
+bones/4/rotation = Quaternion(0.184283, 1.18848e-07, 1.38082e-08, 0.982873)
 bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
-bones/6/rotation = Quaternion(-0.0916941, -1.18707e-07, -1.09307e-08, 0.995787)
+bones/6/rotation = Quaternion(-0.0718301, -1.18901e-07, -8.56282e-09, 0.997417)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -92,7 +89,7 @@ bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
 bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="Cube_002" parent="Player/player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000436385, -0.000311524, -0.216055, 0.0264815, 4.45347e-07, -0.00356088, -0.26747, 0.679841, 0.0534071)
+transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.00023475, -0.000311511, -0.216076, 0.0264841, 2.816e-06, -0.0019158, -0.26747, 0.680392, 0.0567285)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -221,6 +218,27 @@ size_flags_vertical = 8
 label_settings = SubResource("LabelSettings_tbgi4")
 horizontal_alignment = 2
 
+[node name="HealthBar" type="Control" parent="UI"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("9_eb6dy")
+
+[node name="Background" type="ColorRect" parent="UI/HealthBar"]
+layout_mode = 0
+offset_left = -33.0
+offset_top = 1.0
+offset_right = 34.0
+offset_bottom = 15.0
+color = Color(0.398793, 0.398793, 0.398793, 0.478431)
+
+[node name="HealthBar" type="ColorRect" parent="UI/HealthBar"]
+offset_left = -30.0
+offset_top = 3.0
+offset_right = 32.0
+offset_bottom = 13.0
+color = Color(0.398793, 0.398793, 0.398793, 0.478431)
+
 [node name="egg" parent="." instance=ExtResource("7_o6xl0")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 11.2249, 0.052903, -10.0542)
 
@@ -269,6 +287,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7841, 1.00019, 34.1698)
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]
 [connection signal="build_mode_entered" from="Player" to="Messenger" method="_on_player_build_mode_entered"]
 [connection signal="build_mode_exited" from="Player" to="Messenger" method="_on_player_build_mode_exited"]
+[connection signal="health_changed" from="Player" to="UI/HealthBar" method="_on_player_health_changed"]
 
 [editable path="Player"]
 [editable path="Player/player_rig"]

@@ -14,10 +14,10 @@ var tween: Tween
 var default_messages = [
 	{"text": "Welcome to ChickenFarm!", "delay_before": 3.0, "show_duration": 3.0, "target": "right"},
 	{"text": "Use W,A,S,D to move", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
+	{"text": "SPACE to Throw Eggs", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
 	{"text": "Make Many Chickens", "delay_before": 0.5, "show_duration": 3.0, "target": "right"},
 	{"text": "E for Build Menu", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
 	{"text": "Need Eggs to Build", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
-	{"text": "SPACE to Throw Eggs", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
 	{"text": "Throw Eggs to make Chickens", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
 	{"text": "Need Chickens for Eggs", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
 	{"text": "Watch out for Werewolves", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
@@ -109,9 +109,9 @@ func _on_day_night_cycle_morning_civil_twilight() -> void:
 	add_right_message("Good Morning Sunshine", 0.0, 4.0)
 
 func _on_player_build_mode_entered() -> void:
-	interrupt_left_queue("Build Mode: Right Click to Cancel", 0.0, 3.0)
-	interrupt_left_queue("Build Mode: Left Click to Place", 0.0, 3.0)
-	interrupt_left_queue("Build Mode: Use Q or Mouse Wheel to change building", 0.0, 3.0)
+	add_left_message("Build Mode:\nUse Q or Mouse Wheel to change building\nLeft Click to Place\nRight Click to Cancel", 0.0, 5.0)
+
+
 
 
 func _on_player_build_mode_exited() -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://Player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dvbau1p0yhd07" path="res://Egg/throwing_egg.tscn" id="2_fhl08"]
-[ext_resource type="PackedScene" uid="uid://b85cge3x6l3cg" path="res://models/player_man.tscn" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://c7a16ujpn8spx" path="res://models/player_man.tscn" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://bn346es4bjr8e" path="res://Player/build_node.gd" id="3_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://co31yk6pnis5" path="res://Gun/revolver.tscn" id="4_fhl08"]
 [ext_resource type="Texture2D" uid="uid://cbr2726c847cm" path="res://blender files/textures/player_body.png" id="5_od3ui"]
