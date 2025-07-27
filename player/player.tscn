@@ -35,7 +35,7 @@ filters = ["metarig/Skeleton3D:forearm.L", "metarig/Skeleton3D:forearm.R", "meta
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_k53q1"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fhl08"]
-graph_offset = Vector2(-636.411, -23.7028)
+graph_offset = Vector2(-492, 6)
 "nodes/Anim Gun/node" = SubResource("AnimationNodeAnimation_k53q1")
 "nodes/Anim Gun/position" = Vector2(-240, 340)
 "nodes/Anim Idle/node" = SubResource("AnimationNodeAnimation_btcbx")
@@ -43,9 +43,9 @@ graph_offset = Vector2(-636.411, -23.7028)
 "nodes/Anim Run/node" = SubResource("AnimationNodeAnimation_gwnis")
 "nodes/Anim Run/position" = Vector2(-600, 0)
 "nodes/Hold Gun/node" = SubResource("AnimationNodeBlend2_fhl08")
-"nodes/Hold Gun/position" = Vector2(20, 20)
+"nodes/Hold Gun/position" = Vector2(40, 40)
 nodes/Run/node = SubResource("AnimationNodeBlend2_k53q1")
-nodes/Run/position = Vector2(-300, 20)
+nodes/Run/position = Vector2(-280, 40)
 nodes/output/position = Vector2(560, 120)
 node_connections = [&"Hold Gun", 0, &"Run", &"Hold Gun", 1, &"Anim Gun", &"Run", 0, &"Anim Idle", &"Run", 1, &"Anim Run", &"output", 0, &"Hold Gun"]
 
@@ -65,26 +65,26 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 [node name="player_rig" parent="." instance=ExtResource("3_btcbx")]
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
-bones/0/position = Vector3(-4.91022e-10, 0.977197, -0.0552)
-bones/1/rotation = Quaternion(-0.0640256, 0.115968, -0.022037, 0.990942)
-bones/2/rotation = Quaternion(-0.0774641, 3.60482e-09, -1.86341e-08, 0.996995)
-bones/4/rotation = Quaternion(0.201738, 1.18158e-07, 2.40745e-08, 0.97944)
-bones/5/rotation = Quaternion(-0.0948575, 9.59331e-10, -2.30511e-08, 0.995491)
-bones/6/rotation = Quaternion(-0.093712, -1.18709e-07, -1.14276e-08, 0.995599)
-bones/8/rotation = Quaternion(-0.366347, 0.910842, -0.180061, 0.0611105)
-bones/9/rotation = Quaternion(0.769185, -0.265898, 0.0171847, 0.580825)
-bones/12/rotation = Quaternion(-0.051042, -0.32568, 0.737489, 0.589438)
-bones/13/rotation = Quaternion(0.601838, 0.248028, 0.248255, 0.717386)
+bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
+bones/1/rotation = Quaternion(-0.0650908, -1.26919e-10, -1.74829e-08, 0.997879)
+bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
+bones/4/rotation = Quaternion(0.200032, 1.19252e-07, 1.19416e-08, 0.979789)
+bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
+bones/6/rotation = Quaternion(-0.0915722, -1.18708e-07, -1.09162e-08, 0.995799)
+bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
+bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
+bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
+bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
 bones/17/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
-bones/18/rotation = Quaternion(0.877217, -5.57651e-08, 1.04062e-07, 0.480095)
-bones/19/rotation = Quaternion(0.592838, 9.60531e-10, 1.30499e-09, 0.805322)
-bones/20/rotation = Quaternion(-0.147977, -6.66719e-14, 4.26109e-14, 0.988991)
-bones/21/rotation = Quaternion(0.994574, 1.39963e-08, 1.18631e-07, -0.104033)
-bones/22/rotation = Quaternion(0.13992, 2.2671e-10, 1.6044e-09, 0.990163)
-bones/23/rotation = Quaternion(-0.185818, -8.43284e-14, 7.0021e-14, 0.982584)
+bones/18/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
+bones/19/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
+bones/20/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
+bones/21/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
+bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
+bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="Cube_002" parent="player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(-0.00996155, -0.0232291, 0.0645753, 0.0200003, -0.00273535, 0.139894, -0.0142202, 0.0124253, 0.151521, -0.0572851, 1.88551, 0.622751)
+transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000444118, -0.000311523, -0.216054, 0.0264814, 3.53728e-07, -0.00362397, -0.26747, 0.679821, 0.0532796)
 
 [node name="Cube_002" parent="player_rig/metarig/Skeleton3D/Cube_002" index="0"]
 visible = false
