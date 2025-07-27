@@ -32,6 +32,7 @@ var currentAnim = IDLE
 signal egg_amount_changed(value)
 signal build_mode_entered
 signal build_mode_exited
+signal player_death
 
 var in_build_mode = false
 
@@ -159,6 +160,8 @@ func die():
 	"""Handle player death - load Game Over scene"""
 	is_dead = true
 	print("Player died! Game Over!")
+	# Emit death signal before changing scenes
+	player_death.emit()
 	# Load the Game Over scene
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
