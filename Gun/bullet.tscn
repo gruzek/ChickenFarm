@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3piw5n4aip3q"]
+[gd_scene load_steps=5 format=3 uid="uid://c3piw5n4aip3q"]
 
 [ext_resource type="Script" uid="uid://8lpokf3235dd" path="res://Gun/bullet.gd" id="1_xda6o"]
+[ext_resource type="PackedScene" uid="uid://dy03cgypucrd7" path="res://Gun/sparks.tscn" id="2_gof56"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q7gj4"]
+radius = 0.2
 
 [sub_resource type="SphereMesh" id="SphereMesh_xda6o"]
-radius = 0.4
-height = 0.8
+radius = 0.15
+height = 0.3
 
 [node name="Bullet" type="Area3D"]
 script = ExtResource("1_xda6o")
+sparks_scene = ExtResource("2_gof56")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_q7gj4")
