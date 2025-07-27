@@ -69,7 +69,6 @@ daytime_color = Color(1, 0.972228, 0.956357, 1)
 sunset_color = Color(0.817042, 0.162845, 0.219807, 1)
 night_color = Color(0.0687983, 0.0687983, 0.0687983, 1)
 moonlight_color = Color(0.383703, 0.663499, 1, 1)
-day_time_seconds = 120
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
@@ -77,56 +76,28 @@ collision_mask = 1
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
 bones/0/rotation = Quaternion(0.12582, 1.18262e-07, 1.49988e-08, 0.992053)
-bones/0/scale = Vector3(1, 1, 1)
-bones/1/rotation = Quaternion(-0.0665343, 3.16857e-11, -1.53723e-08, 0.997784)
-bones/1/scale = Vector3(1, 1, 1)
+bones/1/rotation = Quaternion(-0.0766453, -6.27928e-12, -1.83705e-08, 0.997058)
 bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
-bones/2/scale = Vector3(1, 1, 1)
-bones/3/rotation = Quaternion(0.00162714, -1.19209e-07, 1.93973e-10, 0.999999)
-bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(0.193963, 1.16564e-07, 2.49743e-08, 0.981009)
-bones/4/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.154384, 1.18002e-07, 1.73268e-08, 0.988011)
 bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
-bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(-0.0839624, -1.18788e-07, -1.00091e-08, 0.996469)
-bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-0.605155, -0.345862, -0.356135, 0.622363)
-bones/7/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.0344367, -1.19138e-07, -4.10518e-09, 0.999407)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
-bones/8/scale = Vector3(1, 1, 1)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
-bones/9/scale = Vector3(1, 1, 1)
 bones/10/rotation = Quaternion(-0.0238619, 0.0501728, 0.000387373, 0.998455)
-bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(-0.605155, 0.345862, 0.356135, 0.622363)
-bones/11/scale = Vector3(1, 1, 1)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
-bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
-bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(-0.0510234, -0.0412582, -0.0171822, 0.997697)
-bones/14/scale = Vector3(1, 1, 1)
-bones/15/rotation = Quaternion(-0.473727, -0.489772, -0.516204, 0.518883)
 bones/15/scale = Vector3(0.026485, 0.026485, 0.216099)
-bones/16/rotation = Quaternion(-0.152455, -0.793331, -0.285504, 0.515627)
-bones/16/scale = Vector3(1, 1, 1)
 bones/17/rotation = Quaternion(-0.152455, 0.793331, 0.285504, 0.515627)
-bones/17/scale = Vector3(1, 1, 1)
 bones/18/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
-bones/18/scale = Vector3(1, 1, 1)
 bones/19/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
-bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
-bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
-bones/21/scale = Vector3(1, 1, 1)
 bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
-bones/22/scale = Vector3(1, 1, 1)
 bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
-bones/23/scale = Vector3(1, 1, 1)
 
 [node name="Cube_002" parent="Player/player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58299e-06, -0.0264832, 0.00254152, -0.000367468, -0.000311524, -0.216063, 0.0264825, 1.27262e-06, -0.00299861, -0.267471, 0.680026, 0.0545434)
+transform = Transform3D(5.58278e-06, -0.0264832, 0.00254143, 0.000169458, -0.00031143, -0.21608, 0.0264845, 7.5688e-06, 0.00138202, -0.26747, 0.681571, 0.0633731)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -226,7 +197,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("6_tefeu")
-starting_eggs = 10000
+starting_eggs = 10
 
 [node name="EggLabel" type="Label" parent="UI"]
 layout_mode = 2
@@ -297,10 +268,6 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.9128, 0.0529045, -23.
 
 [node name="egg7" parent="." instance=ExtResource("7_o6xl0")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.17478)
-
-[node name="Wolf" parent="." instance=ExtResource("8_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10771, 1.55717e-06, 28.4289)
-death_despawn_time = 3
 
 [node name="FogGenerator" type="Node3D" parent="."]
 script = ExtResource("11_eb6dy")
