@@ -58,6 +58,9 @@ func _ready() -> void:
 		# If spawning at night, immediately start seeking a coop
 		if is_nighttime():
 			start_seeking_coop()
+		else:
+			# During day, start by wandering to a random location
+			pick_random_point()
 
 func _process(delta: float) -> void:
 	roam_timer += delta
@@ -185,8 +188,16 @@ func _on_sunset():
 		start_seeking_coop()
 
 func _on_morning_civil_twilight():
-	"""Called when morning civil twilight signal is emitted - exit coop and start roaming"""
-	exit_coop_and_roam()
+	"""Called when morning civil twilight signal is emitted - start roaming (chickens are recreated by coops)"""
+	# Stop any current behaviors and start fresh roaming
+	is_seeking_coop = false
+	is_pecking = false
+	peck_timer = 0.0
+	target_coop = null
+	current_coop_index = 0
+	
+	# Start roaming to a random point
+	pick_random_point()
 
 func start_seeking_coop():
 	"""Begin seeking the closest available coop"""
@@ -260,29 +271,7 @@ func stop_seeking_coop():
 	# Resume normal roaming
 	pick_random_point()
 
-func exit_coop_and_roam():
-	"""Exit the current coop (if in one) and start roaming"""
-	# If chicken is invisible, it means it's inside a coop
-	if not visible:
-		# Find which coop this chicken is in and remove it
-		var coops = get_tree().get_nodes_in_group("chicken_coop")
-		for coop in coops:
-			if coop.remove_chicken(self):
-				# Successfully removed from this coop
-				break
-		
-		# Make chicken visible again
-		visible = true
-	
-	# Stop any current behaviors
-	is_seeking_coop = false
-	is_pecking = false
-	peck_timer = 0.0
-	target_coop = null
-	current_coop_index = 0
-	
-	# Start roaming to a random point
-	pick_random_point()
+
 
 func is_nighttime() -> bool:
 	"""Check if it's currently nighttime (after sunset, before morning civil twilight)"""
