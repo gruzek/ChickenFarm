@@ -102,14 +102,15 @@ func _process(delta) -> void:
 # Signal handlers (can be used to trigger messages based on game events)
 func _on_day_night_cycle_evening_civil_twilight() -> void:
 	# Example: Show a nighttime warning message
-	interrupt_right_queue("Beware of werewolves", 0.0, 4.0)
+	interrupt_right_queue("Beware of Werewolves", 0.0, 4.0)
 
 func _on_day_night_cycle_morning_civil_twilight() -> void:
 	# Example: Show a morning message
 	add_right_message("Good Morning Sunshine", 0.0, 4.0)
 
 func _on_player_build_mode_entered() -> void:
-	interrupt_left_queue("Buildings Cost Eggs", 0.0, 3.0)
+	interrupt_left_queue("Right Click to Cancel", 0.0, 3.0)
+	interrupt_left_queue("Left Click to Place", 0.0, 3.0)
 	interrupt_left_queue("Or Mouse Wheel", 0.0, 3.0)
 	interrupt_left_queue("Use Q to change building", 0.0, 3.0)
 
