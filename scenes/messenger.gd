@@ -109,10 +109,9 @@ func _on_day_night_cycle_morning_civil_twilight() -> void:
 	add_right_message("Good Morning Sunshine", 0.0, 4.0)
 
 func _on_player_build_mode_entered() -> void:
-	interrupt_left_queue("Right Click to Cancel", 0.0, 3.0)
-	interrupt_left_queue("Left Click to Place", 0.0, 3.0)
-	interrupt_left_queue("Or Mouse Wheel", 0.0, 3.0)
-	interrupt_left_queue("Use Q to change building", 0.0, 3.0)
+	interrupt_left_queue("Build Mode: Right Click to Cancel", 0.0, 3.0)
+	interrupt_left_queue("Build Mode: Left Click to Place", 0.0, 3.0)
+	interrupt_left_queue("Build Mode: Use Q or Mouse Wheel to change building", 0.0, 3.0)
 
 
 func _on_player_build_mode_exited() -> void:

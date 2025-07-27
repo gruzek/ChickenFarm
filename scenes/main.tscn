@@ -75,11 +75,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0729773, 1.30972e-10, -1.53718e-08, 0.997334)
+bones/1/rotation = Quaternion(-0.0646883, -4.37843e-11, -1.61003e-08, 0.997905)
 bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
-bones/4/rotation = Quaternion(0.169057, 1.15894e-07, 2.79182e-08, 0.985606)
+bones/4/rotation = Quaternion(0.201278, 1.17894e-07, 1.85356e-08, 0.979534)
 bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
-bones/6/rotation = Quaternion(-0.0527642, -1.19043e-07, -6.29e-09, 0.998607)
+bones/6/rotation = Quaternion(-0.0931349, -1.18691e-07, -1.11025e-08, 0.995654)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -92,7 +92,7 @@ bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
 bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="Cube_002" parent="Player/player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -2.53861e-05, -0.000311478, -0.216084, 0.0264851, 5.27941e-06, -0.000207662, -0.26747, 0.68099, 0.0601724)
+transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000465479, -0.000311525, -0.216051, 0.026481, 1.02358e-07, -0.00379825, -0.26747, 0.679764, 0.0529275)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -248,8 +248,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10771, 1.55717e-06, 28.428
 [node name="FogGenerator" type="Node3D" parent="."]
 script = ExtResource("11_eb6dy")
 
-[connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight"]
+[connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]
 [connection signal="build_mode_entered" from="Player" to="Messenger" method="_on_player_build_mode_entered"]
 [connection signal="build_mode_exited" from="Player" to="Messenger" method="_on_player_build_mode_exited"]
 

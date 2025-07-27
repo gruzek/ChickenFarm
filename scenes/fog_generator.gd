@@ -52,9 +52,7 @@ func _ready():
 		if day_night_cycle.has_signal("sunset"):
 			day_night_cycle.sunset.connect(_on_sunset_start)
 		if day_night_cycle.has_signal("sunrise"):
-			day_night_cycle.sunrise.connect(_on_sunrise_start)
-		
-		print("Connected to day-night cycle signals")
+			day_night_cycle.sunrise.connect(_on_sunrise_start)		
 	else:
 		print("Day-night cycle not found, clouds will persist")
 
@@ -65,9 +63,7 @@ func generate_clouds():
 		return
 	
 	# Debug ground information
-	print("Ground found: ", ground.name)
-	print("Ground global position: ", ground.global_position)
-	print("Ground size: ", ground.size)
+
 	
 	# Get ground bounds for cloud positioning
 	# Use the actual scaled size, not just the mesh size
@@ -78,10 +74,7 @@ func generate_clouds():
 	# Calculate the actual world size by multiplying mesh size by scale
 	var actual_size_x = ground_mesh_size.x * ground_scale.x
 	var actual_size_z = ground_mesh_size.z * ground_scale.z
-	
-	print("Ground mesh size: ", ground_mesh_size)
-	print("Ground scale: ", ground_scale)
-	print("Actual world size: X=", actual_size_x, ", Z=", actual_size_z)
+
 	
 	# Calculate spawn area bounds - use the full ground area
 	var min_x = ground_pos.x - (actual_size_x / 2.0)
@@ -95,10 +88,7 @@ func generate_clouds():
 	ground_bounds.min_z = min_z
 	ground_bounds.max_z = max_z
 	
-	print("Cloud spawn area calculated:")
-	print("  X range: ", min_x, " to ", max_x, " (width: ", max_x - min_x, ")")
-	print("  Z range: ", min_z, " to ", max_z, " (depth: ", max_z - min_z, ")")
-	print("  Y altitude: ", cloud_altitude)
+
 	
 	# Verify we have a valid area
 	if abs(max_x - min_x) < 1.0 or abs(max_z - min_z) < 1.0:
@@ -114,7 +104,6 @@ func generate_clouds():
 		ground_bounds.min_z = min_z
 		ground_bounds.max_z = max_z
 	
-	print("Generating ", num_clouds, " clouds...")
 	for i in range(num_clouds):
 		create_cloud(min_x, max_x, min_z, max_z)
 
@@ -124,7 +113,6 @@ func generate_ground_fog():
 		print("Warning: Ground not found, cannot generate ground fog")
 		return
 	
-	print("Generating ground fog with ", num_clouds * 2, " fog patches...")
 	
 	# Use stored ground bounds
 	var min_x = ground_bounds.min_x
@@ -167,13 +155,6 @@ func create_cloud(min_x: float, max_x: float, min_z: float, max_z: float):
 	var cloud_scale = Vector3(random_scale_x, cloud_height, random_scale_z)
 	cloud.scale = cloud_scale
 	
-	# Debug output for first few clouds
-	if clouds.size() <= 3:
-		print("Cloud ", clouds.size(), " created:")
-		print("  Position: ", cloud_position)
-		print("  Scale: ", cloud_scale)
-		print("  Bounds used: X(", min_x, " to ", max_x, "), Z(", min_z, " to ", max_z, ")")
-	
 	# Set up cloud movement
 	setup_cloud_movement(cloud)
 	
@@ -213,12 +194,6 @@ func create_ground_fog_patch(min_x: float, max_x: float, min_z: float, max_z: fl
 	
 	# Ground fog does not move - no velocity metadata
 	
-	# Debug output for first few fog patches
-	if ground_fog.size() <= 3:
-		print("Ground fog ", ground_fog.size(), " created:")
-		print("  Position: ", fog_position)
-		print("  Scale: ", fog_scale)
-	
 	# Configure fog shader properties with black color
 	configure_ground_fog_shader(fog_patch)
 
@@ -235,7 +210,6 @@ func configure_cloud_shader(cloud: Node3D):
 	# The cloud should be an instance of fog.tscn which has fog.gd script
 	# Use the fog script's setter methods to configure the shader
 	if cloud.has_method("_set_noise_scale"):
-		print("Configuring cloud shader properties using fog.gd methods")
 		# Use the fog script's setter methods
 		cloud._set_noise_scale(initial_noise_scale)
 		cloud._set_density(initial_density)
@@ -245,7 +219,6 @@ func configure_cloud_shader(cloud: Node3D):
 		cloud._set_steps(initial_steps)
 	else:
 		# Fallback: set the exported variables directly
-		print("Using direct property assignment for cloud shader")
 		if "noise_scale" in cloud:
 			cloud.noise_scale = initial_noise_scale
 		if "density" in cloud:
@@ -266,7 +239,6 @@ func configure_ground_fog_shader(fog_patch: Node3D):
 	
 	# Use the fog script's setter methods with cloud parameters but black color
 	if fog_patch.has_method("_set_noise_scale"):
-		print("Configuring ground fog shader properties (black color)")
 		# Use the same parameters as clouds
 		fog_patch._set_noise_scale(initial_noise_scale)
 		fog_patch._set_density(initial_density)
@@ -276,7 +248,6 @@ func configure_ground_fog_shader(fog_patch: Node3D):
 		fog_patch._set_steps(initial_steps)
 	else:
 		# Fallback: set the exported variables directly
-		print("Using direct property assignment for ground fog shader (black color)")
 		if "noise_scale" in fog_patch:
 			fog_patch.noise_scale = initial_noise_scale
 		if "density" in fog_patch:
@@ -350,7 +321,6 @@ func recycle_cloud(cloud: Node3D, velocity: Vector3):
 
 func destroy_all_clouds():
 	"""Remove all clouds from the scene"""
-	print("Destroying all clouds for night time")
 	for cloud in clouds:
 		if cloud and is_instance_valid(cloud):
 			cloud.queue_free()
@@ -358,7 +328,6 @@ func destroy_all_clouds():
 
 func destroy_all_ground_fog():
 	"""Remove all ground fog from the scene"""
-	print("Destroying all ground fog for day time")
 	for fog_patch in ground_fog:
 		if fog_patch and is_instance_valid(fog_patch):
 			fog_patch.queue_free()
@@ -366,22 +335,18 @@ func destroy_all_ground_fog():
 
 func _on_night_start():
 	"""Called when evening civil twilight begins (night starts)"""
-	print("Night started - destroying clouds")
 	destroy_all_clouds()
 
 func _on_morning_start():
 	"""Called when morning civil twilight begins (dawn starts)"""
-	print("Morning started - spawning new clouds")
 	# Small delay to ensure any remaining clouds are cleaned up
 	await get_tree().process_frame
 	generate_clouds()
 
 func _on_sunset_start():
 	"""Called when sunset begins - spawn ground fog"""
-	print("Sunset started - spawning ground fog")
 	generate_ground_fog()
 
 func _on_sunrise_start():
 	"""Called when sunrise begins - remove ground fog"""
-	print("Sunrise started - removing ground fog")
 	destroy_all_ground_fog()
