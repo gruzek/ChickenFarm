@@ -2,7 +2,7 @@ extends Node2D
 
 func _ready():
 	# Connect the button's pressed signal to the _on_start_button_pressed function
-	$CanvasLayer/CenterContainer/StartButton.pressed.connect(_on_start_button_pressed)
+	$CanvasLayer/Control/StartButton.pressed.connect(_on_start_button_pressed)
 
 func _on_start_button_pressed():
 	# Load the main scene when the button is pressed

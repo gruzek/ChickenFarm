@@ -1,9 +1,183 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhjvel1asgj4h"]
+[gd_scene load_steps=13 format=3 uid="uid://bhjvel1asgj4h"]
 
 [ext_resource type="Script" uid="uid://cicsvwo2e8tbt" path="res://scenes/start_scene.gd" id="1_pqnvq"]
+[ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="2_0kdh5"]
+[ext_resource type="PackedScene" uid="uid://di8tthuu34bms" path="res://models/fence-section.tscn" id="3_sg87u"]
+[ext_resource type="PackedScene" uid="uid://c41heprc7sys3" path="res://models/invisible_boundary.tscn" id="4_2l3yw"]
+[ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="5_2525w"]
+[ext_resource type="PackedScene" uid="uid://dr2x5he8a5xn0" path="res://egg_dispenser/egg_dispenser.tscn" id="6_2525w"]
+[ext_resource type="PackedScene" uid="uid://dt40nqqclxdgf" path="res://chicken/chicken.tscn" id="6_sg87u"]
+[ext_resource type="PackedScene" uid="uid://630u3h61ot7d" path="res://chicken_coop/chicken_coop.tscn" id="7_6vkx6"]
+
+[sub_resource type="Environment" id="Environment_6vkx6"]
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.455289, 0.404255, 0.332637, 1)
+fog_light_energy = 1.29
+fog_density = 0.046
+fog_height_density = 0.8649
+adjustment_enabled = true
+adjustment_contrast = 1.72
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_u6lbi"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 2.62
+dof_blur_far_transition = 2.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.5
+dof_blur_near_transition = 2.0
+dof_blur_amount = 0.93
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dgwj"]
+albedo_color = Color(0.353347, 0.401959, 0.197968, 1)
+albedo_texture = ExtResource("2_0kdh5")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2525w"]
+font_size = 58
+font_color = Color(1, 0.803922, 0.384314, 1)
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 13
+shadow_color = Color(0, 0, 0, 0.588235)
 
 [node name="Start Scene" type="Node2D"]
 script = ExtResource("1_pqnvq")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_right = 822.0
+offset_bottom = 613.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(818, 613)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_6vkx6")
+camera_attributes = SubResource("CameraAttributesPractical_u6lbi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.114903, 0.65553, -0.746377, 0.129001, 0.735144, 0.665524, 0.984965, -0.172754, -9.34627e-05, 0, 0, 0)
+light_color = Color(0.858824, 0.858824, 0.427451, 1)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.142699, 0.380255, -0.913807, 0.0273995, 0.921384, 0.387686, 0.989387, -0.0803604, 0.121062, 0, 2.59342, -12.5468)
+near = 0.025
+
+[node name="Node" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Ground" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Node"]
+transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, -3.11527, -0.05, 5.89781)
+use_collision = true
+size = Vector3(0.59601, 1, 0.71917)
+material = SubResource("StandardMaterial3D_3dgwj")
+
+[node name="fence-west" type="Node3D" parent="SubViewportContainer/SubViewport/Node"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.12996, 0, 4.94592)
+
+[node name="fence-section-01" parent="SubViewportContainer/SubViewport/Node/fence-west" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-02" parent="SubViewportContainer/SubViewport/Node/fence-west" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-03" parent="SubViewportContainer/SubViewport/Node/fence-west" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-04" parent="SubViewportContainer/SubViewport/Node/fence-west" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="fence-south" type="Node3D" parent="SubViewportContainer/SubViewport/Node"]
+
+[node name="fence-section-05" parent="SubViewportContainer/SubViewport/Node/fence-south" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-06" parent="SubViewportContainer/SubViewport/Node/fence-south" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-07" parent="SubViewportContainer/SubViewport/Node/fence-south" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-08" parent="SubViewportContainer/SubViewport/Node/fence-south" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="fence-east" type="Node3D" parent="SubViewportContainer/SubViewport/Node"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.08483, 0, 4.94592)
+
+[node name="fence-section-01" parent="SubViewportContainer/SubViewport/Node/fence-east" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-02" parent="SubViewportContainer/SubViewport/Node/fence-east" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-03" parent="SubViewportContainer/SubViewport/Node/fence-east" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-04" parent="SubViewportContainer/SubViewport/Node/fence-east" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="fence-north" type="Node3D" parent="SubViewportContainer/SubViewport/Node"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 10.1442)
+
+[node name="fence-section-05" parent="SubViewportContainer/SubViewport/Node/fence-north" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="fence-section-06" parent="SubViewportContainer/SubViewport/Node/fence-north" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.571, 0, 40)
+
+[node name="fence-section-07" parent="SubViewportContainer/SubViewport/Node/fence-north" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8755, 0, 40)
+
+[node name="fence-section-08" parent="SubViewportContainer/SubViewport/Node/fence-north" instance=ExtResource("3_sg87u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3889, 0, 40)
+
+[node name="boundaries" type="Node3D" parent="SubViewportContainer/SubViewport/Node"]
+
+[node name="InvisibleBoundary" parent="SubViewportContainer/SubViewport/Node/boundaries" instance=ExtResource("4_2l3yw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.951165, -63.7213, 0, 5.61127)
+
+[node name="InvisibleBoundary2" parent="SubViewportContainer/SubViewport/Node/boundaries" instance=ExtResource("4_2l3yw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.951165, 54.1017, 0, 5.61127)
+
+[node name="InvisibleBoundary3" parent="SubViewportContainer/SubViewport/Node/boundaries" instance=ExtResource("4_2l3yw")]
+transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08, -9.14026, 0, 76.5759)
+
+[node name="InvisibleBoundary4" parent="SubViewportContainer/SubViewport/Node/boundaries" instance=ExtResource("4_2l3yw")]
+transform = Transform3D(-4.37114e-08, 0, 0.951165, 0, 1, 0, -1, 0, -4.15767e-08, -9.14026, 0, -64.2564)
+
+[node name="Player" parent="SubViewportContainer/SubViewport/Node" instance=ExtResource("5_2525w")]
+transform = Transform3D(0.549854, 0, -0.835261, 0, 1, 0, 0.835261, 0, 0.549854, 7.14649, 0.0964556, -14.5079)
+collision_mask = 1
+
+[node name="Skeleton3D" parent="SubViewportContainer/SubViewport/Node/Player/player_rig/metarig" index="0"]
+bones/1/rotation = Quaternion(-0.0673056, 4.35686e-11, -1.53723e-08, 0.997732)
+bones/4/rotation = Quaternion(0.190954, 1.16487e-07, 2.53316e-08, 0.981599)
+bones/6/rotation = Quaternion(-0.0801902, -1.18825e-07, -9.55943e-09, 0.99678)
+bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
+bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
+bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
+bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
+bones/17/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
+bones/18/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
+bones/19/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
+bones/20/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
+bones/21/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
+bones/22/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
+
+[node name="egg_dispenser" parent="SubViewportContainer/SubViewport/Node" instance=ExtResource("6_2525w")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.05508, 0, -21.1167)
+
+[node name="chicken_coop" parent="SubViewportContainer/SubViewport/Node" instance=ExtResource("7_6vkx6")]
+transform = Transform3D(-0.499862, 0, -0.0117537, 0, 0.5, 0, 0.0117537, 0, -0.499862, 14.5361, 0.0161118, -15.9715)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -14,7 +188,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StartButton" type="Button" parent="CanvasLayer/CenterContainer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
+offset_left = 300.0
+offset_top = 306.0
+offset_right = 500.0
+offset_bottom = 366.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0.803922, 0.384314, 1)
+theme_override_font_sizes/font_size = 29
 text = "Start Game"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 818.0
+offset_bottom = 84.0
+text = "CHICKEN FARM"
+label_settings = SubResource("LabelSettings_2525w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chicken" parent="." instance=ExtResource("6_sg87u")]
+transform = Transform3D(-0.0919943, 0, -0.237828, 0, 0.255, 0, 0.237828, 0, -0.0919943, 3.77512, 0.00554115, -15.5299)
+egg_chance = 0
+
+[node name="Chicken2" parent="." instance=ExtResource("6_sg87u")]
+transform = Transform3D(-0.0847976, 0, 0.240488, 0, 0.255, 0, -0.240488, 0, -0.0847976, 10.1528, 0.00554115, -12.2191)
+egg_chance = 0
+
+[node name="Chicken3" parent="." instance=ExtResource("6_sg87u")]
+transform = Transform3D(0.167755, 0, -0.19205, 0, 0.255, 0, 0.19205, 0, 0.167755, 6.03985, 0.00554115, -10.5439)
+egg_chance = 0
+
+[editable path="SubViewportContainer/SubViewport/Node/Player"]
+[editable path="SubViewportContainer/SubViewport/Node/Player/player_rig"]

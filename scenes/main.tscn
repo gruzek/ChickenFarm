@@ -63,9 +63,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0646925, -4.4654e-11, -1.61148e-08, 0.997905)
-bones/4/rotation = Quaternion(0.201268, 1.17916e-07, 1.84261e-08, 0.979536)
-bones/6/rotation = Quaternion(-0.0931234, -1.18691e-07, -1.11011e-08, 0.995655)
+bones/1/rotation = Quaternion(-0.0739609, -6.18315e-11, -1.85904e-08, 0.997261)
+bones/4/rotation = Quaternion(0.165171, 1.18319e-07, 1.6061e-08, 0.986265)
+bones/6/rotation = Quaternion(-0.0479131, -1.19072e-07, -5.71169e-09, 0.998852)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
