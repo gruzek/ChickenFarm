@@ -37,7 +37,7 @@ albedo_texture = ExtResource("1_0wfyh")
 [sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
 font = ExtResource("8_ya4ey")
 font_size = 31
-font_color = Color(1, 0.983282, 0.752366, 1)
+font_color = Color(1, 0.750454, 0.465326, 1)
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 5
@@ -71,9 +71,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0767444, 1.33766e-11, -1.809e-08, 0.997051)
-bones/4/rotation = Quaternion(0.153312, 1.1797e-07, 1.74523e-08, 0.988178)
-bones/6/rotation = Quaternion(-0.0330994, -1.19144e-07, -3.94576e-09, 0.999452)
+bones/1/rotation = Quaternion(-0.0771678, 9.73429e-11, -1.68914e-08, 0.997018)
+bones/4/rotation = Quaternion(0.150495, 1.17884e-07, 1.77821e-08, 0.988611)
+bones/6/rotation = Quaternion(-0.0295835, -1.19157e-07, -3.52663e-09, 0.999562)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -228,6 +228,11 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.
 
 [node name="Wolf" parent="." instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10771, 1.55717e-06, 28.4289)
+
+[connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight"]
+[connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]
+[connection signal="build_mode_entered" from="Player" to="Messenger" method="_on_player_build_mode_entered"]
+[connection signal="build_mode_exited" from="Player" to="Messenger" method="_on_player_build_mode_exited"]
 
 [editable path="Player"]
 [editable path="Player/player_rig"]

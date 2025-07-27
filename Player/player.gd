@@ -21,6 +21,8 @@ var currentAnim = IDLE
 @onready var animation_tree: AnimationTree = $player_rig/AnimationPlayer/AnimationTree
 
 signal egg_amount_changed(value)
+signal build_mode_entered
+signal build_mode_exited
 
 var in_build_mode = false
 
@@ -135,10 +137,12 @@ func spawn_and_tween_egg(start_pos: Vector3, end_pos: Vector3):
 func _on_build_mode_entered():
 	in_build_mode = true
 	print("Player: Build mode entered")
+	build_mode_entered.emit()
 
 func _on_build_mode_exited():
 	in_build_mode = false
 	print("Player: Build mode exited")
+	build_mode_exited.emit()
 
 
 #func _ready():

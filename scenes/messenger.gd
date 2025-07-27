@@ -3,16 +3,14 @@ extends Node3D
 @onready var left_message_label: Label = $"../UI/LeftMessageLabel"
 @onready var right_message_label: Label = $"../UI/RightMessageLabel"
 
-# Tween for smooth animations
+# Message queues for each side
+var left_queue: MessageQueue
+var right_queue: MessageQueue
+
+# Tween for animations
 var tween: Tween
-var wasd_displayed = false
 
-# Message sequence system
-var message_sequence: Array = []
-var current_message_index: int = 0
-var is_playing_sequence: bool = false
-
-# Message structure: {"text": String, "delay_before": float, "show_duration": float, "target": String}
+# Default startup messages
 var default_messages = [
 	{"text": "Welcome to ChickenFarm!", "delay_before": 3.0, "show_duration": 3.0, "target": "right"},
 	{"text": "Use W,A,S,D to move", "delay_before": 1.0, "show_duration": 4.0, "target": "right"},
@@ -28,128 +26,93 @@ var default_messages = [
 func _ready():
 	# Create the tween
 	tween = create_tween()
-	tween.set_parallel(true)  # Allow multiple tweens to run simultaneously
+	tween.set_parallel(true)
 	
-	# Start the default message sequence when the game starts
-	play_message_sequence()
+	# Initialize message queues
+	left_queue = MessageQueue.new(left_message_label, tween)
+	right_queue = MessageQueue.new(right_message_label, tween)
+	
+	# Add default startup messages to the appropriate queues
+	for message in default_messages:
+		var target = message.get("target", "right")
+		var text = message.get("text", "")
+		var delay = message.get("delay_before", 0.5)
+		var duration = message.get("show_duration", 3.0)
+		
+		if target == "left":
+			left_queue.add_message(text, delay, duration)
+		else:
+			right_queue.add_message(text, delay, duration)
 
+# Queue-based Message API
+func add_left_message(text: String, delay_before: float = 0.5, show_duration: float = 3.0) -> void:
+	"""Add a message to the left queue"""
+	left_queue.add_message(text, delay_before, show_duration)
+
+func add_right_message(text: String, delay_before: float = 0.5, show_duration: float = 3.0) -> void:
+	"""Add a message to the right queue"""
+	right_queue.add_message(text, delay_before, show_duration)
+
+func interrupt_left_queue(text: String, delay_before: float = 0.0, show_duration: float = 3.0) -> void:
+	"""Interrupt the left queue with an urgent message"""
+	left_queue.interrupt_queue(text, delay_before, show_duration)
+
+func interrupt_right_queue(text: String, delay_before: float = 0.0, show_duration: float = 3.0) -> void:
+	"""Interrupt the right queue with an urgent message"""
+	right_queue.interrupt_queue(text, delay_before, show_duration)
+
+func clear_left_queue() -> void:
+	"""Clear all messages from the left queue"""
+	left_queue.clear_queue()
+
+func clear_right_queue() -> void:
+	"""Clear all messages from the right queue"""
+	right_queue.clear_queue()
+
+func clear_all_queues() -> void:
+	"""Clear all messages from both queues"""
+	left_queue.clear_queue()
+	right_queue.clear_queue()
+
+func get_left_queue_size() -> int:
+	"""Get the number of messages remaining in the left queue"""
+	return left_queue.get_queue_size()
+
+func get_right_queue_size() -> int:
+	"""Get the number of messages remaining in the right queue"""
+	return right_queue.get_queue_size()
+
+func is_left_queue_empty() -> bool:
+	"""Check if the left queue is empty"""
+	return left_queue.is_queue_empty()
+
+func is_right_queue_empty() -> bool:
+	"""Check if the right queue is empty"""
+	return right_queue.is_queue_empty()
+
+# Legacy functions for backward compatibility
 func display_wasd() -> void:
-	"""Legacy function - now handled by message sequence"""
-	fade_in(right_message_label, "Use W,A,S,D to move")
+	"""Legacy function - use add_right_message instead"""
+	add_right_message("Use W,A,S,D to move", 0.0, 4.0)
 
 func _process(delta) -> void:
 	# Process function - currently unused
 	pass
 
-func fade_out(duration: float = 1.0, target_label: Label = null) -> void:
-	"""Fade out a message label over the specified duration"""
-	# If no specific label is provided, fade out both
-	if target_label == null:
-		fade_out_label(left_message_label, duration)
-		fade_out_label(right_message_label, duration)
-	else:
-		fade_out_label(target_label, duration)
+# Signal handlers (can be used to trigger messages based on game events)
+func _on_day_night_cycle_evening_civil_twilight() -> void:
+	# Example: Show a nighttime warning message
+	interrupt_right_queue("Beware of werewolves", 0.0, 4.0)
 
-func fade_out_label(label: Label, duration: float) -> void:
-	"""Fade out a specific label"""
-	if label and label.modulate.a > 0:
-		# Create a new tween if the current one is finished
-		if not tween or not tween.is_valid():
-			tween = create_tween()
-			tween.set_parallel(true)
-		
-		# Tween the alpha (transparency) from current value to 0
-		tween.tween_property(label, "modulate:a", 0.0, duration)
+func _on_day_night_cycle_morning_civil_twilight() -> void:
+	# Example: Show a morning message
+	add_right_message("Good Morning Sunshine", 0.0, 4.0)
 
-func fade_out_left(duration: float = 1.0) -> void:
-	"""Convenience function to fade out left message"""
-	fade_out(duration, left_message_label)
+func _on_player_build_mode_entered() -> void:
+	interrupt_left_queue("Buildings Cost Eggs", 0.0, 3.0)
+	interrupt_left_queue("Or Mouse Wheel", 0.0, 3.0)
+	interrupt_left_queue("Use Q to change building", 0.0, 3.0)
 
-func fade_out_right(duration: float = 1.0) -> void:
-	"""Convenience function to fade out right message"""
-	fade_out(duration, right_message_label)
 
-func fade_in(target_label: Label, text: String, duration: float = 0.5) -> void:
-	"""Fade in a label with text"""
-	if target_label:
-		target_label.text = text
-		if not tween or not tween.is_valid():
-			tween = create_tween()
-			tween.set_parallel(true)
-		
-		tween.tween_property(target_label, "modulate:a", 1.0, duration)
-
-# Message Sequence Functions
-func play_message_sequence(messages: Array = []) -> void:
-	"""Play a sequence of timed messages"""
-	if messages.is_empty():
-		messages = default_messages
-	
-	message_sequence = messages
-	current_message_index = 0
-	is_playing_sequence = true
-	
-	# Start the sequence
-	play_next_message()
-
-func play_next_message() -> void:
-	"""Play the next message in the sequence"""
-	if not is_playing_sequence or current_message_index >= message_sequence.size():
-		# Sequence finished
-		is_playing_sequence = false
-		return
-	
-	var message_data = message_sequence[current_message_index]
-	var text = message_data.get("text", "")
-	var delay_before = message_data.get("delay_before", 0.0)
-	var show_duration = message_data.get("show_duration", 3.0)
-	var target = message_data.get("target", "right")
-	
-	# Wait for the delay before showing this message
-	await get_tree().create_timer(delay_before).timeout
-	
-	# Get the target label
-	var target_label = get_target_label(target)
-	if target_label:
-		# Fade in the message
-		fade_in(target_label, text, 0.5)
-		
-		# Wait for the show duration
-		await get_tree().create_timer(show_duration).timeout
-		
-		# Fade out the message
-		fade_out_label(target_label, 0.5)
-		
-		# Wait for fade out to complete
-		await get_tree().create_timer(0.5).timeout
-	
-	# Move to next message
-	current_message_index += 1
-	play_next_message()
-
-func get_target_label(target: String) -> Label:
-	"""Get the label based on target string"""
-	match target.to_lower():
-		"left":
-			return left_message_label
-		"right":
-			return right_message_label
-		_:
-			return right_message_label  # Default to right
-
-func stop_sequence() -> void:
-	"""Stop the current message sequence"""
-	is_playing_sequence = false
-	# Fade out any visible messages
-	fade_out(0.3)
-
-func add_message_to_sequence(text: String, delay_before: float = 0.5, show_duration: float = 3.0, target: String = "right") -> void:
-	"""Add a single message to the current sequence"""
-	var message = {
-		"text": text,
-		"delay_before": delay_before,
-		"show_duration": show_duration,
-		"target": target
-	}
-	message_sequence.append(message)
-	
+func _on_player_build_mode_exited() -> void:
+	pass # Replace with function body.
