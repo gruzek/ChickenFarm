@@ -6,6 +6,15 @@ extends CharacterBody3D
 @export var pickup_range = 25
 @export var egg_throw_range = 5.0
 
+# Health system
+@export var starting_health = 20
+var health: int:
+	set(health_in):
+		health = health_in
+		if health <= 0:
+			die()
+var is_dead = false
+
 # egg throwing
 @export var throwing_egg_scene: PackedScene
 @onready var egg_bank = get_tree().get_first_node_in_group("egg bank")
@@ -27,6 +36,8 @@ signal build_mode_exited
 var in_build_mode = false
 
 func _ready():
+	health = starting_health
+	add_to_group("player")
 	# Connect to build_node signals
 	build_node.build_mode_entered.connect(_on_build_mode_entered)
 	build_node.build_mode_exited.connect(_on_build_mode_exited)
@@ -143,6 +154,23 @@ func _on_build_mode_exited():
 	in_build_mode = false
 	print("Player: Build mode exited")
 	build_mode_exited.emit()
+
+func die():
+	"""Handle player death - exit the game for now"""
+	is_dead = true
+	print("Player died! Game Over!")
+	# Exit the game (will be replaced with Game Over scene later)
+	get_tree().quit()
+
+func start_being_attacked():
+	"""Called when a wolf starts attacking the player"""
+	# Player doesn't stop moving when attacked (unlike chickens)
+	pass
+
+func stop_being_attacked():
+	"""Called when a wolf stops attacking the player"""
+	# Player doesn't need special handling when attack stops
+	pass
 
 
 #func _ready():

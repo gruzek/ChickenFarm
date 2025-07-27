@@ -29,6 +29,7 @@ var is_dead = false
 var is_seeking_coop = false
 var target_coop = null
 var current_coop_index = 0  # For cycling through coops when they're full
+var is_finding_coop = false  # Prevent recursion
 
 # Texture variants
 var chicken_textures = [
@@ -230,9 +231,15 @@ func start_seeking_coop():
 
 func find_next_coop():
 	"""Find the next closest coop to try"""
+	if is_finding_coop:
+		return  # Prevent recursion
+	
+	is_finding_coop = true
+	
 	var coops = get_tree().get_nodes_in_group("chicken_coop")
 	if coops.is_empty():
 		# No coops available, go back to normal behavior
+		is_finding_coop = false
 		stop_seeking_coop()
 		return
 	
@@ -242,19 +249,23 @@ func find_next_coop():
 	
 	# If we've tried all coops, give up and roam normally
 	if current_coop_index >= sorted_coops.size():
+		is_finding_coop = false
 		stop_seeking_coop()
 		return
 	
 	# Set target to the next closest coop
 	target_coop = sorted_coops[current_coop_index]
 	navigation_agent_3d.target_position = target_coop.global_position
+	
+	is_finding_coop = false
 
 func check_coop_arrival():
 	"""Check if the coop has space when we arrive"""
 	if not target_coop or not is_instance_valid(target_coop):
 		# Coop was destroyed, find another
 		current_coop_index += 1
-		call_deferred("find_next_coop")
+		if not is_finding_coop:
+			find_next_coop()
 		return
 	
 	# Try to enter the coop
@@ -270,20 +281,22 @@ func check_coop_arrival():
 		else:
 			# Failed to add (shouldn't happen if can_accept_chicken was true)
 			current_coop_index += 1
-			call_deferred("find_next_coop")
+			if not is_finding_coop:
+				find_next_coop()
 	else:
 		# Coop is full, try the next one
 		current_coop_index += 1
-		call_deferred("find_next_coop")
+		if not is_finding_coop:
+			find_next_coop()
 
 func stop_seeking_coop():
 	"""Stop seeking coops and return to normal behavior"""
 	# During nighttime, chickens don't give up seeking coops
 	if is_nighttime():
 		# Reset and try again - chickens are persistent at night
-		# Use call_deferred to break recursion
 		current_coop_index = 0
-		call_deferred("find_next_coop")
+		if not is_finding_coop:
+			find_next_coop()
 		return
 	
 	is_seeking_coop = false

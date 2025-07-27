@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var target_timer: Timer = $"Target Timer"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@export var attack_range = 0.7
+@export var attack_range = 2.0
 @export var attack_damage = 5
 @export var move_speed = 10
 @export var reaction_time = 1
@@ -20,19 +20,29 @@ func _ready() -> void:
 
 
 func _on_target_timer_timeout() -> void:
+	# Get all potential targets (chickens and player)
 	var chickens = get_tree().get_nodes_in_group("chicken")
-	# Filter out freed/invalid/dead chickens
-	var valid_chickens: Array[Node] = []
+	var players = get_tree().get_nodes_in_group("player")
+	
+	# Filter out freed/invalid/dead targets
+	var valid_targets: Array[Node] = []
+	
+	# Add valid chickens
 	for chicken in chickens:
 		if chicken and is_instance_valid(chicken) and not chicken.is_dead:
-			valid_chickens.append(chicken)
+			valid_targets.append(chicken)
 	
-	if valid_chickens.is_empty():
+	# Add valid players
+	for player in players:
+		if player and is_instance_valid(player) and not player.is_dead:
+			valid_targets.append(player)
+	
+	if valid_targets.is_empty():
 		print("EMPTY - RETUREND")
 		target = null
 		return
 	
-	target = find_best_target(valid_chickens)
+	target = find_best_target(valid_targets)
 	if target == null:
 		print("NULL - RETUREND")
 		return
@@ -68,7 +78,9 @@ func _physics_process(delta: float) -> void:
 		
 		# Check if we're close enough to attack
 		var distance_to_target = global_position.distance_to(target.global_position)
+		print("Distance to ", target.name, ": ", distance_to_target, " (attack_range: ", attack_range, ")")
 		if distance_to_target <= attack_range:
+			print("Starting attack on ", target.name)
 			start_attack()
 			return
 		
@@ -98,6 +110,9 @@ func start_attack():
 	if target.has_method("start_being_attacked"):
 		target.start_being_attacked()
 	
+	print("wolf attacking")
+	print(target.name)
+	
 	# Play attack animation
 	animation_player.play("attack")
 
@@ -105,7 +120,10 @@ func attack():
 	"""Called by animation player during attack animation"""
 	# Check if target is still valid before dealing damage
 	if target and is_instance_valid(target):
+		print("valid instance")
 		target.health -= attack_damage
+	else:
+		print("wolf attacking invalid instance")
 
 func finish_attack():
 	"""Clean up after attack is finished"""
@@ -128,26 +146,38 @@ func find_new_target():
 func find_new_target_immediately():
 	"""Immediately find a new target without waiting for timer"""
 	target = null
+	
+	# Get all potential targets (chickens and player)
 	var chickens = get_tree().get_nodes_in_group("chicken")
-	# Filter out freed/invalid/dead chickens
-	var valid_chickens: Array[Node] = []
+	var players = get_tree().get_nodes_in_group("player")
+	
+	# Filter out freed/invalid/dead targets
+	var valid_targets: Array[Node] = []
+	
+	# Add valid chickens
 	for chicken in chickens:
 		if chicken and is_instance_valid(chicken) and not chicken.is_dead:
-			valid_chickens.append(chicken)
+			valid_targets.append(chicken)
 	
-	if not valid_chickens.is_empty():
-		target = find_best_target(valid_chickens)
+	# Add valid players
+	for player in players:
+		if player and is_instance_valid(player) and not player.is_dead:
+			valid_targets.append(player)
+	
+	if not valid_targets.is_empty():
+		target = find_best_target(valid_targets)
 		if target:
 			navigation_agent_3d.target_position = target.global_position
 
-func find_best_target(chickens: Array[Node]):
+func find_best_target(targets: Array[Node]):
+	"""Find the closest valid target (chicken or player)"""
 	var best_target = null
 	var best_distance = 1000
-	for chick in chickens:
-		# Double-check that chicken is still valid and alive
-		if chick and is_instance_valid(chick) and not chick.is_dead:
-			var distance = global_position.distance_to(chick.global_transform.origin)
+	for target_node in targets:
+		# Double-check that target is still valid and alive
+		if target_node and is_instance_valid(target_node) and not target_node.is_dead:
+			var distance = global_position.distance_to(target_node.global_transform.origin)
 			if distance < best_distance:
-				best_target = chick
+				best_target = target_node
 				best_distance = distance
 	return best_target
