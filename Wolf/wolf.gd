@@ -7,6 +7,9 @@ extends CharacterBody3D
 @onready var wolf_collider: CollisionShape3D = $CollisionShape3D
 @onready var attack_cooldown_timer: Timer = $"Attack Timer"
 
+#Sounds
+@onready var die_sfx: AudioStreamPlayer3D = $"Die SFX"
+@onready var hurt_sfx: AudioStreamPlayer3D = $"Hurt SFX"
 
 @export var attack_range = 2.0
 @export var attack_damage = 5
@@ -21,6 +24,7 @@ var can_attack = true
 var health: int:
 	set(health_in):
 		health = health_in
+		hurt_sfx.play()
 		if health <=0:
 			die()
 
@@ -238,6 +242,7 @@ func die():
 	death_timer.start()
 	animation_tree["parameters/Die/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	wolf_collider.queue_free()
+	die_sfx.play()
 	# Do spark particles
 
 func _on_death_timer_timeout() -> void:

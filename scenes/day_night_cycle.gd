@@ -67,7 +67,8 @@ func _ready():
 	reset_event_flags()
 
 func _stop_all_music():
-	nighttime_music_player.stop()
+	if nighttime_music_player != null:
+		nighttime_music_player.stop()
 	daytime_music_player_01.stop()
 	daytime_music_player_02.stop()
 	
@@ -81,7 +82,8 @@ func _play_random_daytime():
 
 func _play_nightime_music():
 	_stop_all_music()
-	nighttime_music_player.play()
+	if nighttime_music_player != null:
+		nighttime_music_player.play()
 	
 # Main update function called every frame
 func _process(delta):

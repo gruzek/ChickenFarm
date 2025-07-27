@@ -13,6 +13,7 @@ height = 0.3
 [node name="Bullet" type="Area3D"]
 script = ExtResource("1_xda6o")
 sparks_scene = ExtResource("2_gof56")
+speed = 110
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_q7gj4")

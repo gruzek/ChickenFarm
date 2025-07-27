@@ -14,6 +14,7 @@ var cost_label: Label3D = null
 	
 @onready var camera_3d: Camera3D = $"../Camera3D"
 @onready var egg_bank = get_tree().get_first_node_in_group("egg bank")
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 var current_scene
 
@@ -26,7 +27,7 @@ func _ready():
 	]
 
 	buildable_costs = [
-		5,
+		20,
 		100,
 		300
 	]
@@ -86,6 +87,7 @@ func _process(delta: float) -> void:
 				# Make preview fully opaque
 				preview_instance.set_buildable(true)
 				preview_instance.set_preview_mode(false)
+				audio_stream_player_3d.play()
 				# Activate the object when placed
 				set_active(true)
 				in_build_mode = false

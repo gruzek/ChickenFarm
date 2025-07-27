@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjst7xfrt2nqq"]
+[gd_scene load_steps=8 format=3 uid="uid://cjst7xfrt2nqq"]
 
 [ext_resource type="Script" uid="uid://bbodi52e5h54o" path="res://Wolf/wolf.gd" id="1_dlc5l"]
 [ext_resource type="PackedScene" uid="uid://cl7su6v8jg3jm" path="res://models/werewolf.tscn" id="2_38o6x"]
+[ext_resource type="AudioStream" uid="uid://ncghap4c1tp6" path="res://kill enemy 1.wav" id="3_o1ixa"]
+[ext_resource type="AudioStream" uid="uid://cn3rjb11i8tr8" path="res://hit enemy 1.wav" id="4_ygiko"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dlc5l"]
 radius = 0.7
@@ -40,29 +42,37 @@ wait_time = 3.0
 transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="werewolf/metarig" index="0"]
-bones/1/rotation = Quaternion(0.164243, 0, 0, 0.98642)
-bones/6/rotation = Quaternion(-0.29955, 0, 0, 0.954081)
+bones/1/rotation = Quaternion(0.150971, 0, 0, 0.988538)
+bones/6/rotation = Quaternion(-0.286058, 0, 0, 0.958212)
 
 [node name="Head" parent="werewolf/metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.337936, 0, 0, 0, 0.00968939, -0.326107, 0, 0.337797, 0.00935401, 0, 2.17402, 0.163434)
+transform = Transform3D(0.337936, 0, 0, 0, 0.00923657, -0.326119, 0, 0.337809, 0.00891692, 0, 2.1814, 0.14894)
 
 [node name="Glowing Eye" parent="werewolf/metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416379, 0, -0.00100499, -0.014516, 0, 1.86245, 0.385856)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.035038, -0.00039692, 0, -0.000958027, -0.0145166, 0, 1.86953, 0.370945)
 
 [node name="Glowing Eye" parent="werewolf/metarig/Skeleton3D/Glowing Eye" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_38o6x")
 
 [node name="Glowing Eye_001" parent="werewolf/metarig/Skeleton3D" index="2"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416379, 0, -0.00100499, -0.014516, -0.211952, 1.86245, 0.385856)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.035038, -0.00039692, 0, -0.000958027, -0.0145166, -0.211952, 1.86953, 0.370945)
 
 [node name="Glowing Eye_001" parent="werewolf/metarig/Skeleton3D/Glowing Eye_001" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_38o6x")
 
 [node name="Weapon" parent="werewolf/metarig/Skeleton3D" index="3"]
-transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0283101, 0.0163073, -0.0223033, -0.00904564, 0.0361952, 0.0139636, -0.704906, 0.968475, 0.109871)
+transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0280567, 0.0172743, -0.0219199, -0.00980328, 0.0357438, 0.0145581, -0.704906, 0.971941, 0.113621)
 
 [node name="Weapon" parent="werewolf/metarig/Skeleton3D/Weapon" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_se4sg")
+
+[node name="Die SFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_o1ixa")
+volume_db = 4.571
+
+[node name="Hurt SFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ygiko")
+volume_db = 4.571
 
 [connection signal="timeout" from="Target Timer" to="." method="_on_target_timer_timeout"]
 [connection signal="timeout" from="Death Timer" to="." method="_on_death_timer_timeout"]

@@ -46,3 +46,9 @@ func _on_credits_finished():
 func _on_start_button_pressed():
 	# Load the main scene when the button is pressed
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
+
+
+
+
+func _on_peaceful_mode_button_down() -> void:
+	get_tree().change_scene_to_file("res://scenes/peaceful.tscn")

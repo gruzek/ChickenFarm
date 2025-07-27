@@ -54,9 +54,9 @@ node_connections = [&"Attack", 0, &"Run", &"Attack", 1, &"Anim Attack", &"Die", 
 [node name="Skeleton3D" parent="metarig" index="0"]
 bones/0/position = Vector3(0, 0.907035, -0.0552)
 bones/0/rotation = Quaternion(0.0925428, 0, 0, 0.995709)
-bones/1/rotation = Quaternion(0.164336, 0, 0, 0.986404)
+bones/1/rotation = Quaternion(0.168835, 0, 0, 0.985644)
 bones/2/rotation = Quaternion(-0.0774642, 0, 0, 0.996995)
-bones/6/rotation = Quaternion(-0.299645, 0, 0, 0.954051)
+bones/6/rotation = Quaternion(-0.304211, 0, 0, 0.952605)
 bones/11/rotation = Quaternion(-0.169131, 0.540972, -0.63006, 0.530818)
 bones/12/rotation = Quaternion(0.514568, -0.224016, 0.0584544, 0.825603)
 bones/13/rotation = Quaternion(-0.307821, 0.178225, -0.0574122, 0.932838)
@@ -73,19 +73,19 @@ bones/25/rotation = Quaternion(0.176793, -0.0108909, -3.16813e-06, 0.984188)
 bones/26/rotation = Quaternion(-0.674186, 0.0420047, -0.0586068, 0.735033)
 
 [node name="Head" parent="metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.337936, 0, 0, 0, 0.00969261, -0.326107, 0, 0.337797, 0.00935709, 0, 2.17397, 0.163535)
+transform = Transform3D(0.337936, 0, 0, 0, 0.00984611, -0.326102, 0, 0.337792, 0.00950536, 0, 2.17137, 0.168409)
 
 [node name="Head" parent="metarig/Skeleton3D/Head" index="0"]
 material_override = SubResource("StandardMaterial3D_6wo16")
 
 [node name="Glowing Eye" parent="metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416517, 0, -0.00100532, -0.014516, 0, 1.8624, 0.38596)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350362, -0.000423114, 0, -0.00102125, -0.0145158, 0, 1.8599, 0.390976)
 
 [node name="Glowing Eye_001" parent="metarig/Skeleton3D" index="2"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416517, 0, -0.00100532, -0.014516, -0.211952, 1.8624, 0.38596)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350362, -0.000423114, 0, -0.00102125, -0.0145158, -0.211952, 1.8599, 0.390976)
 
 [node name="Weapon" parent="metarig/Skeleton3D" index="3"]
-transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0283118, 0.0163005, -0.0223059, -0.00904029, 0.0361982, 0.0139594, -0.704906, 0.968451, 0.109844)
+transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0283931, 0.0159695, -0.0224323, -0.00878161, 0.0363455, 0.0137553, -0.704906, 0.967298, 0.10855)
 
 [node name="Body" parent="metarig/Skeleton3D" index="4"]
 material_override = SubResource("StandardMaterial3D_m67nf")
