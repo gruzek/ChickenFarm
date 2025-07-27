@@ -9,6 +9,11 @@ var chickens_inside = []  # Array to track which chickens are inside
 
 func _ready():
 	add_to_group("chicken_coop")
+	
+	# Add this coop's capacity to the total
+	var ui_node = get_tree().get_first_node_in_group("egg bank")
+	if ui_node:
+		ui_node.total_coop_capacity += max_capacity
 
 # Capacity management functions
 func can_accept_chicken() -> bool:
@@ -25,6 +30,12 @@ func add_chicken(chicken: Node) -> bool:
 	
 	chickens_inside.append(chicken)
 	current_occupancy += 1
+	
+	# Update chickens in coops count
+	var ui_node = get_tree().get_first_node_in_group("egg bank")
+	if ui_node:
+		ui_node.chickens_in_coops += 1
+	
 	return true
 
 func remove_chicken(chicken: Node) -> bool:
@@ -34,6 +45,12 @@ func remove_chicken(chicken: Node) -> bool:
 	
 	chickens_inside.erase(chicken)
 	current_occupancy -= 1
+	
+	# Update chickens in coops count
+	var ui_node = get_tree().get_first_node_in_group("egg bank")
+	if ui_node:
+		ui_node.chickens_in_coops -= 1
+	
 	return true
 
 func is_full() -> bool:

@@ -14,8 +14,22 @@ var eggs: int:
 var chickens: int:
 	set(chickens_in):
 		chickens = chickens_in
-		var chicken_text = str(chickens) + " Chicken" + ("s" if chickens != 1 else "")
-		coop_label.text = chicken_text
+		update_chicken_display()
+
+var chickens_in_coops: int:
+	set(chickens_in_coops_in):
+		chickens_in_coops = chickens_in_coops_in
+		update_chicken_display()
+
+var total_coop_capacity: int:
+	set(total_coop_capacity_in):
+		total_coop_capacity = total_coop_capacity_in
+		update_chicken_display()
+
+func update_chicken_display():
+	var chicken_text = str(chickens) + " Chicken" + ("s" if chickens != 1 else "")
+	var coop_text = " " + str(chickens_in_coops) + "/" + str(total_coop_capacity) + " in Coops"
+	coop_label.text = chicken_text + coop_text
 
 
 # Called when the node enters the scene tree for the first time.

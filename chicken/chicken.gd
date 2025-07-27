@@ -54,6 +54,10 @@ func _ready() -> void:
 	if day_night_cycle:
 		day_night_cycle.sunset.connect(_on_sunset)
 		day_night_cycle.morning_civil_twilight.connect(_on_morning_civil_twilight)
+		
+		# If spawning at night, immediately start seeking a coop
+		if is_nighttime():
+			start_seeking_coop()
 
 func _process(delta: float) -> void:
 	roam_timer += delta
@@ -243,6 +247,13 @@ func check_coop_arrival():
 
 func stop_seeking_coop():
 	"""Stop seeking coops and return to normal behavior"""
+	# During nighttime, chickens don't give up seeking coops
+	if is_nighttime():
+		# Reset and try again - chickens are persistent at night
+		current_coop_index = 0
+		find_next_coop()
+		return
+	
 	is_seeking_coop = false
 	target_coop = null
 	current_coop_index = 0
@@ -272,3 +283,23 @@ func exit_coop_and_roam():
 	
 	# Start roaming to a random point
 	pick_random_point()
+
+func is_nighttime() -> bool:
+	"""Check if it's currently nighttime (after sunset, before morning civil twilight)"""
+	var day_night_cycle = get_tree().get_first_node_in_group("day_night_cycle")
+	if not day_night_cycle:
+		return false
+	
+	# Get current time and cycle info
+	var current_time = day_night_cycle.current_time
+	var sunset_time = day_night_cycle.sunset_time
+	var morning_civil_twilight_time = day_night_cycle.morning_civil_twilight_time
+	
+	# Check if we're in the night period
+	# Night is from sunset to morning_civil_twilight (which wraps around to next day)
+	if sunset_time < morning_civil_twilight_time:
+		# Normal case: sunset and morning twilight are in same cycle
+		return current_time >= sunset_time and current_time < morning_civil_twilight_time
+	else:
+		# Wrap-around case: night spans across cycle boundary
+		return current_time >= sunset_time or current_time < morning_civil_twilight_time
