@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 func _ready():
 	# Connect the button's pressed signal to the _on_start_button_pressed function
