@@ -9,6 +9,13 @@ extends CharacterBody3D
 @export var move_speed = 10
 @export var reaction_time = 1
 @export var attack_duration = 2.0  # How long the attack animation takes
+@export var starting_health = 20
+
+var health: int:
+	set(health_in):
+		health = health_in
+		if health <=0:
+			queue_free()
 
 var target: Node
 var is_attacking = false
@@ -17,6 +24,7 @@ var attack_timer = 0.0
 func _ready() -> void:
 	target_timer.wait_time = reaction_time
 	add_to_group("wolf")
+	health = starting_health
 
 
 func _on_target_timer_timeout() -> void:

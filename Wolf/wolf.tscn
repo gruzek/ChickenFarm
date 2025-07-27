@@ -60,7 +60,7 @@ _data = {
 &"attack": SubResource("Animation_38o6x")
 }
 
-[node name="Wolf" type="CharacterBody3D"]
+[node name="Wolf" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_dlc5l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
