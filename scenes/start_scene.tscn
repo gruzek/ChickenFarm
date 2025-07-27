@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhjvel1asgj4h"]
+[gd_scene load_steps=15 format=3 uid="uid://bhjvel1asgj4h"]
 
 [ext_resource type="Script" uid="uid://cicsvwo2e8tbt" path="res://scenes/start_scene.gd" id="1_pqnvq"]
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="2_0kdh5"]
@@ -42,6 +42,11 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 15
 shadow_color = Color(0, 0, 0, 0.6)
 shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6vkx6"]
+font = ExtResource("8_6vkx6")
+font_size = 48
+font_color = Color(1, 0.523025, 0.313268, 1)
 
 [node name="Start Scene" type="Control"]
 layout_mode = 3
@@ -165,9 +170,9 @@ transform = Transform3D(0.549854, 0, -0.835261, 0, 1, 0, 0.835261, 0, 0.549854, 
 collision_mask = 1
 
 [node name="Skeleton3D" parent="SubViewportContainer/SubViewport/Node/Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0757268, 1.73352e-10, -1.53713e-08, 0.997129)
-bones/4/rotation = Quaternion(0.158423, 1.15587e-07, 2.9166e-08, 0.987371)
-bones/6/rotation = Quaternion(-0.0394801, -1.19116e-07, -4.70639e-09, 0.99922)
+bones/1/rotation = Quaternion(-0.0662391, -1.80823e-10, -1.8591e-08, 0.997804)
+bones/4/rotation = Quaternion(0.195064, 1.19128e-07, 1.25313e-08, 0.980791)
+bones/6/rotation = Quaternion(-0.0853425, -1.18774e-07, -1.01736e-08, 0.996352)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -235,6 +240,22 @@ text = "CHICKEN FARM"
 label_settings = SubResource("LabelSettings_2525w")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CreditsLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -397.5
+offset_top = -93.0
+offset_right = 397.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "texct"
+label_settings = SubResource("LabelSettings_6vkx6")
+horizontal_alignment = 1
 
 [node name="Chicken" parent="." instance=ExtResource("6_sg87u")]
 transform = Transform3D(-0.0919943, 0, -0.237828, 0, 0.255, 0, 0.237828, 0, -0.0919943, 3.77512, 0.00554115, -15.5299)
