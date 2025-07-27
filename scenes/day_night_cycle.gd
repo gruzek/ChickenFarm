@@ -41,6 +41,9 @@ var evening_civil_twilight_emitted: bool = false
 var initial_sun_rotation: Vector3
 
 func _ready():
+	# Add to group so chickens can find this node
+	add_to_group("day_night_cycle")
+	
 	# Calculate total day cycle length
 	total_day_cycle = day_time_seconds + night_time_seconds
 	

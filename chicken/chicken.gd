@@ -23,16 +23,37 @@ var peck_duration = 0.0
 var is_fleeing = false
 var flee_speed_multiplier = 1.5
 
+# Coop seeking variables
+var is_seeking_coop = false
+var target_coop = null
+var current_coop_index = 0  # For cycling through coops when they're full
+
 # Health
 @export var starting_health = 10
 var health: int:
 	set(health_in):
 		health = health_in
 		if health <= 0:
+			# Decrement chicken count when dying
+			var ui_node = get_tree().get_first_node_in_group("egg bank")
+			if ui_node:
+				ui_node.chickens -= 1
 			queue_free()
 
 func _ready() -> void:
 	health = starting_health
+	add_to_group("chicken")
+	
+	# Add to chicken count
+	var ui_node = get_tree().get_first_node_in_group("egg bank")
+	if ui_node:
+		ui_node.chickens += 1
+	
+	# Connect to day-night cycle signals
+	var day_night_cycle = get_tree().get_first_node_in_group("day_night_cycle")
+	if day_night_cycle:
+		day_night_cycle.sunset.connect(_on_sunset)
+		day_night_cycle.morning_civil_twilight.connect(_on_morning_civil_twilight)
 
 func _process(delta: float) -> void:
 	roam_timer += delta
@@ -42,10 +63,14 @@ func _process(delta: float) -> void:
 		roam_timer = 0.0
 
 func _physics_process(delta: float) -> void:
-	# Check for nearby wolves first
+	# Check for nearby wolves first (highest priority)
 	var nearby_wolf = detect_nearby_wolf()
 	if nearby_wolf and not is_fleeing:
 		flee_from_wolf(nearby_wolf)
+	
+	# If seeking coop, check if we've reached the target coop
+	if is_seeking_coop and target_coop and navigation_agent_3d.is_navigation_finished():
+		check_coop_arrival()
 	
 	if !navigation_agent_3d.is_navigation_finished():
 		# Reset pecking state if we start moving
@@ -148,3 +173,102 @@ func flee_from_wolf(wolf):
 	
 	# Set the flee destination
 	navigation_agent_3d.target_position = flee_position
+
+# Coop seeking functions
+func _on_sunset():
+	"""Called when sunset signal is emitted - start seeking a coop"""
+	if not is_fleeing:  # Don't interrupt fleeing behavior
+		start_seeking_coop()
+
+func _on_morning_civil_twilight():
+	"""Called when morning civil twilight signal is emitted - exit coop and start roaming"""
+	exit_coop_and_roam()
+
+func start_seeking_coop():
+	"""Begin seeking the closest available coop"""
+	is_seeking_coop = true
+	is_pecking = false  # Stop pecking
+	peck_timer = 0.0
+	current_coop_index = 0  # Reset coop index (chickens forget previous attempts)
+	
+	find_next_coop()
+
+func find_next_coop():
+	"""Find the next closest coop to try"""
+	var coops = get_tree().get_nodes_in_group("chicken_coop")
+	if coops.is_empty():
+		# No coops available, go back to normal behavior
+		stop_seeking_coop()
+		return
+	
+	# Sort coops by distance
+	var sorted_coops = coops.duplicate()
+	sorted_coops.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+	
+	# If we've tried all coops, give up and roam normally
+	if current_coop_index >= sorted_coops.size():
+		stop_seeking_coop()
+		return
+	
+	# Set target to the next closest coop
+	target_coop = sorted_coops[current_coop_index]
+	navigation_agent_3d.target_position = target_coop.global_position
+
+func check_coop_arrival():
+	"""Check if the coop has space when we arrive"""
+	if not target_coop or not is_instance_valid(target_coop):
+		# Coop was destroyed, find another
+		current_coop_index += 1
+		find_next_coop()
+		return
+	
+	# Try to enter the coop
+	if target_coop.can_accept_chicken():
+		# Success! Enter the coop
+		if target_coop.add_chicken(self):
+			# Hide the chicken (they're inside the coop)
+			visible = false
+			is_seeking_coop = false
+			# Stop all movement
+			velocity = Vector3.ZERO
+			chicken_animation_player.play("idle")
+		else:
+			# Failed to add (shouldn't happen if can_accept_chicken was true)
+			current_coop_index += 1
+			find_next_coop()
+	else:
+		# Coop is full, try the next one
+		current_coop_index += 1
+		find_next_coop()
+
+func stop_seeking_coop():
+	"""Stop seeking coops and return to normal behavior"""
+	is_seeking_coop = false
+	target_coop = null
+	current_coop_index = 0
+	# Resume normal roaming
+	pick_random_point()
+
+func exit_coop_and_roam():
+	"""Exit the current coop (if in one) and start roaming"""
+	# If chicken is invisible, it means it's inside a coop
+	if not visible:
+		# Find which coop this chicken is in and remove it
+		var coops = get_tree().get_nodes_in_group("chicken_coop")
+		for coop in coops:
+			if coop.remove_chicken(self):
+				# Successfully removed from this coop
+				break
+		
+		# Make chicken visible again
+		visible = true
+	
+	# Stop any current behaviors
+	is_seeking_coop = false
+	is_pecking = false
+	peck_timer = 0.0
+	target_coop = null
+	current_coop_index = 0
+	
+	# Start roaming to a random point
+	pick_random_point()

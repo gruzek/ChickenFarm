@@ -7,7 +7,7 @@ extends CharacterBody3D
 @export var attack_range = 0.7
 @export var attack_damage = 2
 
-@export var move_speed = 5
+@export var move_speed = 10
 @export var reaction_time = 1
 
 var target: Node
