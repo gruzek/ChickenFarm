@@ -22,12 +22,16 @@ var is_dead = false
 @onready var player_rig: Node3D = $player_rig
 @onready var build_node: Node3D = $build_node
 
+# Shooting
+@onready var revolver: Node3D = $player_rig/metarig/Skeleton3D/Cube_002/revolver
+@onready var camera_3d: Camera3D = $Camera3D
 
 # Variables for animation
 @export var anim_blend_speed = 15
 enum {IDLE, RUN}
 var currentAnim = IDLE
 @onready var animation_tree: AnimationTree = $player_rig/AnimationPlayer/AnimationTree
+var holding_gun = true
 
 signal egg_amount_changed(value)
 signal build_mode_entered
@@ -59,10 +63,20 @@ func _physics_process(delta: float) -> void:
 	# Animation update
 	handle_animations(delta)
 	
-	# Throw Egg
-	if current_scene != "Start Scene" and Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
-		throw_egg()
-
+	# Throw Egg & Shoot
+	if current_scene != "Start Scene":
+		if Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
+			throw_egg()
+		if Input.is_action_just_pressed("shoot"):
+			revolver.shoot()
+	
+	# Rotate player towards mouse
+	var target_point = get_mouse_ground_position()
+	if target_point:
+		var to_target = target_point - global_position
+		var yaw = atan2(to_target.x, to_target.z)
+		rotate_player_to_direction(yaw, delta)
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -73,9 +87,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 		
-		# Rotate player_rig to face movement direction
-		var target_rotation = atan2(direction.x, direction.z)
-		rotate_player_to_direction(target_rotation, delta)
+		# Rotate player_rig to face movement direction (OLD)
+		#var target_rotation = atan2(direction.x, direction.z)
+		#rotate_player_to_direction(target_rotation, delta)
 		
 		# Play run animation
 		currentAnim = RUN
@@ -113,6 +127,9 @@ func handle_animations(delta):
 			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 0, anim_blend_speed * delta)
 		RUN:
 			animation_tree["parameters/Run/blend_amount"] = lerpf(animation_tree["parameters/Run/blend_amount"], 1, anim_blend_speed * delta)
+
+	if holding_gun:
+		animation_tree["parameters/Hold Gun/blend_amount"] = lerpf(animation_tree["parameters/Hold Gun/blend_amount"], 1, anim_blend_speed * delta)
 
 # Throwing eggs
 func throw_egg():
@@ -180,10 +197,20 @@ func stop_being_attacked():
 	# Player doesn't need special handling when attack stops
 	pass
 
-
-#func _ready():
-	#pickup_area.body_entered.connect(_on_body_entered)
-
-## For picking up/interacting with things
-#func _on_body_entered(body):
-	#print(body)
+# For Shooting
+# For building
+func get_mouse_ground_position():
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = camera_3d.project_ray_origin(mouse_pos)
+	var to = from + camera_3d.project_ray_normal(mouse_pos) * 1000
+	
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.collision_mask = 1  # only look at layer 1 (ground)
+	query.collide_with_bodies = true
+	
+	var result = space_state.intersect_ray(query)
+	if result:
+		return result.position
+	else:
+		return null

@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://co31yk6pnis5"]
+
+[ext_resource type="PackedScene" uid="uid://vkdw62lxfiur" path="res://blender files/revolver.blend" id="1_q2iq5"]
+[ext_resource type="Script" uid="uid://g3cabkioyj07" path="res://Gun/revolver.gd" id="2_uaw2c"]
+[ext_resource type="PackedScene" uid="uid://c3piw5n4aip3q" path="res://Gun/bullet.tscn" id="3_x0cjh"]
+[ext_resource type="Texture2D" uid="uid://bcxsym1kw2byw" path="res://blender files/textures/revolver_texture.png" id="4_l05rp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5m4n"]
+albedo_texture = ExtResource("4_l05rp")
+
+[node name="revolver" instance=ExtResource("1_q2iq5")]
+script = ExtResource("2_uaw2c")
+bullet_scene = ExtResource("3_x0cjh")
+
+[node name="Cube" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_x5m4n")
+
+[node name="Barrel" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15448, 0, -0.760739)

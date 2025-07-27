@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3piw5n4aip3q"]
+
+[ext_resource type="Script" uid="uid://8lpokf3235dd" path="res://Gun/bullet.gd" id="1_xda6o"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q7gj4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xda6o"]
+radius = 0.4
+height = 0.8
+
+[node name="Bullet" type="Area3D"]
+script = ExtResource("1_xda6o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_q7gj4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xda6o")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

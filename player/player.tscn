@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cx6uuyckyivl0" path="res://Player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dvbau1p0yhd07" path="res://Egg/throwing_egg.tscn" id="2_fhl08"]
-[ext_resource type="PackedScene" uid="uid://c7a16ujpn8spx" path="res://models/player_man.tscn" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://b85cge3x6l3cg" path="res://models/player_man.tscn" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://bn346es4bjr8e" path="res://Player/build_node.gd" id="3_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://co31yk6pnis5" path="res://models/revolver.tscn" id="4_fhl08"]
+[ext_resource type="PackedScene" uid="uid://co31yk6pnis5" path="res://Gun/revolver.tscn" id="4_fhl08"]
 [ext_resource type="Texture2D" uid="uid://cbr2726c847cm" path="res://blender files/textures/player_body.png" id="5_od3ui"]
 [ext_resource type="Texture2D" uid="uid://u76c1ooqbsi7" path="res://blender files/textures/player_face.png" id="6_00tjw"]
 [ext_resource type="PackedScene" uid="uid://bkxu5166q7vr4" path="res://Egg/pickup_egg_node.tscn" id="6_fhl08"]
@@ -66,11 +66,11 @@ transform = Transform3D(1, 0, 0, 0, 0.303883, 0.952709, 0, -0.952709, 0.303883, 
 
 [node name="Skeleton3D" parent="player_rig/metarig" index="0"]
 bones/0/position = Vector3(-4.44089e-15, 0.968947, -0.0552)
-bones/1/rotation = Quaternion(-0.0650908, -1.26919e-10, -1.74829e-08, 0.997879)
+bones/1/rotation = Quaternion(-0.0767208, 8.69455e-12, -1.81568e-08, 0.997053)
 bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
-bones/4/rotation = Quaternion(0.200032, 1.19252e-07, 1.19416e-08, 0.979789)
+bones/4/rotation = Quaternion(0.153546, 1.17977e-07, 1.74249e-08, 0.988142)
 bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
-bones/6/rotation = Quaternion(-0.0915722, -1.18708e-07, -1.09162e-08, 0.995799)
+bones/6/rotation = Quaternion(-0.0333908, -1.19142e-07, -3.98049e-09, 0.999442)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -84,7 +84,7 @@ bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
 bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="Cube_002" parent="player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000444118, -0.000311523, -0.216054, 0.0264814, 3.53728e-07, -0.00362397, -0.26747, 0.679821, 0.0532796)
+transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, 0.000173464, -0.000311432, -0.216079, 0.0264845, 7.61732e-06, 0.0014147, -0.26747, 0.681582, 0.0634389)
 
 [node name="Cube_002" parent="player_rig/metarig/Skeleton3D/Cube_002" index="0"]
 visible = false
