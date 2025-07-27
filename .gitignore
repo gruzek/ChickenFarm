@@ -14,3 +14,9 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# mac os
+.DS_Store
+
+# ignore the build/ directory
+/build/
