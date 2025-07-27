@@ -21,10 +21,10 @@ func _ready() -> void:
 
 func _on_target_timer_timeout() -> void:
 	var chickens = get_tree().get_nodes_in_group("chicken")
-	# Filter out freed/invalid chickens
+	# Filter out freed/invalid/dead chickens
 	var valid_chickens: Array[Node] = []
 	for chicken in chickens:
-		if chicken and is_instance_valid(chicken):
+		if chicken and is_instance_valid(chicken) and not chicken.is_dead:
 			valid_chickens.append(chicken)
 	
 	if valid_chickens.is_empty():
@@ -41,6 +41,14 @@ func _on_target_timer_timeout() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_attacking:
+		# Check if target died during attack
+		if not target or not is_instance_valid(target) or target.is_dead:
+			# Target died, immediately stop attacking and find new target
+			is_attacking = false
+			attack_timer = 0.0
+			find_new_target_immediately()
+			return
+		
 		# Handle attack sequence
 		attack_timer += delta
 		if attack_timer >= attack_duration:
@@ -49,10 +57,10 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if target:
-		# Check if target is still valid
-		if not is_instance_valid(target):
-			finish_attack()  # Clean up if target was destroyed
-			find_new_target()
+		# Check if target is still valid and alive
+		if not is_instance_valid(target) or target.is_dead:
+			finish_attack()  # Clean up if target was destroyed or died
+			find_new_target_immediately()
 			return
 		
 		# Continuously update target position (follow the chicken)
@@ -109,20 +117,35 @@ func finish_attack():
 		target.stop_being_attacked()
 	
 	# Check if target is dead and find new target
-	if not target or not is_instance_valid(target):
-		find_new_target()
+	if not target or not is_instance_valid(target) or target.is_dead:
+		find_new_target_immediately()
 
 func find_new_target():
 	"""Find a new target after current one dies or becomes invalid"""
 	target = null
 	# The timer will handle finding the next target
 
+func find_new_target_immediately():
+	"""Immediately find a new target without waiting for timer"""
+	target = null
+	var chickens = get_tree().get_nodes_in_group("chicken")
+	# Filter out freed/invalid/dead chickens
+	var valid_chickens: Array[Node] = []
+	for chicken in chickens:
+		if chicken and is_instance_valid(chicken) and not chicken.is_dead:
+			valid_chickens.append(chicken)
+	
+	if not valid_chickens.is_empty():
+		target = find_best_target(valid_chickens)
+		if target:
+			navigation_agent_3d.target_position = target.global_position
+
 func find_best_target(chickens: Array[Node]):
 	var best_target = null
 	var best_distance = 1000
 	for chick in chickens:
-		# Double-check that chicken is still valid
-		if chick and is_instance_valid(chick):
+		# Double-check that chicken is still valid and alive
+		if chick and is_instance_valid(chick) and not chick.is_dead:
 			var distance = global_position.distance_to(chick.global_transform.origin)
 			if distance < best_distance:
 				best_target = chick

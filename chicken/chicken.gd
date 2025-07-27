@@ -23,6 +23,7 @@ var peck_duration = 0.0
 var is_fleeing = false
 var flee_speed_multiplier = 1.5
 var is_being_attacked = false
+var is_dead = false
 
 # Coop seeking variables
 var is_seeking_coop = false
@@ -41,12 +42,8 @@ var chicken_textures = [
 var health: int:
 	set(health_in):
 		health = health_in
-		if health <= 0:
-			# Decrement chicken count when dying
-			var ui_node = get_tree().get_first_node_in_group("egg bank")
-			if ui_node:
-				ui_node.chickens -= 1
-			queue_free()
+		if health <= 0 and not is_dead:
+			die()
 
 func _ready() -> void:
 	health = starting_health
@@ -81,6 +78,12 @@ func _process(delta: float) -> void:
 		roam_timer = 0.0
 
 func _physics_process(delta: float) -> void:
+	# If dead, don't do anything
+	if is_dead:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	
 	# If being attacked, don't move at all
 	if is_being_attacked:
 		velocity = Vector3.ZERO
@@ -359,3 +362,27 @@ func start_being_attacked():
 func stop_being_attacked():
 	"""Called when a wolf stops attacking this chicken"""
 	is_being_attacked = false
+
+func die():
+	"""Handle chicken death with animation and delayed cleanup"""
+	is_dead = true
+	is_being_attacked = false
+	is_fleeing = false
+	is_pecking = false
+	is_seeking_coop = false
+	
+	# Stop all movement
+	velocity = Vector3.ZERO
+	
+	# Decrement chicken count immediately
+	var ui_node = get_tree().get_first_node_in_group("egg bank")
+	if ui_node:
+		ui_node.chickens -= 1
+	
+	# Play death animation
+	chicken_animation_player.play("death")
+	
+	# Wait for animation to finish + 1 second, then free
+	await chicken_animation_player.animation_finished
+	await get_tree().create_timer(1.0).timeout
+	queue_free()
