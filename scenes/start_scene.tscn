@@ -39,8 +39,9 @@ font_size = 58
 font_color = Color(1, 0.803922, 0.384314, 1)
 outline_size = 9
 outline_color = Color(0, 0, 0, 1)
-shadow_size = 13
-shadow_color = Color(0, 0, 0, 0.588235)
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_offset = Vector2(4, 4)
 
 [node name="Start Scene" type="Control"]
 layout_mode = 3
@@ -164,9 +165,9 @@ transform = Transform3D(0.549854, 0, -0.835261, 0, 1, 0, 0.835261, 0, 0.549854, 
 collision_mask = 1
 
 [node name="Skeleton3D" parent="SubViewportContainer/SubViewport/Node/Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0700632, 8.60611e-11, -1.53722e-08, 0.997543)
-bones/4/rotation = Quaternion(0.180298, 1.16205e-07, 2.65934e-08, 0.983612)
-bones/6/rotation = Quaternion(-0.0668846, -1.18943e-07, -7.97326e-09, 0.997761)
+bones/1/rotation = Quaternion(-0.0774278, 1.99576e-10, -1.53711e-08, 0.996998)
+bones/4/rotation = Quaternion(0.151667, 1.15384e-07, 2.99557e-08, 0.988432)
+bones/6/rotation = Quaternion(-0.0310453, -1.19152e-07, -3.70089e-09, 0.999518)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
@@ -218,7 +219,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 0.803922, 0.384314, 1)
 theme_override_fonts/font = ExtResource("8_6vkx6")
-theme_override_font_sizes/font_size = 29
+theme_override_font_sizes/font_size = 24
 text = "Start Game"
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
