@@ -67,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	if current_scene != "Start Scene":
 		if Input.is_action_just_pressed("throw_egg") and egg_bank.eggs != 0:
 			throw_egg()
-		if Input.is_action_just_pressed("shoot"):
+		if Input.is_action_just_pressed("shoot") and !in_build_mode:
 			revolver.shoot()
 	
 	# Rotate player towards mouse

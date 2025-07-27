@@ -21,22 +21,22 @@ func _ready():
 	# Load buildable scenes programmatically
 	buildable_scenes = [
 		load("res://chicken_coop/chicken_coop.tscn"),
+		load("res://egg_pickerupper/egg_pickerupper.tscn"),
 		load("res://egg_dispenser/egg_dispenser.tscn"),
-		load("res://egg_pickerupper/egg_pickerupper.tscn")
 	]
 
 	buildable_costs = [
 		5,
-		200,
-		500
+		100,
+		300
 	]
-		
+
 	building_names = [
 		"Chicken Coop",
-		"Egg Dispenser",
-		"Egg PickerUpperinator 5000"
+		"Egg PickerUpperinator 5000",
+		"Egg Dispenser"
 	]
-	
+
 	# Get current scene
 	current_scene = get_tree().current_scene.name
 
