@@ -5,12 +5,14 @@ extends CharacterBody3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var attack_range = 0.7
-@export var attack_damage = 2
-
+@export var attack_damage = 5
 @export var move_speed = 10
 @export var reaction_time = 1
+@export var attack_duration = 2.0  # How long the attack animation takes
 
 var target: Node
+var is_attacking = false
+var attack_timer = 0.0
 
 func _ready() -> void:
 	target_timer.wait_time = reaction_time
@@ -19,11 +21,18 @@ func _ready() -> void:
 
 func _on_target_timer_timeout() -> void:
 	var chickens = get_tree().get_nodes_in_group("chicken")
-	if chickens.is_empty():
+	# Filter out freed/invalid chickens
+	var valid_chickens: Array[Node] = []
+	for chicken in chickens:
+		if chicken and is_instance_valid(chicken):
+			valid_chickens.append(chicken)
+	
+	if valid_chickens.is_empty():
 		print("EMPTY - RETUREND")
+		target = null
 		return
 	
-	target = find_best_target(chickens)
+	target = find_best_target(valid_chickens)
 	if target == null:
 		print("NULL - RETUREND")
 		return
@@ -31,8 +40,31 @@ func _on_target_timer_timeout() -> void:
 	navigation_agent_3d.target_position = target.global_transform.origin
 
 func _physics_process(delta: float) -> void:
+	if is_attacking:
+		# Handle attack sequence
+		attack_timer += delta
+		if attack_timer >= attack_duration:
+			# Attack finished
+			finish_attack()
+		return
+	
 	if target:
-		# Calculate direction 
+		# Check if target is still valid
+		if not is_instance_valid(target):
+			finish_attack()  # Clean up if target was destroyed
+			find_new_target()
+			return
+		
+		# Continuously update target position (follow the chicken)
+		navigation_agent_3d.target_position = target.global_position
+		
+		# Check if we're close enough to attack
+		var distance_to_target = global_position.distance_to(target.global_position)
+		if distance_to_target <= attack_range:
+			start_attack()
+			return
+		
+		# Move toward target
 		var next_position = navigation_agent_3d.get_next_path_position()
 		var direction = (next_position - global_position).normalized()
 		velocity = direction * move_speed
@@ -42,20 +74,57 @@ func _physics_process(delta: float) -> void:
 		look_at(look_target)
 		
 		move_and_slide()
-		
-		var distance = global_position.distance_to(navigation_agent_3d.target_position)
-		if distance <= attack_range:
-			animation_player.play("attack")
+
+func start_attack():
+	"""Begin attacking the current target"""
+	if not target or not is_instance_valid(target):
+		return
+	
+	is_attacking = true
+	attack_timer = 0.0
+	
+	# Stop moving
+	velocity = Vector3.ZERO
+	
+	# Tell the chicken it's being attacked (stops its movement)
+	if target.has_method("start_being_attacked"):
+		target.start_being_attacked()
+	
+	# Play attack animation
+	animation_player.play("attack")
 
 func attack():
-	target.health -= attack_damage
+	"""Called by animation player during attack animation"""
+	# Check if target is still valid before dealing damage
+	if target and is_instance_valid(target):
+		target.health -= attack_damage
+
+func finish_attack():
+	"""Clean up after attack is finished"""
+	is_attacking = false
+	attack_timer = 0.0
+	
+	# Tell the chicken it's no longer being attacked
+	if target and is_instance_valid(target) and target.has_method("stop_being_attacked"):
+		target.stop_being_attacked()
+	
+	# Check if target is dead and find new target
+	if not target or not is_instance_valid(target):
+		find_new_target()
+
+func find_new_target():
+	"""Find a new target after current one dies or becomes invalid"""
+	target = null
+	# The timer will handle finding the next target
 
 func find_best_target(chickens: Array[Node]):
 	var best_target = null
 	var best_distance = 1000
 	for chick in chickens:
-		var distance = global_position.distance_to(chick.global_transform.origin)
-		if distance < best_distance:
-			best_target = chick
-			best_distance = distance
+		# Double-check that chicken is still valid
+		if chick and is_instance_valid(chick):
+			var distance = global_position.distance_to(chick.global_transform.origin)
+			if distance < best_distance:
+				best_target = chick
+				best_distance = distance
 	return best_target

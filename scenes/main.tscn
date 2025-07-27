@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://di8tthuu34bms" path="res://models/fence-section.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://daahb02bxyth6" path="res://models/fence-section.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://c41heprc7sys3" path="res://models/invisible_boundary.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://dewvbcslh8nn6" path="res://scenes/messenger.gd" id="6_choun"]
 [ext_resource type="Script" uid="uid://cjc8l5wlnr4fb" path="res://Egg/egg_label.gd" id="6_tefeu"]
@@ -77,16 +77,6 @@ collision_mask = 1
 bones/1/rotation = Quaternion(-0.0651361, 1.01442e-11, -1.53724e-08, 0.997876)
 bones/4/rotation = Quaternion(0.200553, 1.16729e-07, 2.41901e-08, 0.979683)
 bones/6/rotation = Quaternion(-0.092227, -1.18701e-07, -1.09943e-08, 0.995738)
-bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
-bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
-bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
-bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
-bones/17/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
-bones/18/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
-bones/19/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
-bones/20/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
-bones/21/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
-bones/22/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -239,8 +229,8 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.
 [node name="Wolf" parent="." instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10771, 1.55717e-06, 28.4289)
 
-[connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight"]
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]
+[connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight"]
 [connection signal="build_mode_entered" from="Player" to="Messenger" method="_on_player_build_mode_entered"]
 [connection signal="build_mode_exited" from="Player" to="Messenger" method="_on_player_build_mode_exited"]
 

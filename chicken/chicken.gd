@@ -22,14 +22,22 @@ var peck_duration = 0.0
 @export var wolf_detection_range = 8.0
 var is_fleeing = false
 var flee_speed_multiplier = 1.5
+var is_being_attacked = false
 
 # Coop seeking variables
 var is_seeking_coop = false
 var target_coop = null
 var current_coop_index = 0  # For cycling through coops when they're full
 
+# Texture variants
+var chicken_textures = [
+	preload("res://blender files/textures/chicken_texture.png"),      # 60% chance
+	preload("res://blender files/textures/chicken_texture_02.png"),   # 30% chance  
+	preload("res://blender files/textures/chicken_texture_03.png")    # 10% chance
+]
+
 # Health
-@export var starting_health = 10
+@export var starting_health = 2
 var health: int:
 	set(health_in):
 		health = health_in
@@ -48,6 +56,9 @@ func _ready() -> void:
 	var ui_node = get_tree().get_first_node_in_group("egg bank")
 	if ui_node:
 		ui_node.chickens += 1
+	
+	# Apply random texture
+	apply_random_texture()
 	
 	# Connect to day-night cycle signals
 	var day_night_cycle = get_tree().get_first_node_in_group("day_night_cycle")
@@ -70,6 +81,12 @@ func _process(delta: float) -> void:
 		roam_timer = 0.0
 
 func _physics_process(delta: float) -> void:
+	# If being attacked, don't move at all
+	if is_being_attacked:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	
 	# Check for nearby wolves first (highest priority)
 	var nearby_wolf = detect_nearby_wolf()
 	if nearby_wolf and not is_fleeing:
@@ -234,7 +251,7 @@ func check_coop_arrival():
 	if not target_coop or not is_instance_valid(target_coop):
 		# Coop was destroyed, find another
 		current_coop_index += 1
-		find_next_coop()
+		call_deferred("find_next_coop")
 		return
 	
 	# Try to enter the coop
@@ -250,19 +267,20 @@ func check_coop_arrival():
 		else:
 			# Failed to add (shouldn't happen if can_accept_chicken was true)
 			current_coop_index += 1
-			find_next_coop()
+			call_deferred("find_next_coop")
 	else:
 		# Coop is full, try the next one
 		current_coop_index += 1
-		find_next_coop()
+		call_deferred("find_next_coop")
 
 func stop_seeking_coop():
 	"""Stop seeking coops and return to normal behavior"""
 	# During nighttime, chickens don't give up seeking coops
 	if is_nighttime():
 		# Reset and try again - chickens are persistent at night
+		# Use call_deferred to break recursion
 		current_coop_index = 0
-		find_next_coop()
+		call_deferred("find_next_coop")
 		return
 	
 	is_seeking_coop = false
@@ -292,3 +310,52 @@ func is_nighttime() -> bool:
 	else:
 		# Wrap-around case: night spans across cycle boundary
 		return current_time >= sunset_time or current_time < morning_civil_twilight_time
+
+func apply_random_texture():
+	"""Apply a random texture to the chicken with weighted probabilities"""
+	var rand_value = randf() * 100.0  # Random value 0-100
+	var selected_texture: Texture2D
+	
+	# Select texture based on weighted probabilities
+	if rand_value < 60.0:  # 60% chance
+		selected_texture = chicken_textures[0]  # Original texture
+	elif rand_value < 90.0:  # 30% chance (60 + 30 = 90)
+		selected_texture = chicken_textures[1]  # Texture 02
+	else:  # 10% chance (remaining)
+		selected_texture = chicken_textures[2]  # Texture 03
+	
+	# Find and apply texture to all MeshInstance3D nodes
+	apply_texture_recursive(self, selected_texture)
+
+func apply_texture_recursive(node: Node, texture: Texture2D):
+	"""Recursively find MeshInstance3D nodes and apply the texture"""
+	if node is MeshInstance3D:
+		var mesh_instance = node as MeshInstance3D
+		
+		# Create or get the material
+		if mesh_instance.material_override == null:
+			# Create a new StandardMaterial3D
+			mesh_instance.material_override = StandardMaterial3D.new()
+		
+		# Apply the texture
+		var material = mesh_instance.material_override as StandardMaterial3D
+		if material:
+			material.albedo_texture = texture
+	
+	# Recursively check all children
+	for child in node.get_children():
+		apply_texture_recursive(child, texture)
+
+func start_being_attacked():
+	"""Called when a wolf starts attacking this chicken"""
+	is_being_attacked = true
+	is_fleeing = false
+	is_pecking = false
+	peck_timer = 0.0
+	# Stop all movement
+	velocity = Vector3.ZERO
+	chicken_animation_player.play("idle")
+
+func stop_being_attacked():
+	"""Called when a wolf stops attacking this chicken"""
+	is_being_attacked = false
