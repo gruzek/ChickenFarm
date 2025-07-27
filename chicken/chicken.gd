@@ -291,8 +291,9 @@ func check_coop_arrival():
 
 func stop_seeking_coop():
 	"""Stop seeking coops and return to normal behavior"""
+	var coops = get_tree().get_nodes_in_group("chicken_coop")
+	if (not coops.is_empty()) and is_nighttime():			
 	# During nighttime, chickens don't give up seeking coops
-	if is_nighttime():
 		# Reset and try again - chickens are persistent at night
 		current_coop_index = 0
 		if not is_finding_coop:

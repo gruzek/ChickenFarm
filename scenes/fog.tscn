@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://ktw2ojtrvvd1"]
+
+[ext_resource type="Script" uid="uid://ctl3l8nxcpatl" path="res://scenes/fog.gd" id="1_e072f"]
+[ext_resource type="Shader" uid="uid://cbywsdkfbrilw" path="res://scenes/fog.gdshader" id="1_ntoob"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_e072f"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_ntoob"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1o7ot"]
+render_priority = 0
+shader = ExtResource("1_ntoob")
+shader_parameter/cloud_noise = SubResource("NoiseTexture3D_ntoob")
+shader_parameter/noise_scale = 0.2
+shader_parameter/density = 0.8
+shader_parameter/threshold = 0.3
+shader_parameter/speed = 0.1
+shader_parameter/fog_color = Vector4(1, 1, 1, 1)
+shader_parameter/steps = 32
+shader_parameter/falloff_start = 0.7
+
+[node name="Fog" type="Node3D"]
+script = ExtResource("1_e072f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_e072f")
+surface_material_override/0 = SubResource("ShaderMaterial_1o7ot")

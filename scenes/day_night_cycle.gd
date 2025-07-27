@@ -253,8 +253,8 @@ func calculate_sky_color(time: float) -> Color:
 	var sky_color = night_color
 	
 	# Define key time points
-	var sunrise_mid = sunrise_overlap/2
-	var sunset_mid = day_time_seconds - sunset_overlap/2
+	var sunrise_mid = sunrise_overlap/2.0
+	var sunset_mid = day_time_seconds - sunset_overlap/2.0
 	
 	# From morning_civil_twilight to sunrise+sunrise_overlap/2: sunrise_color to daytime_color
 	if time >= morning_civil_twilight_time or time <= sunrise_mid:
