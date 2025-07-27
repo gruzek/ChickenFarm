@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjst7xfrt2nqq"]
+[gd_scene load_steps=6 format=3 uid="uid://cjst7xfrt2nqq"]
 
 [ext_resource type="Script" uid="uid://bbodi52e5h54o" path="res://Wolf/wolf.gd" id="1_dlc5l"]
 [ext_resource type="PackedScene" uid="uid://cl7su6v8jg3jm" path="res://models/werewolf.tscn" id="2_38o6x"]
@@ -7,8 +7,20 @@
 radius = 0.7
 height = 3.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38o6x"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.26
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_se4sg"]
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="Wolf" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_dlc5l")
+reaction_time = 2.0
+attack_duration = 0.75
+death_despawn_time = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75051, 0.215114)
@@ -19,41 +31,41 @@ shape = SubResource("CapsuleShape3D_dlc5l")
 [node name="Target Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="Death Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Attack Timer" type="Timer" parent="."]
+
 [node name="werewolf" parent="." instance=ExtResource("2_38o6x")]
 transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="werewolf/metarig" index="0"]
-bones/0/position = Vector3(0, 0.907035, -0.0552)
-bones/1/rotation = Quaternion(0.146532, 0, 0, 0.989206)
-bones/2/rotation = Quaternion(-0.0774642, 0, 0, 0.996995)
-bones/6/rotation = Quaternion(-0.281533, 0, 0, 0.959551)
-bones/11/rotation = Quaternion(-0.169131, 0.540972, -0.63006, 0.530818)
-bones/12/rotation = Quaternion(0.514568, -0.224016, 0.0584544, 0.825603)
-bones/13/rotation = Quaternion(-0.307821, 0.178225, -0.0574122, 0.932838)
-bones/15/rotation = Quaternion(-0.182209, -0.737983, 0.383732, 0.524339)
-bones/16/rotation = Quaternion(0.435729, 0.288307, 0.0218167, 0.852375)
-bones/17/rotation = Quaternion(-0.0639996, 0.00287046, -0.0170796, 0.9978)
-bones/21/position = Vector3(0.0970863, 0.0182224, 0.0401291)
-bones/21/rotation = Quaternion(0.957206, 0.0671205, -0.0127186, 0.281231)
-bones/22/rotation = Quaternion(0.247016, 0.0206914, -5.24358e-06, 0.968791)
-bones/23/rotation = Quaternion(-0.525985, -0.0318724, 0.0648546, 0.847418)
-bones/24/position = Vector3(-0.0970863, 0.0182224, 0.0401291)
-bones/24/rotation = Quaternion(0.995081, -0.0682908, -0.00181123, 0.071748)
-bones/25/rotation = Quaternion(0.176793, -0.0108909, -3.16813e-06, 0.984188)
-bones/26/rotation = Quaternion(-0.674186, 0.0420047, -0.0586068, 0.735033)
+bones/1/rotation = Quaternion(0.164243, 0, 0, 0.98642)
+bones/6/rotation = Quaternion(-0.29955, 0, 0, 0.954081)
 
 [node name="Head" parent="werewolf/metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.337936, 0, 0, 0, 0.00908099, -0.326123, 0, 0.337814, 0.00876664, 0, 2.18377, 0.144064)
+transform = Transform3D(0.337936, 0, 0, 0, 0.00968939, -0.326107, 0, 0.337797, 0.00935401, 0, 2.17402, 0.163434)
 
 [node name="Glowing Eye" parent="werewolf/metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350384, -0.000390234, 0, -0.000941881, -0.0145167, 0, 1.8718, 0.365925)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416379, 0, -0.00100499, -0.014516, 0, 1.86245, 0.385856)
+
+[node name="Glowing Eye" parent="werewolf/metarig/Skeleton3D/Glowing Eye" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_38o6x")
 
 [node name="Glowing Eye_001" parent="werewolf/metarig/Skeleton3D" index="2"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350384, -0.000390234, 0, -0.000941881, -0.0145167, -0.211952, 1.8718, 0.365925)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416379, 0, -0.00100499, -0.014516, -0.211952, 1.86245, 0.385856)
+
+[node name="Glowing Eye_001" parent="werewolf/metarig/Skeleton3D/Glowing Eye_001" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_38o6x")
 
 [node name="Weapon" parent="werewolf/metarig/Skeleton3D" index="3"]
-transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0279676, 0.0175944, -0.0217883, -0.0100547, 0.0355873, 0.0147542, -0.704906, 0.973121, 0.114852)
+transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0283101, 0.0163073, -0.0223033, -0.00904564, 0.0361952, 0.0139636, -0.704906, 0.968475, 0.109871)
+
+[node name="Weapon" parent="werewolf/metarig/Skeleton3D/Weapon" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_se4sg")
 
 [connection signal="timeout" from="Target Timer" to="." method="_on_target_timer_timeout"]
+[connection signal="timeout" from="Death Timer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="Attack Timer" to="." method="_on_attack_timer_timeout"]
 
 [editable path="werewolf"]

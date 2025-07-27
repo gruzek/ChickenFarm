@@ -1,17 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://cl7su6v8jg3jm"]
+[gd_scene load_steps=14 format=3 uid="uid://cl7su6v8jg3jm"]
 
-[ext_resource type="PackedScene" uid="uid://cc4yglfaeavu7" path="res://blender files/werewolf.blend" id="1_6wo16"]
+[ext_resource type="PackedScene" uid="uid://0rbcb72ibyp5" path="res://blender files/werewolf.blend" id="1_6wo16"]
 [ext_resource type="Texture2D" uid="uid://c5derg34kb47h" path="res://blender files/textures/werewolf_head_texture.png" id="2_m67nf"]
 [ext_resource type="Texture2D" uid="uid://bfbjqueqocoa7" path="res://blender files/textures/werewolf_body_texture.png" id="3_tgtdm"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqg0w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wo16"]
 albedo_texture = ExtResource("2_m67nf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w80kg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m67nf"]
 albedo_texture = ExtResource("3_tgtdm")
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_288qh"]
 animation = &"metarigAction_002"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tgtdm"]
+animation = &"metarigAction_003"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cw1dg"]
 animation = &"metarigAction"
@@ -23,31 +26,37 @@ animation = &"metarigAction_001"
 filter_enabled = true
 filters = ["metarig/Skeleton3D:forearm.L", "metarig/Skeleton3D:forearm.R", "metarig/Skeleton3D:hand.L", "metarig/Skeleton3D:hand.R", "metarig/Skeleton3D:upper_arm.L", "metarig/Skeleton3D:upper_arm.R"]
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_mqg0w"]
+
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_neec1"]
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rska1"]
-graph_offset = Vector2(-663.239, -46.9181)
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_w80kg"]
+graph_offset = Vector2(-393.879, 99.4348)
 "nodes/Anim Attack/node" = SubResource("AnimationNodeAnimation_288qh")
 "nodes/Anim Attack/position" = Vector2(-240, 300)
+"nodes/Anim Die/node" = SubResource("AnimationNodeAnimation_tgtdm")
+"nodes/Anim Die/position" = Vector2(0, 380)
 "nodes/Anim Idle/node" = SubResource("AnimationNodeAnimation_cw1dg")
 "nodes/Anim Idle/position" = Vector2(-580, 60)
 "nodes/Anim Run /node" = SubResource("AnimationNodeAnimation_84mwi")
 "nodes/Anim Run /position" = Vector2(-580, 240)
 nodes/Attack/node = SubResource("AnimationNodeBlend2_wbq8d")
 nodes/Attack/position = Vector2(-20, 80)
+nodes/Die/node = SubResource("AnimationNodeOneShot_mqg0w")
+nodes/Die/position = Vector2(240, 220)
 nodes/Run/node = SubResource("AnimationNodeBlend2_neec1")
 nodes/Run/position = Vector2(-320, 0)
 nodes/output/position = Vector2(460, 60)
-node_connections = [&"Attack", 0, &"Run", &"Attack", 1, &"Anim Attack", &"Run", 0, &"Anim Idle", &"Run", 1, &"Anim Run ", &"output", 0, &"Attack"]
+node_connections = [&"Attack", 0, &"Run", &"Attack", 1, &"Anim Attack", &"Die", 0, &"Attack", &"Die", 1, &"Anim Die", &"Run", 0, &"Anim Idle", &"Run", 1, &"Anim Run ", &"output", 0, &"Die"]
 
 [node name="werewolf" instance=ExtResource("1_6wo16")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="metarig" index="0"]
 bones/0/position = Vector3(0, 0.907035, -0.0552)
-bones/1/rotation = Quaternion(0.144509, 0, 0, 0.989503)
+bones/0/rotation = Quaternion(0.0925428, 0, 0, 0.995709)
+bones/1/rotation = Quaternion(0.164336, 0, 0, 0.986404)
 bones/2/rotation = Quaternion(-0.0774642, 0, 0, 0.996995)
-bones/6/rotation = Quaternion(-0.279479, 0, 0, 0.960152)
+bones/6/rotation = Quaternion(-0.299645, 0, 0, 0.954051)
 bones/11/rotation = Quaternion(-0.169131, 0.540972, -0.63006, 0.530818)
 bones/12/rotation = Quaternion(0.514568, -0.224016, 0.0584544, 0.825603)
 bones/13/rotation = Quaternion(-0.307821, 0.178225, -0.0574122, 0.932838)
@@ -64,26 +73,29 @@ bones/25/rotation = Quaternion(0.176793, -0.0108909, -3.16813e-06, 0.984188)
 bones/26/rotation = Quaternion(-0.674186, 0.0420047, -0.0586068, 0.735033)
 
 [node name="Head" parent="metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.337936, 0, 0, 0, 0.00901631, -0.326125, 0, 0.337815, 0.00870423, 0, 2.18484, 0.141826)
+transform = Transform3D(0.337936, 0, 0, 0, 0.00969261, -0.326107, 0, 0.337797, 0.00935709, 0, 2.17397, 0.163535)
 
 [node name="Head" parent="metarig/Skeleton3D/Head" index="0"]
-material_override = SubResource("StandardMaterial3D_mqg0w")
+material_override = SubResource("StandardMaterial3D_6wo16")
 
 [node name="Glowing Eye" parent="metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350386, -0.000387455, 0, -0.000935176, -0.0145168, 0, 1.87282, 0.363627)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416517, 0, -0.00100532, -0.014516, 0, 1.8624, 0.38596)
 
 [node name="Glowing Eye_001" parent="metarig/Skeleton3D" index="2"]
-transform = Transform3D(0.0470209, 0, 0, 0, 0.0350386, -0.000387455, 0, -0.000935176, -0.0145168, -0.211952, 1.87282, 0.363627)
+transform = Transform3D(0.0470209, 0, 0, 0, 0.0350367, -0.000416517, 0, -0.00100532, -0.014516, -0.211952, 1.8624, 0.38596)
 
 [node name="Weapon" parent="metarig/Skeleton3D" index="3"]
-transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0279262, 0.0177398, -0.0217278, -0.010169, 0.035515, 0.0148432, -0.704906, 0.973662, 0.115409)
+transform = Transform3D(0.0267926, -0.00501081, 0.0282809, 0.0283118, 0.0163005, -0.0223059, -0.00904029, 0.0361982, 0.0139594, -0.704906, 0.968451, 0.109844)
 
 [node name="Body" parent="metarig/Skeleton3D" index="4"]
-material_override = SubResource("StandardMaterial3D_w80kg")
+material_override = SubResource("StandardMaterial3D_m67nf")
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer" index="0"]
 root_node = NodePath("../..")
-tree_root = SubResource("AnimationNodeBlendTree_rska1")
+tree_root = SubResource("AnimationNodeBlendTree_w80kg")
 anim_player = NodePath("..")
 parameters/Attack/blend_amount = 0.0
+parameters/Die/active = false
+parameters/Die/internal_active = false
+parameters/Die/request = 0
 parameters/Run/blend_amount = 0.0

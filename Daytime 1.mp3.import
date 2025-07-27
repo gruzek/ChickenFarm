@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://xdx6jxeam6yg"
+path="res://.godot/imported/Daytime 1.mp3-648f67f063e62c47de5a16ff1ac0cc57.mp3str"
+
+[deps]
+
+source_file="res://Daytime 1.mp3"
+dest_files=["res://.godot/imported/Daytime 1.mp3-648f67f063e62c47de5a16ff1ac0cc57.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
