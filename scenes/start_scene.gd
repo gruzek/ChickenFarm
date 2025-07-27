@@ -8,7 +8,7 @@ var tween: Tween
 # Credits messages that loop
 var credits_messages = [
 	{"text": "Credits", "delay_before": 0.0, "show_duration": 1.0},
-	{"text": "Game Design, Art and Music by Zaplee", "delay_before": 0.0, "show_duration": 2.0},
+	{"text": "Game Idea, Design, Art and Music by Zaplee", "delay_before": 0.0, "show_duration": 2.0},
 	{"text": "Coding by Toadz, Kletiz, and Zaplee", "delay_before": 0.0, "show_duration": 2.0}
 ]
 
