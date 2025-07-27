@@ -156,11 +156,11 @@ func _on_build_mode_exited():
 	build_mode_exited.emit()
 
 func die():
-	"""Handle player death - exit the game for now"""
+	"""Handle player death - load Game Over scene"""
 	is_dead = true
 	print("Player died! Game Over!")
-	# Exit the game (will be replaced with Game Over scene later)
-	get_tree().quit()
+	# Load the Game Over scene
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 func start_being_attacked():
 	"""Called when a wolf starts attacking the player"""
