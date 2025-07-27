@@ -1,5 +1,7 @@
 extends Control
 
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+
 # Message queue for credits
 var credits_queue: MessageQueue
 var tween: Tween

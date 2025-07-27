@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c83wrdwy2fyx0"]
+[gd_scene load_steps=23 format=3 uid="uid://c83wrdwy2fyx0"]
 
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="1_o5qli"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://b8hr2jxnrwi8h" path="res://scenes/health_bar_container.gd" id="9_eb6dy"]
 [ext_resource type="Script" uid="uid://b3gmj2roi3tbh" path="res://scenes/fog_generator.gd" id="11_eb6dy"]
 [ext_resource type="Script" path="res://scenes/enemy_spawn_points.gd" id="12_eb6dy"]
+[ext_resource type="AudioStream" uid="uid://xdx6jxeam6yg" path="res://music/Daytime 1.mp3" id="14_jkv2x"]
+[ext_resource type="AudioStream" uid="uid://dfowes78lgwmd" path="res://music/Daytime 2.mp3" id="15_jbj1t"]
+[ext_resource type="AudioStream" uid="uid://bh7oyavvrqeuf" path="res://music/chicken_farm_battle_final.mp3" id="16_jbj1t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -66,30 +69,64 @@ daytime_color = Color(1, 0.972228, 0.956357, 1)
 sunset_color = Color(0.817042, 0.162845, 0.219807, 1)
 night_color = Color(0.0687983, 0.0687983, 0.0687983, 1)
 moonlight_color = Color(0.383703, 0.663499, 1, 1)
+day_time_seconds = 120
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0964556, 0)
 collision_mask = 1
 
 [node name="Skeleton3D" parent="Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0690348, -1.37754e-10, -1.85909e-08, 0.997614)
+bones/0/rotation = Quaternion(0.12582, 1.18262e-07, 1.49988e-08, 0.992053)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/rotation = Quaternion(-0.0665343, 3.16857e-11, -1.53723e-08, 0.997784)
+bones/1/scale = Vector3(1, 1, 1)
 bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
-bones/4/rotation = Quaternion(0.184283, 1.18848e-07, 1.38082e-08, 0.982873)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(0.00162714, -1.19209e-07, 1.93973e-10, 0.999999)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.193963, 1.16564e-07, 2.49743e-08, 0.981009)
+bones/4/scale = Vector3(1, 1, 1)
 bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
-bones/6/rotation = Quaternion(-0.0718301, -1.18901e-07, -8.56282e-09, 0.997417)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.0839624, -1.18788e-07, -1.00091e-08, 0.996469)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(-0.605155, -0.345862, -0.356135, 0.622363)
+bones/7/scale = Vector3(1, 1, 1)
 bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
+bones/8/scale = Vector3(1, 1, 1)
 bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(-0.0238619, 0.0501728, 0.000387373, 0.998455)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/rotation = Quaternion(-0.605155, 0.345862, 0.356135, 0.622363)
+bones/11/scale = Vector3(1, 1, 1)
 bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
+bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/rotation = Quaternion(-0.0510234, -0.0412582, -0.0171822, 0.997697)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(-0.473727, -0.489772, -0.516204, 0.518883)
+bones/15/scale = Vector3(0.026485, 0.026485, 0.216099)
+bones/16/rotation = Quaternion(-0.152455, -0.793331, -0.285504, 0.515627)
+bones/16/scale = Vector3(1, 1, 1)
+bones/17/rotation = Quaternion(-0.152455, 0.793331, 0.285504, 0.515627)
+bones/17/scale = Vector3(1, 1, 1)
 bones/18/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
+bones/18/scale = Vector3(1, 1, 1)
 bones/19/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
+bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
+bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
+bones/21/scale = Vector3(1, 1, 1)
 bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
+bones/22/scale = Vector3(1, 1, 1)
 bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
+bones/23/scale = Vector3(1, 1, 1)
 
 [node name="Cube_002" parent="Player/player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.00023475, -0.000311511, -0.216076, 0.0264841, 2.816e-06, -0.0019158, -0.26747, 0.680392, 0.0567285)
+transform = Transform3D(5.58299e-06, -0.0264832, 0.00254152, -0.000367468, -0.000311524, -0.216063, 0.0264825, 1.27262e-06, -0.00299861, -0.267471, 0.680026, 0.0545434)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tbgi4")
@@ -233,6 +270,7 @@ offset_bottom = 15.0
 color = Color(0.398793, 0.398793, 0.398793, 0.478431)
 
 [node name="HealthBar" type="ColorRect" parent="UI/HealthBar"]
+layout_mode = 0
 offset_left = -30.0
 offset_top = 3.0
 offset_right = 32.0
@@ -262,6 +300,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.90469, 0.0529061, -3.
 
 [node name="Wolf" parent="." instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10771, 1.55717e-06, 28.4289)
+death_despawn_time = 3
 
 [node name="FogGenerator" type="Node3D" parent="."]
 script = ExtResource("11_eb6dy")
@@ -282,6 +321,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1627, 1.00019, 34.1698)
 
 [node name="BottomRight" type="Node3D" parent="EnemySpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7841, 1.00019, 34.1698)
+
+[node name="DaytimeMusicPlayer01" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_jkv2x")
+parameters/looping = true
+
+[node name="DaytimeMusicPlayer02" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_jbj1t")
+parameters/looping = true
+
+[node name="NighttimeMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_jbj1t")
+parameters/looping = true
 
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight"]
 [connection signal="evening_civil_twilight" from="DayNightCycle" to="Messenger" method="_on_day_night_cycle_evening_civil_twilight_again"]

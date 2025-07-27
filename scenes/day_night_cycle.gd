@@ -3,6 +3,9 @@ extends Node3D
 @onready var sun_light: DirectionalLight3D = $"../sun_light"
 @onready var moon_light: DirectionalLight3D = $"../moon_light"
 @onready var enemy_spawn_points: Node3D = $"../EnemySpawnPoints"
+@onready var daytime_music_player_01: AudioStreamPlayer = $"../DaytimeMusicPlayer01"
+@onready var daytime_music_player_02: AudioStreamPlayer = $"../DaytimeMusicPlayer02"
+@onready var nighttime_music_player: AudioStreamPlayer = $"../NighttimeMusicPlayer"
 
 # Signals for day/night events
 signal morning_civil_twilight
@@ -63,6 +66,23 @@ func _ready():
 	# Reset all event flags
 	reset_event_flags()
 
+func _stop_all_music():
+	nighttime_music_player.stop()
+	daytime_music_player_01.stop()
+	daytime_music_player_02.stop()
+	
+func _play_random_daytime():
+	var players = [daytime_music_player_01, daytime_music_player_02]
+	# stop both first
+	_stop_all_music()
+	# pick one at random
+	var choice = randi() % players.size()
+	players[choice].play() 
+
+func _play_nightime_music():
+	_stop_all_music()
+	nighttime_music_player.play()
+	
 # Main update function called every frame
 func _process(delta):
 	# Update time of day"environment"
@@ -94,6 +114,7 @@ func check_and_emit_events() -> void:
 		emit_signal("sunrise")
 		sunrise_emitted = true
 		print("Sunrise event at time: ", current_time)
+		_play_random_daytime()
 	
 	# Morning civil twilight (halfway through sunrise overlap)
 	if current_time >= morning_civil_twilight_time and not morning_civil_twilight_emitted:
@@ -107,6 +128,8 @@ func check_and_emit_events() -> void:
 		sunset_emitted = true
 		print("Sunset event at time: ", current_time)
 		enemy_spawn_points.spawn_enemies()
+		_play_nightime_music()
+
 	
 	# Evening civil twilight (halfway through sunset overlap)
 	if current_time >= evening_civil_twilight_time and not evening_civil_twilight_emitted:

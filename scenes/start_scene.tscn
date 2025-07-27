@@ -1,14 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhjvel1asgj4h"]
+[gd_scene load_steps=16 format=3 uid="uid://bhjvel1asgj4h"]
 
 [ext_resource type="Script" uid="uid://cicsvwo2e8tbt" path="res://scenes/start_scene.gd" id="1_pqnvq"]
 [ext_resource type="Texture2D" uid="uid://cxgwtd68xgny1" path="res://scenes/ground_texture.png" id="2_0kdh5"]
 [ext_resource type="PackedScene" uid="uid://daahb02bxyth6" path="res://models/fence-section.tscn" id="3_sg87u"]
-[ext_resource type="PackedScene" path="res://models/invisible_boundary.tscn" id="4_2l3yw"]
+[ext_resource type="PackedScene" uid="uid://c41heprc7sys3" path="res://models/invisible_boundary.tscn" id="4_2l3yw"]
 [ext_resource type="PackedScene" uid="uid://b38r8siyfyu8y" path="res://Player/player.tscn" id="5_2525w"]
 [ext_resource type="PackedScene" uid="uid://dr2x5he8a5xn0" path="res://egg_dispenser/egg_dispenser.tscn" id="6_2525w"]
 [ext_resource type="PackedScene" uid="uid://dt40nqqclxdgf" path="res://chicken/chicken.tscn" id="6_sg87u"]
 [ext_resource type="PackedScene" uid="uid://630u3h61ot7d" path="res://chicken_coop/chicken_coop.tscn" id="7_6vkx6"]
 [ext_resource type="FontFile" uid="uid://cq64scvcuyu6a" path="res://fonts/WesternBangBang-Regular.ttf" id="8_6vkx6"]
+[ext_resource type="AudioStream" uid="uid://xdx6jxeam6yg" path="res://music/Daytime 1.mp3" id="10_u6lbi"]
 
 [sub_resource type="Environment" id="Environment_6vkx6"]
 tonemap_mode = 3
@@ -170,12 +171,24 @@ transform = Transform3D(0.549854, 0, -0.835261, 0, 1, 0, 0.835261, 0, 0.549854, 
 collision_mask = 1
 
 [node name="Skeleton3D" parent="SubViewportContainer/SubViewport/Node/Player/player_rig/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0676327, -1.59354e-10, -1.8591e-08, 0.99771)
-bones/4/rotation = Quaternion(0.189664, 1.1899e-07, 1.31714e-08, 0.981849)
-bones/6/rotation = Quaternion(-0.0785735, -1.18841e-07, -9.36669e-09, 0.996908)
+bones/1/rotation = Quaternion(-0.0695586, 7.82845e-11, -1.53722e-08, 0.997578)
+bones/2/rotation = Quaternion(-0.0774641, -6.25424e-16, -1.84689e-08, 0.996995)
+bones/4/rotation = Quaternion(0.182246, 1.16258e-07, 2.63632e-08, 0.983253)
+bones/5/rotation = Quaternion(-0.0948575, -1.90209e-14, -2.26158e-08, 0.995491)
+bones/6/rotation = Quaternion(-0.0692983, -1.18923e-07, -8.261e-09, 0.997596)
+bones/8/rotation = Quaternion(-0.160499, 0.684006, -0.554216, 0.446342)
+bones/9/rotation = Quaternion(-0.0244422, -0.110585, -0.232397, 0.966005)
+bones/12/rotation = Quaternion(-0.179777, -0.676414, 0.568742, 0.432061)
+bones/13/rotation = Quaternion(-0.0247541, 0.110064, 0.201888, 0.97289)
+bones/18/rotation = Quaternion(0.985341, 0.0362341, -0.00307768, 0.166676)
+bones/19/rotation = Quaternion(0.0906872, 4.61454e-10, -1.53344e-09, 0.99588)
+bones/20/rotation = Quaternion(-0.526859, -0.0192923, 0.039264, 0.848826)
+bones/21/rotation = Quaternion(0.985455, -0.0329283, 0.00279711, 0.166695)
+bones/22/rotation = Quaternion(0.0906872, 5.15683e-10, 1.13994e-09, 0.99588)
+bones/23/rotation = Quaternion(-0.526346, 0.0273806, -0.0557255, 0.848001)
 
 [node name="Cube_002" parent="SubViewportContainer/SubViewport/Node/Player/player_rig/metarig/Skeleton3D" index="0"]
-transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000309188, -0.000311518, -0.216069, 0.0264833, 1.94143e-06, -0.00252311, -0.26747, 0.680185, 0.0555028)
+transform = Transform3D(5.58302e-06, -0.0264833, 0.00254144, -0.000206935, -0.000311508, -0.216077, 0.0264843, 3.14304e-06, -0.00168886, -0.26747, 0.680469, 0.0571863)
 
 [node name="egg_dispenser" parent="SubViewportContainer/SubViewport/Node" instance=ExtResource("6_2525w")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.05508, 0, -21.1167)
@@ -261,6 +274,11 @@ egg_chance = -1
 [node name="Chicken3" parent="." instance=ExtResource("6_sg87u")]
 transform = Transform3D(0.167755, 0, -0.19205, 0, 0.255, 0, 0.19205, 0, 0.167755, 6.03985, 0.00554115, -10.5439)
 egg_chance = -1
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_u6lbi")
+autoplay = true
+parameters/looping = true
 
 [editable path="SubViewportContainer/SubViewport/Node/Player"]
 [editable path="SubViewportContainer/SubViewport/Node/Player/player_rig"]
