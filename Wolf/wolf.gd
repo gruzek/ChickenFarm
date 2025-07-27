@@ -14,6 +14,7 @@ var target: Node
 
 func _ready() -> void:
 	target_timer.wait_time = reaction_time
+	add_to_group("wolf")
 
 
 func _on_target_timer_timeout() -> void:
